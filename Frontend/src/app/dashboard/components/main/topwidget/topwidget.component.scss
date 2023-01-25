@@ -1,0 +1,31 @@
+
+mat-card{
+    text-align: center;
+    margin: 4px;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(84, 84, 223);
+        color: white;
+        mat-icon{
+            color: white;
+        }
+        h2{
+            font-size: 2.5rem;
+        }
+    }
+}
+
+h3{
+    font-size: 1.5rem;
+}
+h2{
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.topwidgeticon{
+    height: 40px;
+    width: 40px;
+    color: rgb(34, 34, 126);
+    font-size: 40px;
+}

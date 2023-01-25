@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+  padding: 1rem;
+  margin-top: 4rem;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 1rem;
+}
+
+.box .row {
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+}
+
+.row div {
+  margin: .5rem 0;
+}

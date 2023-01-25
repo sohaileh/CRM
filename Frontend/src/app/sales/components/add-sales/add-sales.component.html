@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="box">
+    <mat-card>
+      <mat-horizontal-stepper labelPosition="bottom" linear>
+        <mat-step>
+          <ng-template matStepLabel>Vehicle no</ng-template>
+          <p>Please enter vehicle number to proceed further</p>
+          <form>
+            <mat-form-field>
+              <mat-label>Enter vehicle no</mat-label>
+              <input matInput type="text" required />
+            </mat-form-field>
+            <div class="row">
+              <button mat-raised-button type="reset" color="accent">
+                Reset
+              </button>
+              <button mat-raised-button matStepperNext color="primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Vehicle details</ng-template>
+          <p>Details of the vehicle for number <b>JK01A 1111</b></p>
+          <div class="row">
+            <button mat-raised-button matStepperPrevious color="accent">Back</button>
+            <button mat-raised-button matStepperNext color="primary">
+              Next
+            </button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Sell details</ng-template>
+          <p>Please enter buyer details</p>
+          <form>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Full Name</mat-label>
+                <input matInput type="text" required />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput type="email" />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Phone No</mat-label>
+                <input matInput type="number" required />
+              </mat-form-field>
+            </div>
+
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput type="text" required />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Zip/Postal code</mat-label>
+                <input matInput type="number" required />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Sold Date</mat-label>
+                <input matInput type="date" required />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field>
+                <mat-label>Sold Amount</mat-label>
+                <input matInput type="number" required />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Balance amount</mat-label>
+                <input matInput type="number" required />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <input type="file" hidden accept=".docs .pdf .rtf .xlms" required />
+              <div>
+                No file choosen
+                <button mat-mini-fab color="primary">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <button mat-raised-button matStepperPrevious color="accent">Back</button>
+              <button mat-raised-button type="reset" color="accent">
+                Reset
+              </button>
+              <button mat-raised-button matStepperNext color="primary">
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-card>
+  </div>
+</div>

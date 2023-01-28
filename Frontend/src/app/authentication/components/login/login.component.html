@@ -1,0 +1,26 @@
+<div class="containerLogin" fxFlex.lt-sm="60" fxFlex.lt-sm="90" fxFlex.md="50" fxFlex.gt-md="30">
+  <mat-toolbar class="header" color="primary">
+    <h1>Login</h1>
+  </mat-toolbar>
+  <mat-card color="primary">
+    <form [formGroup]="loginForm" class=" form-body " (ngSubmit)="login()">
+      <mat-form-field appearance="fill" color="primary" required>
+        <mat-label>Email</mat-label>
+        <input type="email" formControlName="email" matInput required placeholder="Ex. Abc@gmail.com">
+        <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Please enter Email</mat-error>
+        <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter valid Email</mat-error>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-hint>Enter your <strong>Email</strong> here</mat-hint>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput required>
+        <mat-error *ngIf="loginForm.get('password')?.hasError('required')">please enter Password</mat-error>
+        <mat-icon matSuffix>password</mat-icon>
+        <mat-hint>Enter your <strong>Password</strong> here</mat-hint>
+      </mat-form-field>
+      <button class=" button" type="submit" color="primary" mat-raised-button>Submit</button>
+    </form>
+  </mat-card>
+</div>

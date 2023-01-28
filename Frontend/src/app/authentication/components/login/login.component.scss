@@ -1,0 +1,43 @@
+.containerLogin {
+  text-align: center;
+  width: 30rem;
+  margin: 40px auto;
+  box-shadow: 15px 15px 20px black;
+}
+
+.header {
+  padding: 15px;
+  color: black;
+  text-align: center;
+}
+
+.header h1 {
+  margin: auto;
+  font-size: 35px;
+}
+
+.form-body {
+  margin: auto;
+  width: 80%;
+}
+
+.form-body mat-form-field {
+  font-size: 15px;
+  margin-top: 3rem;
+  display: block;
+}
+
+.button {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  color: black;
+  padding: 7px;
+  font-size: 17px;
+  font-weight: 600;
+
+}
+
+.anchor {
+  display: block;
+  margin-top: 10px;
+}

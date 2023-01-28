@@ -1,22 +1,33 @@
-.container {
-  display: flex;
-  justify-content: space-evenly;
-  justify-items: center;
-  padding: 1rem;
-  margin-top: 4rem;
+.container{
+  height: 100vh;
+  margin-top:50px
+}
+.flex-container{
+  height: 100vh;
+}
+.form-button{
+  text-align: center;
+}
+.form-title{
+  text-align: center;
 }
 
-mat-form-field {
+.full-width{
   width: 100%;
-  margin: 1rem;
+}
+.form-button{
+  text-align: center;
+  padding-top: 10px;
 }
 
-.box .row {
-  display: flex;
-  justify-content: space-evenly;
-  justify-items: center;
+.full-width{
+  width: 100%;
 }
-
-.row div {
-  margin: .5rem 0;
+.form-title{
+  text-align: center;
+}
+.file-upload{
+  justify-content: center;
+  padding: .5rem;
+  border-bottom: 1px solid grey;
 }

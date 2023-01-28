@@ -1,54 +1,53 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SharedService } from 'src/app/sharedService/shared-service';
+import { SharedService} from 'src/app/sharedService/shared-service';
 
 @Component({
-  selector: 'app-sales-list',
-  templateUrl: './sales-list.component.html',
-  styleUrls: ['./sales-list.component.scss']
+  selector: 'app-products-list',
+  templateUrl: './products-list.component.html',
+  styleUrls: ['./products-list.component.scss']
 })
-export class SalesListComponent implements OnInit {
+export class ProductsListComponent implements OnInit {
   @ViewChild(MatPaginator)paginator!:MatPaginator;
   xsDevice=false;
   searchData="";
-   salesData=[
+  purchaseData=[
     {
       _id:1,
       vehicle_no:"JK01A 1111",
       fullName:"Suhail Bhat",
-      sold_on:new Date(),
-      sold_amount:100,
+      purchase_date:new Date(),
+      purchase_amount:100,
       balance_amount:0
     },
     {
       _id:2,
       vehicle_no:"JK01A 2222",
       fullName:"Suhail Ahmad",
-      sold_on:new Date(),
-      sold_amount:200,
+      purchase_date:new Date(),
+      purchase_amount:200,
       balance_amount:100
     }
-   ]
+   ];
   constructor(private sharedService:SharedService) { }
-  salesList!:MatTableDataSource<any>;
-  displayedColumns=["sell_id","vehicle_no","fullName","sold_date","sold_amount","balance_amount","actions"]
+  purchaseList!:MatTableDataSource<any>;
+  displayedColumns=["sell_id","vehicle_no","fullName","purchase_date","purchase_amount","balance_amount","actions"]
   ngOnInit(): void {
-    this.salesList=new MatTableDataSource(this.salesData);
+    this.purchaseList=new MatTableDataSource(this.purchaseData);
     this.sharedService.isSmallDevice().subscribe(result => {
       this.xsDevice=result[0].mqAlias==="xs"?true:false;
       });
   }
   ngAfterViewInit(){
     if(this.xsDevice)
-    this.salesList.paginator=this.paginator;
+    this.purchaseList.paginator=this.paginator;
   }
-  searchSale(){
-    this.salesList.filter=this.searchData.trim().toLowerCase();
+  searchPurchase(){
+    this.purchaseList.filter=this.searchData.trim().toLowerCase();
   }
   clearSearch(){
     this.searchData="";
-    this.searchSale();
+    this.searchPurchase();
   }
-
 }

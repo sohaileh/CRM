@@ -1,87 +1,191 @@
-<mat-card>
-  <div fxLayout="column wrap">
-    <mat-card-title class="form-title">Add Vehical</mat-card-title>
-    <mat-card-subtitle class="form-title"
-      >please fill in the below details!</mat-card-subtitle>
+<div class="container">
+  <div fxLayout="row wrap" fxLayoutAlign="center center">
+    <div class="flex-container">
+      <mat-card class="mat-elevation-z8">
+
+        <mat-horizontal-stepper labelPosition="bottom">
+
+          <mat-step label="Add vehical">
+            <div fxLayout="column wrap">
+              <mat-card-title class="form-title">Add Vehical</mat-card-title>
+              <mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
+            </div>
+
+            <form>
+              <div class="radio-button">
+                <p>car type*:</p>
+                <mat-radio-group aria-label="car type" required>
+                  <mat-radio-button value="new">new</mat-radio-button>
+                  <mat-radio-button class="radio-button" value="used">used</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>car Name</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>enter car name</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Model</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>please enter car model</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>color</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>mention the color</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Fuel used</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>fuel used in car</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>Engine cc</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>mention engine cc</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>year</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>mention year</mat-error>
+                </mat-form-field>
+              </div>
+
+              <mat-form-field class="full-width">
+                <mat-label>Regno.</mat-label>
+                <input matInput type="number" required/>
+                <mat-error>mention Regno.</mat-error>
+              </mat-form-field>
+
+              <div fxLayout="column" fxLayoutGap="10px" fxLayout.xs="column" class=" full-width file-upload">
+                  <label for="carImages">Upload car Images*</label>
+                  <div fxLayout="row" fxLayoutGap="10px" >
+                  <input  type="file" required hidden #carImages>
+                  <div>
+                    {{"NA"}}
+                  <button mat-mini-fab color="primary">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                  </div>
+                </div>
+              </div>
+
+              <div fxLayout="column" fxLayoutGap="10px" fxLayout.xs="column" class=" full-width file-upload">
+                <label for="carDocs">Upload car documents*</label>
+                <div fxLayout="row" fxLayoutGap="10px" >
+                <input  type="file" required hidden #carDocs>
+                <div>
+                  {{"NA"}}
+                <button mat-mini-fab color="primary">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                </div>
+              </div>
+            </div>
+
+              <div class="form-button" fxLayoutGap="10px">
+                <button mat-button color="accent" type="reset">reset</button>
+                <button mat-raised-button color="primary" matStepperNext type="button">
+                  Next
+                </button>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step label="owner details">
+            <div fxLayout="column wrap">
+
+              <mat-card-title class="form-title">owner details</mat-card-title>
+              <mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
+            </div>
+            <form>
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>full Name</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>enter full name</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>email</mat-label>
+                  <input matInput type="email" />
+                  <mat-error>please enter email</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>phone no</mat-label>
+                  <input matInput type="number" required/>
+                  <mat-error>mention your contact number</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Address</mat-label>
+                  <input matInput type="text" required/>
+                  <mat-error>enter your address</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>Postal code</mat-label>
+                  <input matInput type="number" required/>
+                  <mat-error>mention your postal code</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Purchase date</mat-label>
+                  <input matInput type="date" required/>
+                  <mat-error>mention year</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+                <mat-form-field class="full-width">
+                  <mat-label>Purchase Amount</mat-label>
+                  <input matInput type="number" required/>
+                  <mat-error>enter purchase amount</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="full-width">
+                  <mat-label>Balance Amount</mat-label>
+                  <input matInput type="number" required/>
+                  <mat-error>enter amount</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div fxLayout="row" fxLayoutGap="10px" class="full-width file-upload">
+                <div  >
+                  <input type="file" required hidden>
+                  {{"NA"}}
+                  <button mat-mini-fab color="primary">
+                    <mat-icon>attach_file</mat-icon>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-button" fxLayoutGap="10px" fxLayout.xs="column">
+                <button mat-button color="warn" matStepperPrevious>Back</button>
+                <button mat-button color="accent" type="reset">reset</button>
+                <button mat-raised-button color="primary">submit</button>
+              </div>
+            </form>
+          </mat-step>
+
+        </mat-horizontal-stepper>
+
+      </mat-card>
+    </div>
   </div>
-
-<form>
-  <div class="radio-button">
-    <p>car type:</p>
-    <mat-radio-group aria-label="car type">
-      <mat-radio-button value="new">new</mat-radio-button>
-      <mat-radio-button class="radio-button" value="used"
-        >used</mat-radio-button
-      >
-    </mat-radio-group>
-  </div>
-  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>car Name</mat-label>
-        <input matInput type="text" />
-        <mat-error>enter car name</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>Model</mat-label>
-        <input matInput type="text" />
-        <mat-error>please enter car model</mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>color</mat-label>
-        <input matInput type="text" />
-        <mat-error>mention the color</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>Fuel used</mat-label>
-        <input matInput type="text" />
-        <mat-error>fuel used in car</mat-error>
-      </mat-form-field>
-    </div>
-  </div>
-
-  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>Engine cc</mat-label>
-        <input matInput type="text" />
-        <mat-error>mention engine cc</mat-error>
-      </mat-form-field>
-    </div>
-        <div class="field">
-        <mat-form-field class="full-width">
-          <mat-label>year</mat-label>
-          <input matInput type="text" />
-          <mat-error>mention year</mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="field">
-      <mat-form-field class="full-width">
-        <mat-label>Regno.</mat-label>
-        <input matInput type="number" />
-        <mat-error>mention Regno.</mat-error>
-      </mat-form-field>
-    </div>
-
-
-  <div class="form-button" fxLayoutGap="10px">
-    <button mat-button color="accent" type="reset">reset</button>
-    <button mat-raised-button color="primary" matStepperNext type="button">
-      Next
-    </button>
-  </div>
-</form>
-</mat-card>
+</div>

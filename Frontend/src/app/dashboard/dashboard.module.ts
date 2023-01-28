@@ -38,7 +38,6 @@ import { PurchasebymonthComponent } from './components/main/purchasebymonth/purc
     MatDividerModule,
     MatMenuModule,
     MatButtonModule
-  ],
-  exports:[DashboardComponent]
+  ]
 })
 export class DashboardModule { }

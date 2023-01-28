@@ -9,6 +9,9 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 import { MatTableModule } from "@angular/material/table";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AddSalesComponent,
@@ -22,10 +25,10 @@ import { MatTableModule } from "@angular/material/table";
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatTableModule
-  ],
-  exports: [
-    AddSalesComponent, SalesListComponent
+    MatTableModule,
+    FlexLayoutModule,
+    MatPaginatorModule,
+    FormsModule
   ]
 })
 export class SalesModule { }

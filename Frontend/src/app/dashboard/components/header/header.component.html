@@ -1,7 +1,38 @@
 
-<div class="header" fxlayout="row" fxLayoutAlign="center">
-   <mat-toolbar color="primary" fxFlex="100%">
-      <mat-icon>dashboard</mat-icon> Dashboard
+<div class="header" fxlayout="row wrap" >
+   <mat-toolbar color="primary" fxFlex="100%" fxLayoutAlign="space-between center">
+      <div class="header-name" fxLayout="row" fxLayoutAlign="end center">
+         <mat-icon>dashboard</mat-icon> <h2> Dashboard </h2>
+      </div>
+      
+      <div class="header-action" fxShow fxHide.xs>
+      <button mat-button >HOME</button>
+      <button mat-button [matMenuTriggerFor]="sales">SALES</button>
+         <mat-menu #sales="matMenu">
+          <button mat-menu-item>Add Sales</button>
+          <button mat-menu-item>View Sales</button>
+         </mat-menu>
+
+         <button mat-button [matMenuTriggerFor]="purchase">PURCHASE</button>
+         <mat-menu #purchase="matMenu">
+          <button mat-menu-item>Add Purchase</button>
+          <button mat-menu-item>View Purchase</button>
+         </mat-menu>
+
+         <button mat-raised-button color="warn">Logout</button>
+      </div>
+
+      <div fxHide fxShow.xs >
+         <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+            <mat-menu #menu="matMenu">
+             <button mat-menu-item>Add Sales</button>
+             <button mat-menu-item>View Sales</button>
+             <button mat-menu-item>Add Purchase</button>
+             <button mat-menu-item>View Purchase</button>
+             <button mat-button color="warn">Logout</button>
+            </mat-menu>
+            
+         </div>
    </mat-toolbar>
    
 </div>

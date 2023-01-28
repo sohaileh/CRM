@@ -1,3 +1,4 @@
+import { MatButtonModule } from '@angular/material/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
@@ -10,6 +11,7 @@ import{MatToolbarModule} from '@angular/material/toolbar'
 import{MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card'
 import{MatDividerModule} from '@angular/material/divider'
+import{MatMenuModule} from '@angular/material/menu'
 
 import{FlexLayoutModule} from '@angular/flex-layout';
 import{NgxChartsModule} from '@swimlane/ngx-charts';
@@ -33,7 +35,9 @@ import { PurchasebymonthComponent } from './components/main/purchasebymonth/purc
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   exports:[DashboardComponent]
 })

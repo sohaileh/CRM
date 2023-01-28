@@ -1,95 +1,87 @@
-<mat-card-title class="form-title">Add Vehical</mat-card-title>
-<mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
+<mat-card>
+  <div fxLayout="column wrap">
+    <mat-card-title class="form-title">Add Vehical</mat-card-title>
+    <mat-card-subtitle class="form-title"
+      >please fill in the below details!</mat-card-subtitle>
+  </div>
+
 <form>
   <div class="radio-button">
     <p>car type:</p>
     <mat-radio-group aria-label="car type">
-      <mat-radio-button   value="new">new</mat-radio-button>
-      <mat-radio-button class="radio-button" value="used">used</mat-radio-button>
+      <mat-radio-button value="new">new</mat-radio-button>
+      <mat-radio-button class="radio-button" value="used"
+        >used</mat-radio-button
+      >
     </mat-radio-group>
   </div>
-  <table cellspacing="2">
-       <tr>
-        <td>
-          <div class="field">
-            <mat-form-field class="full-width">
-              <mat-label>car Name</mat-label>
-              <input matInput type="text" />
-              <mat-error>enter car name</mat-error>
-            </mat-form-field>
-          </div>
-        </td>
-        <td>
-          <div class="field">
-            <mat-form-field class="full-width">
-              <mat-label>Model</mat-label>
-              <input matInput type="text" />
-              <mat-error>please enter car model</mat-error>
-            </mat-form-field>
-          </div>
-        </td>
-       </tr>
-  </table>
-  <table cellSpacing="2">
-    <tr>
-      <td>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>car Name</mat-label>
+        <input matInput type="text" />
+        <mat-error>enter car name</mat-error>
+      </mat-form-field>
+    </div>
 
-<div class="field">
-  <mat-form-field class="full-width">
-    <mat-label>color</mat-label>
-    <input matInput type="text" />
-    <mat-error>mention the color</mat-error>
-  </mat-form-field>
-</div>
-      </td>
-     <td>
-      <div class="field">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Model</mat-label>
+        <input matInput type="text" />
+        <mat-error>please enter car model</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>color</mat-label>
+        <input matInput type="text" />
+        <mat-error>mention the color</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Fuel used</mat-label>
+        <input matInput type="text" />
+        <mat-error>fuel used in car</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Engine cc</mat-label>
+        <input matInput type="text" />
+        <mat-error>mention engine cc</mat-error>
+      </mat-form-field>
+    </div>
+        <div class="field">
         <mat-form-field class="full-width">
-          <mat-label>Fuel used</mat-label>
+          <mat-label>year</mat-label>
           <input matInput type="text" />
-          <mat-error>fuel used in car</mat-error>
+          <mat-error>mention year</mat-error>
         </mat-form-field>
       </div>
-     </td>
-    </tr>
-  </table>
-  <table cellSpacing="2">
-    <tr>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Engine cc</mat-label>
-            <input matInput type="text" />
-            <mat-error>mention engine cc</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>year</mat-label>
-            <input matInput type="text" />
-            <mat-error>mention year</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Regno.</mat-label>
-            <input matInput type="number" />
-            <mat-error>mention Regno.</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-  </table>
+    </div>
 
-  <div class="form-button">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Regno.</mat-label>
+        <input matInput type="number" />
+        <mat-error>mention Regno.</mat-error>
+      </mat-form-field>
+    </div>
+
+
+  <div class="form-button" fxLayoutGap="10px">
     <button mat-button color="accent" type="reset">reset</button>
-    <button mat-raised-button color="primary" matStepperNext type="button">Next</button>
+    <button mat-raised-button color="primary" matStepperNext type="button">
+      Next
+    </button>
   </div>
 </form>
+</mat-card>

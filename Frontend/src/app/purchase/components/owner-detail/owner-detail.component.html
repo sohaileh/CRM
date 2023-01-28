@@ -1,101 +1,84 @@
+<mat-card>
+  <div fxLayout="column wrap">
+
 <mat-card-title class="form-title">owner details</mat-card-title>
 <mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
-<form>
-
-  <table cellspacing="2">
-       <tr>
-        <td>
-          <div class="field">
-            <mat-form-field class="full-width">
-              <mat-label>full Name</mat-label>
-              <input matInput type="text" />
-              <mat-error>enter full name</mat-error>
-            </mat-form-field>
-          </div>
-        </td>
-        <td>
-          <div class="field">
-            <mat-form-field class="full-width">
-              <mat-label>email</mat-label>
-              <input matInput type="email" />
-              <mat-error>please enter email</mat-error>
-            </mat-form-field>
-          </div>
-        </td>
-       </tr>
-  </table>
-  <table cellSpacing="2">
-    <tr>
-      <td>
-
-<div class="field">
-  <mat-form-field class="full-width">
-    <mat-label>phone no</mat-label>
-    <input matInput type="number" />
-    <mat-error>mention your contact number</mat-error>
-  </mat-form-field>
 </div>
-      </td>
-     <td>
-      <div class="field">
-        <mat-form-field class="full-width">
-          <mat-label>Address</mat-label>
-          <input matInput type="text" />
-          <mat-error>enter your address</mat-error>
-        </mat-form-field>
-      </div>
-     </td>
-    </tr>
-  </table>
-  <table cellSpacing="2">
-    <tr>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Postal code</mat-label>
-            <input matInput type="number" />
-            <mat-error>mention your postal code</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Purchase date</mat-label>
-            <input matInput type="date" />
-            <mat-error>mention year</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-    </tr>
-  </table>
-  <table cellSpacing="2">
-    <tr>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Purchase Amount</mat-label>
-            <input matInput type="number" />
-            <mat-error>enter purchase amount</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-      <td>
-        <div class="field">
-          <mat-form-field class="full-width">
-            <mat-label>Balance  Amount</mat-label>
-            <input matInput type="number" />
-            <mat-error>enter amount</mat-error>
-          </mat-form-field>
-        </div>
-      </td>
-    </tr>
-  </table>
+<form>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column" >
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>full Name</mat-label>
+        <input matInput type="text" />
+        <mat-error>enter full name</mat-error>
+      </mat-form-field>
+    </div>
 
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>email</mat-label>
+        <input matInput type="email" />
+        <mat-error>please enter email</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>phone no</mat-label>
+        <input matInput type="number" />
+        <mat-error>mention your contact number</mat-error>
+      </mat-form-field>
+    </div>
 
-  <div class="form-button">
-    <button mat-button color="warn" matStepperPrevious >Back</button>
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Address</mat-label>
+        <input matInput type="text" />
+        <mat-error>enter your address</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Postal code</mat-label>
+        <input matInput type="number" />
+        <mat-error>mention your postal code</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Purchase date</mat-label>
+        <input matInput type="date" />
+        <mat-error>mention year</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Purchase Amount</mat-label>
+        <input matInput type="number" />
+        <mat-error>enter purchase amount</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="field">
+      <mat-form-field class="full-width">
+        <mat-label>Balance Amount</mat-label>
+        <input matInput type="number" />
+        <mat-error>enter amount</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="form-button"  fxLayoutGap="10px" fxLayout.xs="column">
+    <button mat-button color="warn" matStepperPrevious>Back</button>
     <button mat-button color="accent" type="reset">reset</button>
-    <button mat-raised-button color="primary" >submit</button>
+    <button mat-raised-button color="primary">submit</button>
   </div>
 </form>
+</mat-card>

@@ -6,30 +6,30 @@
       </div>
 
       <div class="header-action" fxShow fxHide.xs>
-      <button mat-button >HOME</button>
+      <button mat-button (click)="onHome()">HOME</button>
       <button mat-button [matMenuTriggerFor]="sales">SALES</button>
          <mat-menu #sales="matMenu">
-          <button mat-menu-item>Add Sales</button>
-          <button mat-menu-item>View Sales</button>
+          <button mat-menu-item (click)="addSale()">Add Sales</button>
+          <button mat-menu-item (click)="viewSales()">View Sales</button>
          </mat-menu>
 
          <button mat-button [matMenuTriggerFor]="purchase">PURCHASE</button>
          <mat-menu #purchase="matMenu">
-          <button mat-menu-item>Add Purchase</button>
-          <button mat-menu-item>View Purchase</button>
+          <button mat-menu-item (click)="addPurchase()">Add Purchase</button>
+          <button mat-menu-item (click)="viewPurchase()">View Purchase</button>
          </mat-menu>
 
-         <button mat-raised-button color="warn">Logout</button>
+         <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
       </div>
 
       <div fxHide fxShow.xs >
          <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
             <mat-menu #menu="matMenu">
-             <button mat-menu-item>Add Sales</button>
-             <button mat-menu-item>View Sales</button>
-             <button mat-menu-item>Add Purchase</button>
-             <button mat-menu-item>View Purchase</button>
-             <button mat-button color="warn">Logout</button>
+             <button mat-menu-item (click)="addSale()">Add Sales</button>
+             <button mat-menu-item (click)="viewSales()">View Sales</button>
+             <button mat-menu-item (click)="addPurchase()">Add Purchase</button>
+             <button mat-menu-item (click)="viewPurchase()">View Purchase</button>
+             <button mat-menu-item (click)="onLogout()">Logout</button>
             </mat-menu>
 
          </div>

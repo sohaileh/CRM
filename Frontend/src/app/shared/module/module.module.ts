@@ -1,3 +1,4 @@
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatStepperModule } from "@angular/material/stepper";
@@ -10,6 +11,8 @@ import { MatTableModule } from "@angular/material/table";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [],
@@ -25,7 +28,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FlexLayoutModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    //for dashboard
+    MatToolbarModule,
+    MatDividerModule,
+    MatMenuModule
+
   ],exports:[
     MatStepperModule,
     MatCardModule,
@@ -37,7 +45,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     FlexLayoutModule,
     MatPaginatorModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatDividerModule,
+    MatMenuModule
   ]
 })
 export class ModuleModule { }

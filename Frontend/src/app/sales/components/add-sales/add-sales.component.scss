@@ -1,6 +1,6 @@
 .container{
   height: 100vh;
-  margin-top:50px
+  margin:4rem 1rem 0 1rem;
 }
 .flex-container{
   height: 100vh;
@@ -29,5 +29,22 @@
 .file-upload{
   justify-content: center;
   padding: .5rem;
-  border-bottom: 1px solid grey;
 }
+.file-upload div{
+  border: 1px solid grey;
+  padding: .3rem;
+  border-radius: .5rem;
+  outline: blue($color: #353e82);
+}
+table{
+  width: 100%;
+  padding: .2rem;
+  text-align: center;
+
+} th, td {
+  border: 1px ridge black;
+}
+.hide{
+  display: none;
+}
+

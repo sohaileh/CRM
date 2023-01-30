@@ -11,21 +11,21 @@ const routes: Routes = [
   {path:"admin/login",component:LoginComponent},
   {path:"admin/dashboard",component:DashboardComponent},
   {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
-  {path:"sales",children:[
+  {path:"admin/sales",children:[
     {
-      path:"addSale",component:AddSalesComponent,
+      path:"addsale",component:AddSalesComponent,
 
     },
     {
-      path:"salesList",component:SalesListComponent,
+      path:"saleslist",component:SalesListComponent,
     }
   ]},
-  {path:"purchase",children:[
+  {path:"admin/purchase",children:[
       {
-        path:"addVehicle",component:AddProductComponent
+        path:"addvehicle",component:AddProductComponent
       },
       {
-        path:"purchaseList",component:ProductsListComponent
+        path:"purchaselist",component:ProductsListComponent
       }
     ]
   },

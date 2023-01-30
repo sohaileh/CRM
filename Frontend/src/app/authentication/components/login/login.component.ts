@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -7,14 +7,18 @@ import { AuthService } from '../../service/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  constructor(private authservice: AuthService) {
+export class LoginComponent implements OnInit {
+  loginForm!:FormGroup;
+  constructor(private authservice: AuthService, private formBuilder: FormBuilder) {
     localStorage.clear();
   }
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required),
-  });
+ngOnInit(): void {
+  this.loginForm=this.formBuilder.group({
+    email:['',Validators.email,],
+    password:['']
+  },Validators.required)
+}
+
 
   login() {
     if (!this.loginForm.invalid) {
@@ -22,7 +26,7 @@ export class LoginComponent {
         if (res.status == 201) {
           localStorage.setItem('token', res.accessToken);
           console.log('logged in');
-          // this.authservice._router.navigateByUrl('/admin/dashboard');
+          this.authservice._router.navigateByUrl('/admin/dashboard');
         } else {
           alert(res.info);
         }

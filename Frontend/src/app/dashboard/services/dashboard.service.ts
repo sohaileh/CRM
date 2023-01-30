@@ -5,7 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class DashboardService {
 
-  constructor() { }
+  constructor() {
+
+  }
    month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
    sales=[3000,4000,2000,4003,5456,5564,7898,2134,6789,2345,6754,3243]
 

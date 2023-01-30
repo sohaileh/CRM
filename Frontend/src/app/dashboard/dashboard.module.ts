@@ -27,6 +27,6 @@ import { ModuleModule } from '../shared/module/module.module';
     CommonModule,
     NgxChartsModule,
     ModuleModule,
-  ]
+  ],exports:[HeaderComponent]
 })
 export class DashboardModule { }

@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/service/shared-service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private sharedService: SharedService) {
+    this.sharedService.url=window.location.href;
   }
-
 }

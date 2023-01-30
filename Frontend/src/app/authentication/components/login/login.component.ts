@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SharedService } from 'src/app/shared/service/shared-service';
 import { AuthService } from '../../service/auth.service';
 
 @Component({
@@ -9,8 +10,9 @@ import { AuthService } from '../../service/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
-  constructor(private authservice: AuthService, private formBuilder: FormBuilder) {
+  constructor(private authservice: AuthService, private formBuilder: FormBuilder, private sharedService: SharedService) {
     localStorage.clear();
+    this.sharedService.url=window.location.href;
   }
 ngOnInit(): void {
   this.loginForm=this.formBuilder.group({
@@ -18,7 +20,6 @@ ngOnInit(): void {
     password:['']
   },Validators.required)
 }
-
 
   login() {
     if (!this.loginForm.invalid) {

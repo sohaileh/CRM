@@ -1,6 +1,4 @@
-<!-- <<<<<<< Updated upstream -->
-<!-- <app-dashboard></app-dashboard> -->
-<!-- <app-stepper></app-stepper> -->
-<!-- ======= -->
+<div *ngIf="sharedService.url!=='http://localhost:4200/admin/login'">
+  <app-header></app-header>
+</div>
 <router-outlet></router-outlet>
-<!-- >>>>>>> Stashed changes -->

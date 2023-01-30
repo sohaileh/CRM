@@ -5,6 +5,7 @@ import { MediaObserver } from '@angular/flex-layout';
   providedIn: 'root'
 })
 export class SharedService {
+  url=''
   constructor(private mediaObserver:MediaObserver) { }
   isSmallDevice(){
     return this.mediaObserver.asObservable();

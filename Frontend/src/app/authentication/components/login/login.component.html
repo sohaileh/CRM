@@ -1,4 +1,4 @@
-<div class="containerLogin" fxFlex.lt-sm="60" fxFlex.lt-sm="90" fxFlex.md="50" fxFlex.gt-md="30">
+<div class="containerLogin mat-elevation-z8" fxFlex.lt-sm="60" fxFlex.lt-sm="90" fxFlex.md="50" fxFlex.gt-md="30">
   <mat-toolbar class="header" color="primary">
     <h1>Login</h1>
   </mat-toolbar>
@@ -15,9 +15,11 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Password</mat-label>
-        <input type="password" formControlName="password" matInput required>
+        <input [type]="showPassword ? 'text' : 'password'" formControlName="password" matInput required>
         <mat-error *ngIf="loginForm.get('password')?.hasError('required')">please enter Password</mat-error>
-        <mat-icon matSuffix>password</mat-icon>
+        <mat-icon matSuffix (click)="togglePasswordVisibility()">
+          {{showPassword?'visibility_off':'visibility'}}
+      </mat-icon>
         <mat-hint>Enter your <strong>Password</strong> here</mat-hint>
       </mat-form-field>
       <button class=" button" type="submit" color="primary" mat-raised-button>Login</button>

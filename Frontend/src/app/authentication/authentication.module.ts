@@ -12,7 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatSnackBarModule}  from '@angular/material/snack-bar'
 
 @NgModule({
   declarations: [
@@ -27,9 +27,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
      HttpClientModule,
      FlexLayoutModule,
      MatCardModule,
-     MatToolbarModule
-  ],exports:[
-    LoginComponent,
+     MatToolbarModule,
+     MatSnackBarModule
   ]
 },
 )

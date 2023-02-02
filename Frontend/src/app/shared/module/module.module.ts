@@ -32,7 +32,7 @@ import { MatMenuModule } from '@angular/material/menu';
     //for dashboard
     MatToolbarModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
 
   ],exports:[
     MatStepperModule,
@@ -48,7 +48,8 @@ import { MatMenuModule } from '@angular/material/menu';
     ReactiveFormsModule,
     MatToolbarModule,
     MatDividerModule,
-    MatMenuModule
+    MatMenuModule,
+
   ]
 })
 export class ModuleModule { }

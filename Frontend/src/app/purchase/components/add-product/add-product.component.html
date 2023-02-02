@@ -1,195 +1,186 @@
-<div class="container">
-  <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="flex-container">
-      <mat-card class="mat-elevation-z8">
+<div class="container" fxFlex="80%" fxFlex.sm="100%" fxFlex.xm="100%">
+  <mat-card>
+    <mat-toolbar color="primary">
+      VEHICLE DETAILS
+    </mat-toolbar>
 
-        <mat-horizontal-stepper labelPosition="bottom" linear>
+  <form [formGroup]="vehicleDetails">
 
-          <mat-step label="Add vehicle" [stepControl]="vehicleDetails">
-            <div fxLayout="column wrap">
-              <mat-card-title class="form-title">Add Vehicle</mat-card-title>
-              <mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
-            </div>
+  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" class="vehicletype" (change)="getchassisno()">
+    <mat-radio-button color="primary" value="old">OLD</mat-radio-button>
+    <mat-radio-button color="primary" value="new">NEW</mat-radio-button>
+  </mat-radio-group>
 
-            <form [formGroup]="vehicleDetails">
-              <div class="radio-button">
-                <p>car type*:</p>
-                <mat-radio-group aria-label="car type" required formControlName="condition">
-                  <mat-radio-button value="new">new</mat-radio-button>
-                  <mat-radio-button class="radio-button" value="used">used</mat-radio-button>
-                </mat-radio-group>
-              </div>
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>car Name</mat-label>
-                  <input matInput type="text" required formControlName="car_name" />
-                  <mat-error>enter car name</mat-error>
-                </mat-form-field>
+  <div class="vehicleDetailContainer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
-                <mat-form-field class="full-width">
-                  <mat-label>Model</mat-label>
-                  <input matInput type="text" required formControlName="model" />
-                  <mat-error>please enter car model</mat-error>
-                </mat-form-field>
-              </div>
+    <div class="firstColumn" fxFlex="50%">
+      <mat-form-field appearance="outline" >
+        <mat-label>Brand</mat-label>
+        <input matInput type="text" required formControlName="model">
+        <mat-error>Please Enter Model Name</mat-error>
+      </mat-form-field>
 
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>color</mat-label>
-                  <input matInput type="text" required formControlName="color" />
-                  <mat-error>mention the color</mat-error>
-                </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <mat-label>Engine No</mat-label>
+        <input matInput type="text" required formControlName="engine_no">
+        <mat-error>Please Enter Engine No</mat-error>
+      </mat-form-field>
 
-                <mat-form-field class="full-width">
-                  <mat-label>Fuel used</mat-label>
-                  <input matInput type="text" required formControlName="fuel_type" />
-                  <mat-error>fuel used in car</mat-error>
-                </mat-form-field>
-              </div>
+        <mat-form-field appearance="outline" >
+          <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
+          <input matInput type="text" required formControlName="vehicle_no">
+          <mat-error>Please Enter Vehicle Reg. No.</mat-error>
+        </mat-form-field>
 
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>Engine cc</mat-label>
-                  <input matInput type="text" required formControlName="engine_cc" />
-                  <mat-error>mention engine cc</mat-error>
-                </mat-form-field>
 
-                <mat-form-field class="full-width">
-                  <mat-label>year</mat-label>
-                  <input matInput type="number" required formControlName="year" />
-                  <mat-error>mention year</mat-error>
-                </mat-form-field>
-              </div>
-
-              <mat-form-field class="full-width">
-                <mat-label>Registration/vehicle no.</mat-label>
-                <input matInput type="text" required formControlName="vehicle_no" />
-                <mat-error>mention Regno.</mat-error>
-              </mat-form-field>
-
-              <div fxLayout="column" fxLayoutGap="10px" fxLayout.xs="column" class=" full-width file-upload">
-                <label for="carImages">Upload car Images*</label>
-                <div fxLayout="row" fxLayoutGap="10px">
-                  <input type="file" required hidden #carImages accept="image/*" (change)="changeCarIamges($event)"
-                    multiple />
-                  <div>
-                    {{carImage||"No images uploaded"}}
-                    <button mat-mini-fab color="primary" type="button" (click)="carImages.click()">
-                      <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <mat-error *ngIf="!carImage">Car image/s required</mat-error>
-                  </div>
-                </div>
-              </div>
-
-              <div fxLayout="column" fxLayoutGap="10px" fxLayout.xs="column" class=" full-width file-upload">
-                <label for="carDocs">Upload car documents*</label>
-                <div fxLayout="row" fxLayoutGap="10px">
-                  <input type="file" required hidden #carDocs (change)="changeCarDocs($event)">
-                  <div>
-                    {{carDoc||"No document uploaded"}}
-                    <button mat-mini-fab color="primary" type="button" (click)="carDocs.click()">
-                      <mat-icon>attach_file</mat-icon>
-                    </button>
-                    <mat-error *ngIf="!carDoc">Car document is required</mat-error>
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-button" fxLayoutGap="10px">
-                <button mat-button color="accent" type="reset">reset</button>
-                <button mat-raised-button color="primary" matStepperNext type="button">
-                  Next
-                </button>
-              </div>
-            </form>
-          </mat-step>
-
-          <mat-step label="owner details" [stepControl]="ownerDetails">
-            <div fxLayout="column wrap">
-
-              <mat-card-title class="form-title">owner details</mat-card-title>
-              <mat-card-subtitle class="form-title">please fill in the below details!</mat-card-subtitle>
-            </div>
-            <form [formGroup]="ownerDetails">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>full Name</mat-label>
-                  <input matInput type="text" required formControlName="fullName"/>
-                  <mat-error>enter full name</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                  <mat-label>email</mat-label>
-                  <input matInput type="email" formControlName="email"/>
-                  <mat-error>please enter email</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>phone no</mat-label>
-                  <input matInput type="number" required formControlName="phone_no"/>
-                  <mat-error>mention your contact number</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                  <mat-label>Address</mat-label>
-                  <input matInput type="text" required formControlName="address"/>
-                  <mat-error>enter your address</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>Postal code</mat-label>
-                  <input matInput type="number" required formControlName="postal_code"/>
-                  <mat-error>mention your postal code</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                  <mat-label>Purchase date</mat-label>
-                  <input matInput type="date" required formControlName="purchase_date"/>
-                  <mat-error>mention year</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width">
-                  <mat-label>Purchase Amount</mat-label>
-                  <input matInput type="number" required formControlName="purchase_amount"/>
-                  <mat-error>enter purchase amount</mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="full-width">
-                  <mat-label>Balance Amount</mat-label>
-                  <input matInput type="number" required formControlName="balance_amount"/>
-                  <mat-error>enter amount</mat-error>
-                </mat-form-field>
-              </div>
-
-              <div fxLayout="row" fxLayoutGap="10px" class="full-width file-upload">
-                <div>
-                  <input type="file" required hidden #docs (change)="documentChange($event)">
-                  {{ownerDoc||"No document uploaded"}}
-                  <button mat-mini-fab color="primary" type="button" (click)="docs.click()">
-                    <mat-icon>attach_file</mat-icon>
-                  </button>
-                  <mat-error *ngIf="!ownerDoc">please upload document</mat-error>
-                </div>
-              </div>
-
-              <div class="form-button" fxLayoutGap="10px" fxLayout.xs="column">
-                <button mat-button color="warn" matStepperPrevious>Back</button>
-                <button mat-button color="accent" type="reset">reset</button>
-                <button mat-raised-button color="primary">submit</button>
-              </div>
-            </form>
-          </mat-step>
-
-        </mat-horizontal-stepper>
-
-      </mat-card>
     </div>
+
+    <div class="secoundColumn" fxFlex="50%">
+      <mat-form-field appearance="outline" >
+        <mat-label>Car Name</mat-label>
+        <input matInput type="text" required formControlName="car_name">
+        <mat-error>Please Enter Car Name</mat-error>
+      </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Color</mat-label>
+          <input matInput type="text" required formControlName="color">
+          <mat-error>Please Enter Color</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fuel Type</mat-label>
+          <input matInput type="text" required formControlName="fuel_type">
+          <mat-error>Please Enter Fuel Type</mat-error>
+        </mat-form-field>
+    </div>
+
+      </div>
+</form>
+
+<div class="carDocuments">
+<mat-toolbar color="primary">VEHICLE DOCUMENTS</mat-toolbar>
+</div>
+<form  fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+  <div fxFlex="50%" >
+    <mat-form-field >
+      <mat-toolbar>
+        <input matInput [value]="'Registration Certificate'" readonly>
+      </mat-toolbar>
+      <input type="file" accept="image/*" (change)="uploadRc($event)" required>
+    </mat-form-field>
   </div>
+
+  <div fxFlex="50%">
+    <mat-form-field>
+      <mat-toolbar>
+        <input matInput [value]="'Purchase Agreement'" readonly>
+      </mat-toolbar>
+      <input type="file" accept="image/*" (change)="uploadPurchaseAgr($event)" required>
+    </mat-form-field>
+  </div>
+
+</form>
+
+
+<div class="carDocuments">
+  <mat-toolbar color="primary">SELLER DETAILS</mat-toolbar>
+  </div>
+  <form   [formGroup]="sellerDetails" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+          <div class="firstColumn" fxFlex="50%">
+          <mat-form-field appearance="outline" >
+            <mat-label>Full Name</mat-label>
+            <input matInput type="text" required formControlName="fullName">
+            <mat-error>Please Enter Full Name</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Phone No</mat-label>
+            <input matInput type="text" required formControlName="phone_no">
+            <mat-error>Please Enter Phone No</mat-error>
+          </mat-form-field>
+
+            <mat-form-field appearance="outline" >
+              <mat-label>Email</mat-label>
+              <input matInput type="text" required formControlName="email">
+              <mat-error>Please Enter Email</mat-error>
+            </mat-form-field>
+
+
+        </div>
+
+        <div class="secoundColumn" fxFlex="50%">
+          <mat-form-field appearance="outline" >
+            <mat-label>Full Address</mat-label>
+            <input matInput type="text" required formControlName="address">
+            <mat-error>Please Enter Address</mat-error>
+          </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Postal Code</mat-label>
+              <input matInput type="text" required formControlName="postal_code">
+              <mat-error>Please Enter Color</mat-error>
+            </mat-form-field>
+
+            <mat-form-field  appearance="outline">
+              <mat-label>Choose a date</mat-label>
+              <input matInput type="date" formControlName="purchase_date" required>
+              <mat-error>Enter Date</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+
+    <div class="sellerDocuments">
+      <mat-toolbar color="primary">SELLER DOCUMENTS</mat-toolbar>
+      </div>
+      <form fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+        <div fxFlex="50%" >
+            <mat-form-field>
+              <mat-toolbar>
+                <input matInput [value]="'Identity Proof'" readonly>
+              </mat-toolbar>
+              <input type="file" accept="image/*" (change)="uploadIdentityProof($event)" required>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50%">
+          <mat-form-field >
+            <mat-toolbar>
+              <input matInput [value]="'Address Proof'" readonly>
+            </mat-toolbar>
+            <input type="file" accept="image/*" (change)="uploadAddressProof($event)" required>
+          </mat-form-field>
+        </div>
+
+      </form>
+
+      <div class="purchasedetails" >
+        <mat-toolbar color="primary">PURCHASE DETAILS</mat-toolbar>
+        <form [formGroup]="purchaseDetail" class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="20px" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+          <mat-form-field appearance="outline" >
+            <mat-label>Total Car Amount</mat-label>
+            <input matInput type="text" required formControlName="totalAmt">
+            <mat-error>Enter Total Car Amount</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Paid Amount</mat-label>
+            <input matInput type="text" formControlName="paidAmt">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" >
+            <mat-label>Balanced Amount</mat-label>
+            <input matInput type="text" formControlName="balancedAmt">
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div class="action" fxLayoutAlign="center">
+        <button mat-raised-button color="primary" (click)="submitData()">Submit</button>
+      </div>
+
+</mat-card>
 </div>

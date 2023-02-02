@@ -4,6 +4,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { ProductsListComponent } from './components/products-list/products-list.component';
 import { ModuleModule } from '../shared/module/module.module';
 import {MatRadioModule} from '@angular/material/radio';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import {MatRadioModule} from '@angular/material/radio';
   imports: [
     CommonModule,
     ModuleModule,
-    MatRadioModule
+    MatRadioModule,
+    FormsModule
   ]
 })
 export class PurchaseModule { }

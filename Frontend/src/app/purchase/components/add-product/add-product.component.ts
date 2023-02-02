@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PurchaseService } from '../../services/purchase.service';
 
 @Component({
   selector: 'app-add-product',
@@ -8,52 +9,78 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddProductComponent implements OnInit {
   vehicleDetails!: FormGroup;
-  ownerDetails!: FormGroup;
-  carImage = "";
-  carDoc = "";
-  ownerDoc = "";
-  constructor(private fb: FormBuilder) { }
+  sellerDetails!: FormGroup;
+  purchaseDetail!:FormGroup;
+
+  vehicleDocuments:any={
+    registration:'',
+    purchaseAgrement:''
+  }
+  sellerDocumnets:any=[{
+    identityProof:'',
+    addressProof:''
+  }]
+
+  oldCar=true;
+  constructor(private fb: FormBuilder,private purchaseService:PurchaseService) { }
 
   ngOnInit(): void {
     this.vehicleDetails = this.fb.group({
-      condition: ["used"],
+      condition: ["old"],
       car_name: [""],
       model: [""],
       color: [""],
       fuel_type: [""],
-      engine_cc: [""],
-      year: [""],
+      engine_no: [""],
       vehicle_no: [""],
-      car_images: [null],
-      car_docs: [null],
     }, Validators.required);
-    this.ownerDetails = this.fb.group({
+
+    this.sellerDetails = this.fb.group({
       fullName: [""],
       email: ["NA"],
       phone_no: [""],
       address: [""],
       postal_code: [""],
       purchase_date: [""],
-      purchase_amount: [""],
-      balance_amount: [""],
-      docs: [null],
     }, Validators.required);
+    this.purchaseDetail=this.fb.group({
+      totalAmt:[""],
+      paidAmt:[""],
+      balancedAmt:[""]
+    })
   }
-  changeCarIamges(event: any) {
-    const file: FileList = event.target.files;
-    this.vehicleDetails.get("car_images")?.setValue(file);
-    for (let i = 0; i < file.length; i++) {
-      this.carImage += file[i].name;
+
+  getchassisno(){
+    this.oldCar=!this.oldCar;
+  }
+// Car Documnets//
+  uploadRc(event:any){
+    this.vehicleDocuments.registration=event.target.files[0]
+  }
+
+  uploadPurchaseAgr(event:any){
+    this.vehicleDocuments.purchaseAgrement=event.target.files[0]
+    console.log(this.vehicleDocuments);
+  }
+
+//Seller Documents
+  uploadIdentityProof(event:any){
+    this.sellerDocumnets.identityProof=event.target.files[0]
+  }
+  uploadAddressProof(event:any){
+    this.sellerDocumnets.addressProof=event.target.files[0]
+  }
+
+
+  submitData(){
+    if(this.vehicleDetails.invalid || this.sellerDetails.invalid || this.purchaseDetail.invalid){
+      alert('Enter Valid Detais');
+    }
+   else{
+      console.log("submit data sucessfully")
+    this.purchaseService.storeVehicleData(this.vehicleDetails.value,this.purchaseDetail.value,this.vehicleDocuments);
+    this.purchaseService.storeSellerData(this.sellerDetails.value,this.sellerDocumnets);
     }
   }
-  changeCarDocs(event: any) {
-    const file: File = event.target.files[0];
-    this.vehicleDetails.get("car_docs")?.setValue(file);
-    this.carDoc = file.name;
-  }
-  documentChange(event: any) {
-    const file: File = event.target.files[0];
-    this.ownerDetails.get("docs")?.setValue(file);
-    this.ownerDoc = file.name;
-  }
+
 }

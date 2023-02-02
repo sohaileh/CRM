@@ -1,31 +1,23 @@
-.radio-button{
-  margin-left: 5px;
+.container{
+  margin: 0 auto;
 }
-.form-title{
-  text-align: center;
-}
-.full-width{
+
+.mat-form-field {
   width: 100%;
 }
-.container{
-  height: 100vh;
-  margin-top:50px
+
+mat-toolbar{
+  height: 35px;
+  margin-bottom: 0.2rem;
 }
-.flex-container{
-  height: 100vh;
+.mat-radio-group{
+  margin: 10px;
+  display:flex ;
+  width:120px;
+  font-size:1em;
+  justify-content: space-between;
 }
-.form-button{
-  text-align: center;
-  padding-top: 10px;
-}
-.form-title{
-  text-align: center;
-}
-.file-upload{
-  justify-content: center;
-  padding: .5rem;
-  border-bottom: 1px solid grey;
-}
-.file-upload div{
-  justify-content: center;
+
+button{
+  width:30%;
 }

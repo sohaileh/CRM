@@ -117,8 +117,8 @@
   <mat-toolbar color="primary">SELLER DETAILS</mat-toolbar>
   </div>
   <form   [formGroup]="sellerDetails" (ngSubmit)="onAddPurchase()" >
-      <div fxLayoutGap.gt-sm="20px">
-          <div class="firstColumn" fxFlex="50%">
+      <div fxLayoutGap.gt-sm="20px" fxLayout="row" fxLayout.lt-sm="column">
+          <div class="firstColumn">
           <mat-form-field appearance="outline" >
             <mat-label>Full Name</mat-label>
             <input matInput type="text" required formControlName="fullName">
@@ -140,7 +140,7 @@
 
         </div>
 
-        <div class="secoundColumn" fxFlex="50%">
+        <div class="secoundColumn">
           <mat-form-field appearance="outline" >
             <mat-label>Full Address</mat-label>
             <input matInput type="text" required formControlName="address">
@@ -186,7 +186,7 @@
         </div>
 
         <div class="action" fxLayoutAlign="center">
-          <button mat-raised-button color="primary" type="submit">Add Purchase</button>
+          <button mat-raised-button color="primary" type="submit">Add</button>
           <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
         </div>
     </form>

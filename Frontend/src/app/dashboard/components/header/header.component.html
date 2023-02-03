@@ -1,8 +1,8 @@
 
 <div class="header" fxlayout="row wrap" >
    <mat-toolbar color="primary" fxFlex="100%" fxLayoutAlign="space-between center">
-      <div class="header-name" fxLayout="row" fxLayoutAlign="end center">
-         <mat-icon>dashboard</mat-icon> <h2> Dashboard </h2>
+      <div class="header-name" fxLayout="row" >
+          <button mat-button class="home" (click)="onHome()"><mat-icon>dashboard</mat-icon>Dashboard</button>
       </div>
 
       <div class="header-action" fxShow fxHide.xs>

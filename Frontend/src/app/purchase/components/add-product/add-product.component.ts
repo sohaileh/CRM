@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
@@ -10,7 +11,6 @@ import { PurchaseService } from '../../services/purchase.service';
 export class AddProductComponent implements OnInit {
   vehicleDetails!: FormGroup;
   sellerDetails!: FormGroup;
-  purchaseDetail!:FormGroup;
 
   vehicleDocuments:any={
     registration:'',
@@ -20,11 +20,13 @@ export class AddProductComponent implements OnInit {
     identityProof:'',
     addressProof:''
   }]
-
+  showVehicleTemplate:boolean=true;
   oldCar=true;
-  constructor(private fb: FormBuilder,private purchaseService:PurchaseService) { }
+  balancedAmount:any='';
+  constructor(private fb: FormBuilder,private purchaseService:PurchaseService,private router:Router) { }
 
   ngOnInit(): void {
+    this.showVehicleTemplate=true;
     this.vehicleDetails = this.fb.group({
       condition: ["old"],
       car_name: [""],
@@ -33,21 +35,24 @@ export class AddProductComponent implements OnInit {
       fuel_type: [""],
       engine_no: [""],
       vehicle_no: [""],
+      vehicleRc:[""],
+      vehiclePurchaseAgrement:[""],
+      totalAmount:[""],
+      paidAmount:[""],
+      balanceAmount:[""]
     }, Validators.required);
 
     this.sellerDetails = this.fb.group({
       fullName: [""],
-      email: ["NA"],
+      email: [""],
       phone_no: [""],
       address: [""],
       postal_code: [""],
       purchase_date: [""],
+      identityProof:[''],
+    addressProof:['']
+
     }, Validators.required);
-    this.purchaseDetail=this.fb.group({
-      totalAmt:[""],
-      paidAmt:[""],
-      balancedAmt:[""]
-    })
   }
 
   getchassisno(){
@@ -60,7 +65,6 @@ export class AddProductComponent implements OnInit {
 
   uploadPurchaseAgr(event:any){
     this.vehicleDocuments.purchaseAgrement=event.target.files[0]
-    console.log(this.vehicleDocuments);
   }
 
 //Seller Documents
@@ -71,16 +75,33 @@ export class AddProductComponent implements OnInit {
     this.sellerDocumnets.addressProof=event.target.files[0]
   }
 
-
-  submitData(){
-    if(this.vehicleDetails.invalid || this.sellerDetails.invalid || this.purchaseDetail.invalid){
-      alert('Enter Valid Detais');
+  saveVehicle(){
+    if(this.vehicleDetails.valid){
+      this.showVehicleTemplate=!this.showVehicleTemplate;
     }
-   else{
-      console.log("submit data sucessfully")
-    this.purchaseService.storeVehicleData(this.vehicleDetails.value,this.purchaseDetail.value,this.vehicleDocuments);
-    this.purchaseService.storeSellerData(this.sellerDetails.value,this.sellerDocumnets);
+    else{
+      alert('Enter All Details')
     }
   }
 
+  onAddPurchase(){
+    if(this.sellerDetails.valid){
+      this.purchaseService.storeVehicleData(this.vehicleDetails)
+      this.purchaseService.storeSellerData(this.sellerDetails)
+      this.router.navigateByUrl('admin/dashboard')
+      this.showVehicleTemplate=!this.showVehicleTemplate
+    }
+
+    else
+    alert("Enter Correct Details")
+  }
+
+  onCancel(){
+    this.vehicleDetails.reset;
+    this.router.navigateByUrl('admin/dashboard');
+  }
+
+  calculateBalanced(total:any,paid:any){
+    this.balancedAmount=total-paid;
+  }
 }

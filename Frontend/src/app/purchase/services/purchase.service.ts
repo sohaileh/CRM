@@ -9,13 +9,9 @@ export class PurchaseService {
   vehicleDetails:any=[]
   sellerDetails:any=[]
 
-  storeVehicleData(vehicleDetail:any,purchaseDetail:any,vehicleDoc:any){
-    Object.assign(vehicleDetail,purchaseDetail)
-    this.vehicleDetails.push({vehicle:vehicleDetail,vehicleDocument:vehicleDoc})
+  storeVehicleData(vechile:any){
   }
-  storeSellerData(sellerDetails:any,sellerDocuments:any){
-    this.sellerDetails.push({seller:sellerDetails,sellerDoc:sellerDocuments})
-    console.log(this.sellerDetails);
+  storeSellerData(seller:any){
   }
 
 }

@@ -10,8 +10,8 @@ export class AuthService {
   constructor(public _router: Router, public _http: HttpClient) {}
 
   serverUrl = environment.serverUrl;
-  authAdmin(authObj: any) {
-    return this._http.post(`${this.serverUrl}admin/login`, authObj);
+  authAdmin(authModel: any) {
+    return this._http.post(`${this.serverUrl}login`, authModel);
   }
 
   isloggedIn() {

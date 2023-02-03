@@ -13,6 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
+import { HttpClientModule} from '@angular/common/http';
+import {MatSnackBarModule}  from '@angular/material/snack-bar'
+
 
 @NgModule({
   declarations: [],
@@ -33,6 +36,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
+<<<<<<< Updated upstream
+=======
+    HttpClientModule,
+    MatSnackBarModule
+>>>>>>> Stashed changes
 
   ],exports:[
     MatStepperModule,
@@ -49,7 +57,12 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
+<<<<<<< Updated upstream
 
+=======
+    HttpClientModule,
+    MatSnackBarModule
+>>>>>>> Stashed changes
   ]
 })
 export class ModuleModule { }

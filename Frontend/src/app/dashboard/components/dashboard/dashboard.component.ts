@@ -9,6 +9,6 @@ import { SharedService } from 'src/app/shared/service/shared-service';
 export class DashboardComponent {
 
   constructor(private sharedService: SharedService) {
-    this.sharedService.url=window.location.href;
+    this.sharedService.isDashboardComponent=true;
   }
 }

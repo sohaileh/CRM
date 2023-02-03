@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private sharedService: SharedService
   ) {
     localStorage.clear();
-    this.sharedService.url = window.location.href;
+    this.sharedService.isDashboardComponent = false;
   }
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group(
@@ -28,9 +28,10 @@ export class LoginComponent implements OnInit {
       },
       Validators.required
     );
+
   }
 
-  public showPassword: boolean = false
+  public showPassword: boolean = false;
 
   public togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
@@ -40,11 +41,17 @@ export class LoginComponent implements OnInit {
       this.authservice.authAdmin(this.loginForm.value).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.accessToken);
-          this.snackBar.open(res.info, 'OK');
+          this.sharedService.snackbarNotification(res.msg,"OK",{
+          duration:3000,
+          panelClass:['snackbar-success'],
+          });
           this.authservice._router.navigateByUrl('/admin/dashboard');
         },
         (error) => {
-          this.snackBar.open(error.error.info, 'retry');
+          this.sharedService.snackbarNotification(error.error.msg,"Retry",{
+            duration:3000,
+            panelClass:['snackbar-fail']
+          });
         }
       );
     }

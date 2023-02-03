@@ -36,11 +36,8 @@ import {MatSnackBarModule}  from '@angular/material/snack-bar'
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
-<<<<<<< Updated upstream
-=======
     HttpClientModule,
     MatSnackBarModule
->>>>>>> Stashed changes
 
   ],exports:[
     MatStepperModule,
@@ -57,12 +54,9 @@ import {MatSnackBarModule}  from '@angular/material/snack-bar'
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
-<<<<<<< Updated upstream
 
-=======
     HttpClientModule,
     MatSnackBarModule
->>>>>>> Stashed changes
   ]
 })
 export class ModuleModule { }

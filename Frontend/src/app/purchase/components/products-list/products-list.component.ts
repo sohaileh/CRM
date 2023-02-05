@@ -9,8 +9,10 @@ import { PurchaseService } from '../../services/purchase.service';
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss']
 })
+
 export class ProductsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+<<<<<<< Updated upstream
   xsDevice = false;
   searchData = "";
   purchaseData = [
@@ -48,16 +50,16 @@ export class ProductsListComponent implements OnInit {
     this.sharedService.isSmallDevice().subscribe(result => {
       this.xsDevice = result[0].mqAlias === "xs" ? true : false;
     });
+=======
+
+  constructor(public sharedService: SharedService) { }
+  purchaseList!:MatTableDataSource<any>;
+  displayedColumns = ["sell_id", "vehicle_no", "fullName", "purchase_date", "purchase_amount", "balance_amount", "actions"]
+  ngOnInit(): void {
+    this.purchaseList = new MatTableDataSource(this.sharedService.purchaseData);
+>>>>>>> Stashed changes
   }
   ngAfterViewInit() {
-    if (this.xsDevice)
       this.purchaseList.paginator = this.paginator;
-  }
-  searchPurchase() {
-    this.purchaseList.filter = this.searchData.trim().toLowerCase();
-  }
-  clearSearch() {
-    this.searchData = "";
-    this.searchPurchase();
   }
 }

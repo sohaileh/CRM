@@ -1,9 +1,11 @@
 .container{
-  margin: 5rem 1rem;
-  overflow: hidden;
+  margin: 1rem 1rem;
 }
 table{
   width: 100%;
+}
+mat-card{
+  overflow: auto;
 }
  button{
   margin: 0.1rem .1rem;
@@ -17,4 +19,15 @@ table{
 }
 .search-input mat-form-field{
   width: 70%;
+}
+::ng-deep .snackbar-success {
+  background-color: green;
+  color:white;
+}
+::ng-deep .snackbar-fail{
+  background-color: red;
+  color:  white;
+}
+::ng-deep .snackbar-fail .mat-simple-snackbar-action,::ng-deep .snackbar-success .mat-simple-snackbar-action{
+color: white;
 }

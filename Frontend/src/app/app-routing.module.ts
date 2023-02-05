@@ -15,6 +15,9 @@ const routes: Routes = [
     {
       path:"addsale",component:AddSalesComponent,
 
+    },{
+      path:"editsale",component:AddSalesComponent,
+
     },
     {
       path:"saleslist",component:SalesListComponent,

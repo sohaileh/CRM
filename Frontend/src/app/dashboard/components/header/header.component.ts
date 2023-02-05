@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { SalesService } from 'src/app/sales/services/sales.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+  constructor(private _router:Router,private saleService:SalesService) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
     }
 
     addSale(){
+      this.saleService.index=-1;
       this._router.navigateByUrl('admin/sales/addsale')
     }
 

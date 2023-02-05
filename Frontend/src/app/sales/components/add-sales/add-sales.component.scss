@@ -1,50 +1,33 @@
 .container{
-  height: 100vh;
-  margin:4rem 1rem 0 1rem;
+  margin: 1rem auto;
 }
-.flex-container{
-  height: 100vh;
+mat-toolbar{
+  height: 3.5rem;
 }
-.form-button{
-  text-align: center;
-}
-.form-title{
-  text-align: center;
-}
-
-.full-width{
+mat-form-field{
   width: 100%;
 }
-.form-button{
-  text-align: center;
-  padding-top: 10px;
+button{
+  height: fit-content;
 }
-
-.full-width{
+mat-toolbar{
+  margin: .5rem 0;
+}
+p{
   width: 100%;
-}
-.form-title{
   text-align: center;
 }
-.file-upload{
-  justify-content: center;
-  padding: .5rem;
+::ng-deep .snackbar-success {
+  background-color: green;
+  color:white;
 }
-.file-upload div{
-  border: 1px solid grey;
-  padding: .3rem;
-  border-radius: .5rem;
-  outline: blue($color: #353e82);
+::ng-deep .snackbar-fail{
+  background-color: red;
+  color:  white;
 }
-table{
-  width: 100%;
-  padding: .2rem;
-  text-align: center;
-
-} th, td {
-  border: 1px ridge black;
+::ng-deep .snackbar-fail .mat-simple-snackbar-action,::ng-deep .snackbar-success .mat-simple-snackbar-action{
+color: white;
 }
-.hide{
-  display: none;
+.image_style{
+  margin: 1rem;
 }
-

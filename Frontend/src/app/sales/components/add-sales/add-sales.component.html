@@ -1,144 +1,106 @@
-<div class="container">
-  <div fxLayout="row wrap" fxLayoutAlign="center center">
-    <div class="flex-container">
-      <mat-card class="mat-elevation-z8">
-        <mat-card-title class="form-title">Add Sale</mat-card-title>
+<div class="container" fxFlex="80%" fxFlex.sm="100%" fxFlex.xm="100%" fxLayout.xs="column wrap">
+  <mat-card class="mat-elevation-z8" fxLayout="column wrap" fxLayout.lt-sm="column wrap" fxLayoutAlign="space-between centre">
 
-        <mat-horizontal-stepper labelPosition="bottom" linear>
+    <form [formGroup]="saleForm" (ngSubmit)="saleService.index<0? submitSale():updateSale()">
 
-          <mat-step label="Vehicle no" [completed]="vehicleExists">
-            <div fxLayout="column wrap">
-              <mat-card-subtitle class="form-title">Please enter vehice no </mat-card-subtitle>
-            </div>
+      <mat-toolbar color="primary">
+        Vehicle No
+      </mat-toolbar>
+      <p ><u>{{saleService.index<0?"Please enter vehicle number to proceed further":"Vehicle no can't be edited"}}</u></p>
 
-            <form [formGroup]="vehicleNo">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>vehicle/registration no</mat-label>
-                  <input matInput  type="text" required formControlName="vehicleNo" (keyup)="findVehicle($event)"/>
-                  <mat-error >vehicle no required</mat-error>
-                </mat-form-field>
-              </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter vehicle no</mat-label>
+        <input type="text" matInput required #vehicleNo (keyup)="findVehicle($event)" formControlName="vehicle_no" />
+        <mat-error>Vehicle no is required</mat-error>
+      </mat-form-field>
 
-              <div class="form-button" fxLayoutGap="10px">
-                <button mat-button color="accent" type="reset">reset</button>
-              </div>
 
-              <div *ngIf="vehicleExists">
-                <div fxLayout="column wrap">
-                  <mat-card-subtitle class="form-title">Vehicle details for "{{vehicleNo.get('vehicleNo')?.value |uppercase}}"</mat-card-subtitle>
-                </div>
-                <table >
-                  <thead >
-                    <th>Purchase id </th>
-                    <th>Owner name </th>
-                    <th>Car details</th>
-                    <th>Condition</th>
-                    <th>Purchase amount </th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Suhail</td>
-                      <td>Suzuki Alto 800</td>
-                      <td>old</td>
-                      <td>100000</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="form-button" fxLayoutGap="10px">
-                  <button mat-raised-button color="primary" matStepperNext type="button">
-                    Next
-                  </button>
-                </div>
-              </div>
-            </form>
-          </mat-step>
+      <div *ngIf="saleService.index<0?vehicleExists:true">
 
-          <mat-step label="buyer details" [stepControl]="saleForm">
-            <div fxLayout="column wrap">
-              <mat-card-subtitle class="form-title">please enter the buyer details</mat-card-subtitle>
-            </div>
-            <form [formGroup]="saleForm">
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Full Name</mat-label>
-                  <input matInput type="text" required formControlName="fullName"/>
-                  <mat-error >please enter full name</mat-error>
-                </mat-form-field>
+        <mat-toolbar color="primary">
+          Buyer details
+        </mat-toolbar>
+        <p ><u>Please enter buyer details below</u></p>
 
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Email</mat-label>
-                  <input matInput type="email" formControlName="email"/>
-                  <mat-error >please enter email</mat-error>
-                </mat-form-field>
-              </div>
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
+          <mat-form-field appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input type="text" matInput required formControlName="fullName"/>
+            <mat-error>Full name is required</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput required formControlName="email"/>
+            <mat-error>This field is required</mat-error>
+          </mat-form-field>
+        </div>
 
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Phone no</mat-label>
-                  <input matInput type="number" required formControlName="phone_no"/>
-                  <mat-error >please enter phone number</mat-error>
-                </mat-form-field>
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone no</mat-label>
+            <input type="number" matInput required formControlName="phone_no"/>
+            <mat-error>Phone no is required</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input type="text" matInput required formControlName="address"/>
+            <mat-error>Address is required</mat-error>
+          </mat-form-field>
+        </div>
 
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Address</mat-label>
-                  <input matInput type="text" required formControlName="address"/>
-                  <mat-error >please enter address</mat-error>
-                </mat-form-field>
-              </div>
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
+          <mat-form-field appearance="outline">
+            <mat-label>Postal/Zip code</mat-label>
+            <input type="number" matInput required formControlName="postal_code"/>
+            <mat-error>Zip code is required</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Sold date</mat-label>
+            <input type="date" matInput required formControlName="sold_date"/>
+            <mat-error>Sold date is required</mat-error>
+          </mat-form-field>
+        </div>
 
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Postal code</mat-label>
-                  <input matInput type="number" required formControlName="postal_code"/>
-                  <mat-error >please enter postal code</mat-error>
-                </mat-form-field>
+        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
+          <mat-form-field appearance="outline">
+            <mat-label>Sold amount</mat-label>
+            <input type="number" matInput required formControlName="sold_amount"/>
+            <mat-error>Sold amount is required</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Balance amount</mat-label>
+            <input type="number" matInput required formControlName="balance_amount" />
+            <mat-error>Balance amount is required</mat-error>
+          </mat-form-field>
+        </div>
 
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Sold date</mat-label>
-                  <input matInput type="date" required formControlName="sold_date"/>
-                  <mat-error >please select the date</mat-error>
-                </mat-form-field>
-              </div>
+        <mat-toolbar color="primary">
+          Buyer documents
+        </mat-toolbar>
+        <p ><u>Please upload below documents (only Images)</u></p>
 
-              <div fxLayout="row" fxLayoutGap="10px" fxLayout.xs="column">
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Sold Amount</mat-label>
-                  <input matInput type="number" required formControlName="sold_amount"/>
-                  <mat-error >please enter sold amount</mat-error>
-                </mat-form-field>
+        <div fxLayoutAlign="space-between centre" fxLayout="column wrap">
+          <span>Adhaaar card*</span>
+          <img [src]=" imagesUrl.documents.adhaar_card" class="image_style" alt="upload adhaar card here" width="90%" (click)="adhaarCard.click()"/>
+          <span>Agreement or any other relevant document*</span>
+          <img [src]="imagesUrl.documents.agreement" class="image_style" alt="upload agreement here" width="90%" (click)="agreement.click()"/>
 
-                <mat-form-field class="full-width" appearance="outline">
-                  <mat-label>Balance Amount</mat-label>
-                  <input matInput type="number" required formControlName="balance_amount"/>
-                  <mat-error >please enter balance amount</mat-error>
-                </mat-form-field>
-              </div>
+          <input type="file" hidden required #adhaarCard (change)="documentChange($event,'adhaarCard')" accept="image/*"/>
+          <input type="file" hidden required #agreement  (change)="documentChange($event,'agreement')" accept="image/*"/>
 
-              <div fxLayout="row" fxLayoutGap="10px" class="full-width file-upload">
-                <div >
-                  <input type="file" required hidden  #buyerDocs (change)="documentChange($event)">
-                  {{fileName||"No document uploaded"}}
-                  <button mat-mini-fab color="primary" (click)="buyerDocs.click()" type="button">
-                    <mat-icon>attach_file</mat-icon>
-                  </button>
-                  <mat-error *ngIf="!fileName">please upload document</mat-error>
-                </div>
-              </div>
+        </div>
 
-              <div class="form-button" fxLayoutGap="10px" fxLayout.xs="column">
-                <button mat-button color="warn" matStepperPrevious>Back</button>
-                <button mat-button color="accent" type="reset">reset</button>
-                <button mat-raised-button color="primary">submit</button>
-              </div>
+        <div fxLayoutAlign="space-between centre" *ngIf="saleService.index<0">
+          <button  mat-raised-button color="accent" type="reset" (click)=" resetForm()">reset</button>
+          <button mat-raised-button color="primary" [disabled]="!(imagesUrl.documents.adhaar_card.length ||imagesUrl.documents.agreement.length)">Submit</button>
+        </div>
 
-            </form>
-          </mat-step>
+        <div fxLayoutAlign="space-around centre" *ngIf="saleService.index>=0">
+          <button mat-raised-button color="primary" fxLayout="40%" [disabled]="!(imagesUrl.documents.adhaar_card.length ||imagesUrl.documents.agreement.length)">Submit</button>
+        </div>
 
-        </mat-horizontal-stepper>
+      </div>
 
-      </mat-card>
-    </div>
-  </div>
+    </form>
+  </mat-card>
 </div>

@@ -12,17 +12,9 @@ export class AddProductComponent implements OnInit {
   vehicleDetails!: FormGroup;
   sellerDetails!: FormGroup;
 
-  vehicleDocuments:any={
-    registration:'',
-    purchaseAgrement:''
-  }
-  sellerDocumnets:any=[{
-    identityProof:'',
-    addressProof:''
-  }]
   showVehicleTemplate:boolean=true;
   oldCar=true;
-  balancedAmount:any='';
+  balancedAmt:any='';
   constructor(private fb: FormBuilder,private purchaseService:PurchaseService,private router:Router) { }
 
   ngOnInit(): void {
@@ -35,49 +27,80 @@ export class AddProductComponent implements OnInit {
       fuel_type: [""],
       engine_no: [""],
       vehicle_no: [""],
-      vehicleRc:[""],
-      vehiclePurchaseAgrement:[""],
       totalAmount:[""],
       paidAmount:[""],
-      balanceAmount:[""]
-    }, Validators.required);
+      balanceAmount:[""],
+      registration:null,
+      purchaseAgrement:null
+    });
 
     this.sellerDetails = this.fb.group({
-      fullName: [""],
+      seller_name: [""],
       email: [""],
       phone_no: [""],
       address: [""],
       postal_code: [""],
       purchase_date: [""],
-      identityProof:[''],
-    addressProof:['']
-
-    }, Validators.required);
+      identityProof:null,
+      addressProof:null
+    });
   }
 
-  getchassisno(){
+  getChassisNo(){
     this.oldCar=!this.oldCar;
   }
 // Car Documnets//
   uploadRc(event:any){
-    this.vehicleDocuments.registration=event.target.files[0]
+    const file=event.target.files[0];
+    const reader=new FileReader();
+
+    reader.addEventListener("load",()=>{
+     // console.log(reader.result)
+    })
+    reader.readAsDataURL(file)
+
+    this.vehicleDetails.patchValue({registration:reader})
+
   }
 
   uploadPurchaseAgr(event:any){
-    this.vehicleDocuments.purchaseAgrement=event.target.files[0]
+    const file=event.target.files[0];
+    const reader=new FileReader();
+
+    reader.addEventListener("load",()=>{
+     // console.log(reader.result)
+    })
+    reader.readAsDataURL(file)
+
+    this.vehicleDetails.patchValue({purchaseAgrement:reader})
   }
 
 //Seller Documents
   uploadIdentityProof(event:any){
-    this.sellerDocumnets.identityProof=event.target.files[0]
+    const file=event.target.files[0];
+    const reader=new FileReader();
+
+    reader.addEventListener("load",()=>{
+      //console.log(reader.result)
+    })
+    reader.readAsDataURL(file)
+    this.sellerDetails.patchValue({identityProof:reader})
   }
   uploadAddressProof(event:any){
-    this.sellerDocumnets.addressProof=event.target.files[0]
+    const file=event.target.files[0];
+    const reader=new FileReader();
+
+    reader.addEventListener("load",()=>{
+     // console.log(reader.result)
+    })
+    reader.readAsDataURL(file)
+    this.sellerDetails.patchValue({addressProof:reader})
   }
 
   saveVehicle(){
     if(this.vehicleDetails.valid){
-      this.showVehicleTemplate=!this.showVehicleTemplate;
+    this.showVehicleTemplate=!this.showVehicleTemplate;
+
     }
     else{
       alert('Enter All Details')
@@ -86,10 +109,20 @@ export class AddProductComponent implements OnInit {
 
   onAddPurchase(){
     if(this.sellerDetails.valid){
-      this.purchaseService.storeVehicleData(this.vehicleDetails)
-      this.purchaseService.storeSellerData(this.sellerDetails)
-      this.router.navigateByUrl('admin/dashboard')
-      this.showVehicleTemplate=!this.showVehicleTemplate
+      let allDetails=this.vehicleDetails.value;
+      Object.assign(allDetails,this.sellerDetails.value)
+
+      this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
+        if(res.status==201){
+          alert(res.msg);
+          this.router.navigateByUrl('admin/dashboard')
+          this.showVehicleTemplate=!this.showVehicleTemplate
+        }else{
+          alert("something went wrong")
+        }
+
+      })
+
     }
 
     else
@@ -102,6 +135,6 @@ export class AddProductComponent implements OnInit {
   }
 
   calculateBalanced(total:any,paid:any){
-    this.balancedAmount=total-paid;
+    this.balancedAmt=total-paid;
   }
 }

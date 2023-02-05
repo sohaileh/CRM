@@ -8,7 +8,7 @@
 
   <form [formGroup]="vehicleDetails" (ngSubmit)="saveVehicle()">
 
-  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" class="vehicletype" (change)="getchassisno()">
+  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" class="vehicletype" (change)="getChassisNo()">
     <mat-radio-button color="primary" value="old">OLD</mat-radio-button>
     <mat-radio-button color="primary" value="new">NEW</mat-radio-button>
   </mat-radio-group>
@@ -69,7 +69,7 @@
       <mat-toolbar>
         <input matInput [value]="'Registration Certificate'" readonly>
       </mat-toolbar>
-      <input type="file" accept="image/*" (change)="uploadRc($event)" required formControlName="vehicleRc">
+      <input type="file" accept="image/*" (change)="uploadRc($event)" required >
       <mat-error>Upload Registration Certificate</mat-error>
     </mat-form-field>
   </div>
@@ -79,7 +79,7 @@
       <mat-toolbar>
         <input matInput [value]="'Purchase Agreement'" readonly>
       </mat-toolbar>
-      <input type="file" accept="image/*" (change)="uploadPurchaseAgr($event)" required formControlName="vehiclePurchaseAgrement">
+      <input type="file" accept="image/*" (change)="uploadPurchaseAgr($event)" required >
       <mat-error>Upload Purchase Agreement</mat-error>
     </mat-form-field>
   </div>
@@ -101,13 +101,13 @@
 
     <mat-form-field appearance="outline" >
       <mat-label>Balanced Amount</mat-label>
-      <input matInput type="number" formControlName="balanceAmount" [(ngModel)]="balancedAmount" readonly>
+      <input matInput type="number" formControlName="balanceAmount" [(ngModel)]="balancedAmt" readonly>
     </mat-form-field>
   </div>
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center">
-<button mat-flat-button color="primary" type="submit" [disabled]="!total.value">Next</button>
+<button mat-flat-button color="primary" type="submit" [disabled]="!vehicleDetails.valid">Next</button>
 </div>
 </form>
 
@@ -121,7 +121,7 @@
           <div class="firstColumn">
           <mat-form-field appearance="outline" >
             <mat-label>Full Name</mat-label>
-            <input matInput type="text" required formControlName="fullName">
+            <input matInput type="text" required formControlName="seller_name">
             <mat-error>Please Enter Full Name</mat-error>
           </mat-form-field>
 
@@ -170,7 +170,7 @@
                 <mat-toolbar>
                   <input matInput [value]="'Identity Proof'" readonly>
                 </mat-toolbar>
-                <input type="file" accept="image/*" (change)="uploadIdentityProof($event)" required formControlName="identityProof">
+                <input type="file" accept="image/*" (change)="uploadIdentityProof($event)" required >
               </mat-form-field>
           </div>
 
@@ -179,7 +179,7 @@
               <mat-toolbar>
                 <input matInput [value]="'Address Proof'" readonly>
               </mat-toolbar>
-              <input type="file" accept="image/*" (change)="uploadAddressProof($event)" required formControlName="addressProof">
+              <input type="file" accept="image/*" (change)="uploadAddressProof($event)" required >
             </mat-form-field>
           </div>
 

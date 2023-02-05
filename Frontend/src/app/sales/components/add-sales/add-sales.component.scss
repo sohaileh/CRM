@@ -29,5 +29,17 @@ p{
 color: white;
 }
 .image_style{
-  margin: 1rem;
+  margin: .5rem;
+  width: 60%;
+  min-height: 20%;
+  max-height: 17rem !important;
+}
+.image_container{
+  padding: .5rem;
+  margin: .5rem auto;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+.image_container span{
+  text-align: center;
 }

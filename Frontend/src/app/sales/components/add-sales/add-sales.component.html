@@ -79,15 +79,16 @@
         </mat-toolbar>
         <p ><u>Please upload below documents (only Images)</u></p>
 
-        <div fxLayoutAlign="space-between centre" fxLayout="column wrap">
+        <div class="image_container" fxLayoutAlign="space-between centre" fxLayout.lt-sm="column wrap" fxLayout.gt-sm="row wrap">
           <span>Adhaaar card*</span>
-          <img [src]=" imagesUrl.documents.adhaar_card" class="image_style" alt="upload adhaar card here" width="90%" (click)="adhaarCard.click()"/>
-          <span>Agreement or any other relevant document*</span>
-          <img [src]="imagesUrl.documents.agreement" class="image_style" alt="upload agreement here" width="90%" (click)="agreement.click()"/>
-
+          <img [src]=" imagesUrl.documents.adhaar_card" class="image_style" alt="upload adhaar card here" (click)="adhaarCard.click()"/>
           <input type="file" hidden required #adhaarCard (change)="documentChange($event,'adhaarCard')" accept="image/*"/>
-          <input type="file" hidden required #agreement  (change)="documentChange($event,'agreement')" accept="image/*"/>
+        </div>
 
+        <div class="image_container" fxLayoutAlign="space-between centre" fxLayout.lt-sm="column wrap" fxLayout.gt-sm="row wrap">
+          <span>Agreement or any other relevant document*</span>
+          <img [src]="imagesUrl.documents.agreement" class="image_style" alt="upload agreement here" (click)="agreement.click()"/>
+          <input type="file" hidden required #agreement  (change)="documentChange($event,'agreement')" accept="image/*"/>
         </div>
 
         <div fxLayoutAlign="space-between centre" *ngIf="saleService.index<0">

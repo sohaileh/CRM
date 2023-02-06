@@ -1,26 +1,21 @@
-const { Sale, SaleDocuments } = require("../../model");
+const { Sale } = require("../../model");
 const editSale = async (req, res, next) => {
-    const { vehicle_no, fullName, email, phone_no, address, postal_code, sold_date, sold_amount, balance_amount } = req.body;
+    const { vehicle_no, fullName, email, phone_no, address, postal_code, sold_date, sold_amount, balance_amount, documents } = req.body;
     try {
-        await SaleDocuments.updateOne({ _id: req.params.doc_id }, { "documents": req.body.documents }, async (err, resl) => {
-            if (err) {
-                return next(err);
+       const result= await Sale.updateOne({ vehicle_no: vehicle_no }, {
+            fullName, email, phone_no, address, postal_code, sold_date, sold_amount, balance_amount,
+            documents: {
+                adhaar_card: documents[0],
+                agreement: documents[1]
             }
-            try {
-                await Sale.updateOne({ vehicle_no: vehicle_no }, {
-                    fullName, email, phone_no, address, postal_code, sold_date, sold_amount, balance_amount
-                }, (err, _) => {
-                    if (err) {
-                        return next(err)
-                    }
-    res.status(201).json({ message: `Sale having vehicle no: ${vehicle_no} updated successfully` });
-                }).clone();
-            } catch (err) {
-                return next(err);
-            }
-        }).clone();
+        });
+        
+        if(result.modifiedCount===0){
+            return next(new Error("No changes detected! sale is not modified.."));
+        }
     } catch (error) {
         return next(error);
     }
+    res.status(201).json({ message: `Sale having vehicle no: ${vehicle_no} updated successfully` });
 }
 module.exports = editSale;

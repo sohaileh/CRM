@@ -1,6 +1,5 @@
 const mongoose=require("mongoose");
 const saleSchema=mongoose.Schema({
-    document_id:{},
     vehicle_no:{type:String,required:true,unique:true},
     fullName:{type:String,required:true},
     email:{type:String,required:true},
@@ -10,5 +9,6 @@ const saleSchema=mongoose.Schema({
     sold_date:{type:String,required:true},
     sold_amount:{type:Number,required:true},
     balance_amount:{type:Number,required:true},
+    documents:Object
 });
 module.exports=mongoose.model("Sale",saleSchema,"sales");

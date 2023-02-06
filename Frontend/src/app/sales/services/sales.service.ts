@@ -13,11 +13,8 @@ index=-1;
   uploadSale(saleData:any){
     return this.http.post(`${this.serverUrl}/addsale`,saleData);
   }
-  getSalesList(){
-    return this.http.get(`${this.serverUrl}getsales`);
-  }
-  editSale(updateSaleData:any,doc_id:any){
-   return this.http.put(`${this.serverUrl}editsale${doc_id}`,updateSaleData);
+  editSale(updateSaleData:any){
+   return this.http.put(`${this.serverUrl}editsale`,updateSaleData);
   }
   deleteSale(sel_id:any){
     return this.http.delete(`${this.serverUrl}deletesale${sel_id}`);

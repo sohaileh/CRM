@@ -16,7 +16,7 @@ export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
   displayedColumns = ["sell_id", "vehicle_no", "fullName", "sold_date", "sold_amount", "balance_amount", "actions"]
   ngOnInit(): void {
-    this.saleService.getSalesList().subscribe((res: any) => {
+    this.sharedService.getSalesList().subscribe((res: any) => {
       if(res.data.length){
         this.sharedService.salesData = res.data;
         this.salesList = new MatTableDataSource(this.sharedService.salesData);

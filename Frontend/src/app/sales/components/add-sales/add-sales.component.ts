@@ -15,8 +15,7 @@ export class AddSalesComponent implements OnInit {
     documents: {
       agreement: "",
       adhaar_card: ""
-    },
-    _id: ""
+    }
   };
   vehicle = ["JK01A 1111", "JK01A 2222"];
   saleForm = new FormGroup({
@@ -36,19 +35,8 @@ export class AddSalesComponent implements OnInit {
   ngOnInit(): void {
     if (this.saleService.index >= 0) {
       this.saleForm.get("vehicle_no")?.disable();
-      const doc_id = this.sharedService.salesData[this.saleService.index].document_id;
-      this.saleService.http.post(`${this.saleService.serverUrl}getdocs`, { doc_id }).subscribe((res: any) => {
-        this.imagesUrl.documents.adhaar_card = res.data.documents[0];
-        this.imagesUrl.documents.agreement = res.data.documents[1];
-        this.imagesUrl._id = res.data._id;
-        this.saleForm.patchValue(this.sharedService.salesData[this.saleService.index]);
-      }, err => {
-        this.sharedService.snackbarNotification(err.error.message, "Retry", {
-          duration: 3000,
-          panelClass: ['snackbar-fail']
-        });
-        this.route.navigateByUrl("/admin/sales/saleslist");
-      });
+      this.saleForm.patchValue(this.sharedService.salesData[this.saleService.index]);
+      this.imagesUrl.documents = this.sharedService.salesData[this.saleService.index].documents;
     }
     else {
       this.saleForm.reset();
@@ -95,7 +83,7 @@ export class AddSalesComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-success']
       });
-      this.resetForm();
+      this.route.navigateByUrl("/admin/sales/saleslist");
     }, err => this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
       panelClass: ['snackbar-fail']
@@ -108,7 +96,7 @@ export class AddSalesComponent implements OnInit {
     if (this.saleForm.invalid) {
       return;
     }
-    this.saleService.editSale(this.saleForm.value,this.imagesUrl._id).subscribe((res: any) => {
+    this.saleService.editSale(this.saleForm.value).subscribe((res: any) => {
       this.sharedService.snackbarNotification(res.message, "OK", {
         duration: 3000,
         panelClass: ['snackbar-success']

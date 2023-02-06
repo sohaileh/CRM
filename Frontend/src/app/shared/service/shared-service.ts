@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
@@ -6,10 +7,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class SharedService {
-  serverUrl=environment.serverUrl;
+  serverUrl = environment.serverUrl;
   isDashboardComponent = true;
   searchData = "";
-  salesData:any[]=[];
+  salesData:any=[];
   purchaseData = [{
     _id: 1,
     vehicle_no: "JK01A 2222",
@@ -26,8 +27,7 @@ export class SharedService {
     balance_amount: 10
   }
   ];
-
-  constructor( private snackbar: MatSnackBar) { }
+  constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
 
   filterData(matTableDataSource: any) {
     matTableDataSource.filter = this.searchData.trim().toLowerCase();
@@ -38,5 +38,8 @@ export class SharedService {
   }
   snackbarNotification(msg: any, action: any, config: any) {
     this.snackbar.open(msg, action, config);
+  }
+  getSalesList() {
+   return this.http.get(`${this.serverUrl}getsales`);
   }
 }

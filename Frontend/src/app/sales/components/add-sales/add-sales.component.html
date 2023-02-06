@@ -93,11 +93,11 @@
 
         <div fxLayoutAlign="space-between centre" *ngIf="saleService.index<0">
           <button  mat-raised-button color="accent" type="reset" (click)=" resetForm()">reset</button>
-          <button mat-raised-button color="primary" [disabled]="!(imagesUrl.documents.adhaar_card.length ||imagesUrl.documents.agreement.length)">Submit</button>
+          <button mat-raised-button color="primary" [disabled]="!(imagesUrl.documents.adhaar_card ||imagesUrl.documents.agreement)">Submit</button>
         </div>
 
         <div fxLayoutAlign="space-around centre" *ngIf="saleService.index>=0">
-          <button mat-raised-button color="primary" fxLayout="40%" [disabled]="!(imagesUrl.documents.adhaar_card.length ||imagesUrl.documents.agreement.length)">Submit</button>
+          <button mat-raised-button color="primary" fxLayout="40%" [disabled]="!(imagesUrl.documents.adhaar_card ||imagesUrl.documents.agreement)">Submit</button>
         </div>
 
       </div>

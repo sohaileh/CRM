@@ -17,9 +17,8 @@ export class ProductsListComponent implements OnInit {
   displayedColumns = ["sell_id", "vehicle_no", "seller_name", "purchase_date", "totalAmount", "balanceAmount", "actions"]
   ngOnInit(): void {
     this.purchaseService.viewPurchaseDetails().subscribe(res=>{
-      if(res.status==200){
+      if(res){
         this.purchaseList=new MatTableDataSource(res.data);
-        console.log(res.data)
       }
       else{
         alert('Something went wrong')
@@ -27,7 +26,14 @@ export class ProductsListComponent implements OnInit {
     })
   }
 
-  ngAfterViewInit() {
-      this.purchaseList.paginator = this.paginator;
-  }
+  onPurchaseDelete(carNo:any){
+    this.purchaseService.deletePurchase(carNo).subscribe((res)=>{
+      if(res){
+        alert("Vehicle "+carNo+" "+res.message)
+      }else{
+        alert(res.message)
+      }
+    })
+
+   }
 }

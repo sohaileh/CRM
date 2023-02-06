@@ -8,8 +8,6 @@ import { Injectable } from '@angular/core';
 export class PurchaseService {
   serverUrl=environment.serverUrl;
   constructor(private http:HttpClient) { }
-  vehicleDetails:any=[]
-  sellerDetails:any=[]
 
   addPurchaseDetails(data:any){
     return this.http.post<any>(`${this.serverUrl}purchase/addvehicle`,data)
@@ -18,5 +16,9 @@ export class PurchaseService {
 
   viewPurchaseDetails(){
     return  this.http.get<any>(`${this.serverUrl}purchase/purchaselist`)
+  }
+
+  deletePurchase(carNo:any){
+    return  this.http.delete<any>(`${this.serverUrl}purchase/deletepurchase:${carNo}`)
   }
 }

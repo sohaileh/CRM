@@ -7,5 +7,8 @@ class CustomErrorHandler extends Error{
     static saleAlreadyExists(message){
         return new CustomErrorHandler(403,message)
     }
+    static purchaseAlreadyExists(message){
+        return new CustomErrorHandler(403,message)
+    }
 }
 module.exports=CustomErrorHandler;

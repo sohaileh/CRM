@@ -1,28 +1,38 @@
-let database=[
-     {
-      _id: 2,
-      vehicle_no: "JK01A 2222",
-      seller_name: "Suhail Ahmad",
-      purchase_date: new Date(),
-      totalAmount: 200,
-      balanceAmount: 100
-    }
-]
 
-class Purchase{
-    constructor(){}
-    static addPurchase(req,res){
-        const details={_id:req.body.engine_no}
-        Object.assign(details,req.body);
-        database.push(details)
-      //  console.log(req.body)
-        res.json({status:201,msg:"Added Purchase Sucessfully"})
-    }
+const Purchase=require('../model/purchase.model');
+const CustomErrorHandler = require('../services/customErrorHandler');
 
-    static viewPurchase(req,res){
-        res.json({status:200,msg:'Purchase List',data:database})
+const purchase={
+
+ async   addPurchase(req,res){
+    try {
+        const allDetails=req.body;
+        await Purchase.insertMany(allDetails)
+        res.status(201).json({message:"Purchase Added sucessfully"})
+    } catch (error) {
+        res.status(409).json({message:error.message})
+    }
+},
+
+   async viewPurchase(req,res){
+    try{
+        const data=await Purchase.find({})
+        res.status(200).json({message:"Purchase List",data:data})
+    }
+    catch(error){
+        res.status(409).json({message:error.message})
+    }
+    },
+
+    deletePurchase(req,res){
+        const carnumber=req.params;        
+        Purchase.deleteOne({carnumber}).then((data)=>{
+            res.status(200).json({message:"Deleted Sucessfully"})
+        }).catch((err)=>{
+            res.status(409).json({message:"Something Went Wrong"})
+        })
     }
 }
 
-module.exports=Purchase;
+module.exports=purchase;
 

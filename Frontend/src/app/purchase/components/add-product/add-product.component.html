@@ -1,5 +1,5 @@
 
-<div class="container" fxFlex="80%" fxFlex.sm="100%" fxFlex.xm="100%">
+<div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card>
   <div class="showVehicleTemplate" *ngIf="showVehicleTemplate">
     <mat-toolbar color="primary">
@@ -69,7 +69,8 @@
       <mat-toolbar>
         <input matInput [value]="'Registration Certificate'" readonly>
       </mat-toolbar>
-      <input type="file" accept="image/*" (change)="uploadRc($event)" required >
+      <div *ngIf="documents.registration"><img [src]="documents.registration"></div>
+      <input type="file" accept="image/*" (change)="upload($event,'rc')" required >
       <mat-error>Upload Registration Certificate</mat-error>
     </mat-form-field>
   </div>
@@ -79,7 +80,8 @@
       <mat-toolbar>
         <input matInput [value]="'Purchase Agreement'" readonly>
       </mat-toolbar>
-      <input type="file" accept="image/*" (change)="uploadPurchaseAgr($event)" required >
+      <div *ngIf="documents.purchaseAgrement"><img [src]="documents.purchaseAgrement"></div>
+      <input type="file" accept="image/*" (change)="upload($event,'purchaseAgre')" required  >
       <mat-error>Upload Purchase Agreement</mat-error>
     </mat-form-field>
   </div>
@@ -87,7 +89,7 @@
 
 <div class="purchasedetails" >
   <mat-toolbar color="primary">PURCHASE DETAILS</mat-toolbar>
-  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="20px" fxLayout.lt-sm="column" fxLayoutAlign="space-between">
+  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="20px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
     <mat-form-field appearance="outline" >
       <mat-label>Total Car Amount</mat-label>
       <input matInput type="number" required formControlName="totalAmount" #total (keyup)="calculateBalanced(total.value,paid.value)">
@@ -170,7 +172,8 @@
                 <mat-toolbar>
                   <input matInput [value]="'Identity Proof'" readonly>
                 </mat-toolbar>
-                <input type="file" accept="image/*" (change)="uploadIdentityProof($event)" required >
+                <div *ngIf="documents.identityProof"><img [src]="documents.identityProof"></div>
+                <input type="file" accept="image/*" (change)="upload($event,'identity')" required >
               </mat-form-field>
           </div>
 
@@ -179,14 +182,15 @@
               <mat-toolbar>
                 <input matInput [value]="'Address Proof'" readonly>
               </mat-toolbar>
-              <input type="file" accept="image/*" (change)="uploadAddressProof($event)" required >
+              <div *ngIf="documents.addressProof"><img [src]="documents.addressProof"></div>
+              <input type="file" accept="image/*" (change)="upload($event,'address')" required >
             </mat-form-field>
           </div>
 
         </div>
 
         <div class="action" fxLayoutAlign="center">
-          <button mat-raised-button color="primary" type="submit">Add</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="sellerDetails.invalid">Add</button>
           <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
         </div>
     </form>

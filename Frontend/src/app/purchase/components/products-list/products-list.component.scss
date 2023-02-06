@@ -1,22 +1,12 @@
+
 .container{
-  margin: 1rem 1rem;
+
+  margin: 0px auto;
 }
 table{
   width: 100%;
-}
-mat-card{
-  overflow: auto;
-}
- button{
-  margin: 0.1rem .1rem;
-}
-.hide{
-  display: none;
-}
-.search-input{
-  display: flex;
-  justify-content: center;
-}
-.search-input mat-form-field{
-  width: 70%;
+ }
+td, th {
+  text-align: center !important;
+
 }

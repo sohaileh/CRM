@@ -18,17 +18,8 @@ export class HeaderComponent implements OnInit {
       this._router.navigateByUrl('admin/dashboard')
     }
 
-    addSale(){
-      this.saleService.index=-1;
-      this._router.navigateByUrl('admin/sales/addsale')
-    }
-
     viewSales(){
       this._router.navigateByUrl('admin/sales/saleslist')
-    }
-
-    addPurchase(){
-      this._router.navigateByUrl('admin/purchase/addvehicle')
     }
 
     viewPurchase(){

@@ -14,10 +14,6 @@ export class PurchaseService {
    //console.log(data);
   }
 
-  viewPurchaseDetails(){
-    return  this.http.get<any>(`${this.serverUrl}purchase/purchaselist`)
-  }
-
   deletePurchase(carNo:any){
     return  this.http.delete<any>(`${this.serverUrl}purchase/deletepurchase:${carNo}`)
   }

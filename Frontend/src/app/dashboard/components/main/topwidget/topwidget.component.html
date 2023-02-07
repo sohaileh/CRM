@@ -1,10 +1,11 @@
 <div class="topwidget" fxFlex="100%" fxFlex.xs="100%" fxFlex.gt-sm="100%" fxLayout="row wrap" fxLayoutAlign="space-around center">
-    
+
        <mat-card fxFlex="20%" fxFlex.sm="40%" fxFlex.xs="90%" fxLayoutAlign="center center" fxLayout="column"
        *ngFor="let item of topwidgetinfo">
             <mat-icon class="topwidgeticon">{{item.icon}}</mat-icon>
             <h3>{{item.name}}</h3>
-            <h2><mat-icon>euro_symbol</mat-icon>{{item.value}}</h2>
+            <h2><mat-icon>currency_rupee</mat-icon>
+              {{item.value}}</h2>
         </mat-card>
-         
+
 </div>

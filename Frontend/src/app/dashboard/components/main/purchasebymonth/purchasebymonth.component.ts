@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/shared/service/shared-service';
 import { DashboardService } from './../../../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,10 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchasebymonthComponent implements OnInit {
 
-  constructor(private purchase:DashboardService) { }
-  netPurchase:any=[]
+  constructor(private sharedservice:SharedService  ) { }
+  totalPurchase:any=[]
+  purchaseData:any=[]
+  month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
   ngOnInit(): void {
-    this.netPurchase=this.purchase.totalSales();
+    this.sharedservice.viewPurchaseDetails().subscribe(res=>{
+      this.purchaseData=res.data
+      this.calculateTotalPurchase();
+    })
   }
 
+  calculateTotalPurchase(){
+    let monthPurchase:any=[0,0,0,0,0,0,0,0,0,0,0,0]
+    let graphData:any=[]
+
+    for(let i=0;i<this.purchaseData.length;i++){
+        let month=new Date(this.purchaseData[i].purchase_date).getMonth()
+        let value=this.purchaseData[i].totalAmount;
+        monthPurchase[month]+=value
+    }
+
+    for(let i=0;i<monthPurchase.length;i++){
+      let str={name:this.month[i],value:monthPurchase[i]}
+      graphData.push(str)
+    }
+
+    this.totalPurchase=[{
+      name:"Total Purchase",
+      series:graphData
+    }]
+  }
 }

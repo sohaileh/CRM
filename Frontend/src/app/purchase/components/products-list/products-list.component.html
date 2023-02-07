@@ -1,12 +1,12 @@
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card class="mat-elevation-z8" >
+    <div class="addpurchase">
+      <button mat-flat-button color="primary" (click)="onPurchaseAdd()">
+        Add Purchase
+      </button>
+    </div>
     <div *ngIf="purchaseList">
     <table mat-table [dataSource]="purchaseList" >
-
-      <ng-container matColumnDef="sell_id">
-        <th mat-header-cell *matHeaderCellDef>Purchade id</th>
-        <td mat-cell *matCellDef="let owner"> {{owner._id}} </td>
-      </ng-container>
 
       <ng-container matColumnDef="vehicle_no">
         <th mat-header-cell *matHeaderCellDef>Vehicle no</th>

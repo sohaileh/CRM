@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,11 +13,12 @@ import { PurchaseService } from '../../services/purchase.service';
 
 export class ProductsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  constructor(public sharedService: SharedService,private purchaseService:PurchaseService) { }
+
+  constructor(public sharedService: SharedService,private purchaseService:PurchaseService,private router:Router) { }
   purchaseList!: MatTableDataSource<any>;
-  displayedColumns = ["sell_id", "vehicle_no", "seller_name", "purchase_date", "totalAmount", "balanceAmount", "actions"]
+  displayedColumns = ["vehicle_no", "seller_name", "purchase_date", "totalAmount", "balanceAmount", "actions"]
   ngOnInit(): void {
-    this.purchaseService.viewPurchaseDetails().subscribe(res=>{
+    this.sharedService.viewPurchaseDetails().subscribe(res=>{
       if(res){
         this.purchaseList=new MatTableDataSource(res.data);
       }
@@ -34,6 +36,9 @@ export class ProductsListComponent implements OnInit {
         alert(res.message)
       }
     })
+   }
 
+   onPurchaseAdd(){
+    this.router.navigateByUrl('admin/purchase/addvehicle')
    }
 }

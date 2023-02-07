@@ -42,4 +42,8 @@ export class SharedService {
   getSalesList() {
    return this.http.get(`${this.serverUrl}getsales`);
   }
+
+  viewPurchaseDetails(){
+    return  this.http.get<any>(`${this.serverUrl}purchase/purchaselist`)
+  }
 }

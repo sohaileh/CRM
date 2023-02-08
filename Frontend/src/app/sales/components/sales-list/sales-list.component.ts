@@ -30,7 +30,7 @@ export class SalesListComponent implements OnInit {
 
     }
   }
-  editSale(index: any) {
+  updateSale(index: any) {
     this.saleService.index = index;
     this.router.navigateByUrl("/admin/sales/editsale");
   }

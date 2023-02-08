@@ -1,4 +1,5 @@
 const { Sale } = require("../../model");
+const CustomErrorHandler = require("../../services/customErrorHandler");
 const editSale = async (req, res, next) => {
     const { vehicle_no, fullName, email, phone_no, address, postal_code, sold_date, sold_amount, balance_amount, documents } = req.body;
     try {
@@ -11,7 +12,7 @@ const editSale = async (req, res, next) => {
         });
         
         if(result.modifiedCount===0){
-            return next(new Error("No changes detected! sale is not modified.."));
+            return next(CustomErrorHandler.noChanges("No changes detected! sale is not modified"));
         }
     } catch (error) {
         return next(error);

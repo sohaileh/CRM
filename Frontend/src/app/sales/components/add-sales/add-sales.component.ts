@@ -76,7 +76,10 @@ export class AddSalesComponent implements OnInit {
     const images = [this.imagesUrl.documents.adhaar_card, this.imagesUrl.documents.agreement];
     this.saleForm.get("documents")?.setValue(images);
     if (this.saleForm.invalid) {
-      return;
+      return  this.sharedService.snackbarNotification("Incomplete form", "OK", {
+        duration: 3000,
+        panelClass: ['snackbar-fail'],
+      });
     }
     this.saleService.uploadSale(this.saleForm.value).subscribe((res: any) => {
       this.sharedService.snackbarNotification(res.message, "OK", {
@@ -94,15 +97,16 @@ export class AddSalesComponent implements OnInit {
     const images = [this.imagesUrl.documents.adhaar_card, this.imagesUrl.documents.agreement];
     this.saleForm.get("documents")?.setValue(images);
     if (this.saleForm.invalid) {
-      return;
+      return  this.sharedService.snackbarNotification("Incomplete form", "OK", {
+        duration: 3000,
+        panelClass: ['snackbar-fail'],
+      });
     }
     this.saleService.editSale(this.saleForm.value).subscribe((res: any) => {
       this.sharedService.snackbarNotification(res.message, "OK", {
         duration: 3000,
         panelClass: ['snackbar-success']
       });
-      console.log(res.message);
-
       this.resetForm();
       this.saleService.index = -1;
       this.route.navigateByUrl("/admin/sales/saleslist");
@@ -110,6 +114,7 @@ export class AddSalesComponent implements OnInit {
       duration: 3000,
       panelClass: ['snackbar-fail']
     });
+    this.route.navigateByUrl("/admin/sales/saleslist");
   });
   }
 }

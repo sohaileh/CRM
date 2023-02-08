@@ -1,6 +1,6 @@
 const handle={
     addSale:require("./addsale.handler"),
-    editSale:require("./editsale.handle"),
+    updateSale:require("./updatesale.handle"),
     deleteSale:require("./deletesale.handler"),
     getSales:require("./getsales.handler")
 }

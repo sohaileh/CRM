@@ -12,21 +12,22 @@ import { Router } from '@angular/router';
 })
 export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
-  displayedColumns = ["sNo","vehicle_no", "fullName", "sold_date", "sold_amount", "balance_amount", "actions"];
+  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date", "sold_amount", "balance_amount", "actions"];
   constructor(public sharedService: SharedService, public saleService: SalesService, public router: Router) { }
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {
+      if (res.data.length) {
         this.sharedService.salesData = res.data;
-    this.salesList = new MatTableDataSource(this.sharedService.salesData);
+        this.salesList = new MatTableDataSource(this.sharedService.salesData);
+      }
     }, err => this.sharedService.snackbarNotification(err.error.message, "OK", {
       duration: 3000,
       panelClass: ['snackbar-fail']
     }));
   }
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
-    if(paginator != undefined)
-    {
-    this.salesList.paginator =paginator;
+    if (paginator != undefined) {
+      this.salesList.paginator = paginator;
 
     }
   }
@@ -35,8 +36,7 @@ export class SalesListComponent implements OnInit {
     this.router.navigateByUrl("/admin/sales/editsale");
   }
   deleteSale(sell_id: any) {
-    if(!confirm("Are you sure to delete this sale"))
-    {
+    if (!confirm("Are you sure to delete this sale")) {
       return;
     }
     this.saleService.deleteSale(sell_id).subscribe((res: any) => {
@@ -44,10 +44,15 @@ export class SalesListComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-success']
       });
-      window.location.reload();
+      this.reloadComponet();
     }, err => this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
       panelClass: ['snackbar-fail']
     }));
+  }
+  reloadComponet() {
+    this.router.navigate(["admin/dashboard"]).then(() => {
+      return this.router.navigateByUrl("/admin/sales/saleslist");
+    });
   }
 }

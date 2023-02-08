@@ -13,6 +13,6 @@ router.delete('/purchase/deletepurchase:id',purchase.deletePurchase)
 
 router.post("/addsale",handle.addSale);
 router.get("/getsales",handle.getSales);
-router.put("/editsale",handle.editSale);
+router.put("/editsale",handle.updateSale);
 router.delete("/deletesale:sell_id",handle.deleteSale);
 module.exports=router

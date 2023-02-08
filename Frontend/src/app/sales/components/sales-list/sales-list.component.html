@@ -1,72 +1,75 @@
 <div class="container">
   <mat-card class="mat-elevation-z8">
-    <div class="search-input" *ngIf="salesList" >
-      <mat-form-field  floatLabel="never">
-        <input matInput type="text" placeholder="search" [(ngModel)]="sharedService.searchData" autocomplete="off" (keyup)="sharedService.filterData(salesList)">
-        <button  matSuffix mat-icon-button aria-label="Clear" (click)="sharedService.clearSearch(salesList)" *ngIf="sharedService.searchData">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
+
+    <mat-toolbar fxLayoutAlign="space-between centre">
+      Sales List
+      <button mat-raised-button (click)="router.navigateByUrl('/admin/sales/addsale')" color="primary">Add sale</button>
+    </mat-toolbar>
+
+      <div class="search-input" *ngIf="salesList">
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput type="text" placeholder="search sale" [(ngModel)]="sharedService.searchData"
+            autocomplete="off" (keyup)="sharedService.filterData(salesList)">
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="sharedService.clearSearch(salesList)"
+            *ngIf="sharedService.searchData">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
       </div>
 
-     <div *ngIf="salesList">
-    <table mat-table [dataSource]="salesList" >
+    <div *ngIf="salesList">
+      <table mat-table [dataSource]="salesList" fxLayout.lt-sm="column wrap" fxLayout.lt-md="column wrap">
 
-      <ng-container matColumnDef="sell_id">
-        <th mat-header-cell *matHeaderCellDef>Sell id</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer._id}} </td>
-      </ng-container>
+        <ng-container matColumnDef="sNo" sticky>
+          <th mat-header-cell *matHeaderCellDef>S.No</th>
+          <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="vehicle_no">
-        <th mat-header-cell *matHeaderCellDef>Vehicle no</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer.vehicle_no|uppercase}} </td>
-      </ng-container>
+        <ng-container matColumnDef="vehicle_no">
+          <th mat-header-cell *matHeaderCellDef>Vehicle no</th>
+          <td mat-cell *matCellDef="let buyer"> {{buyer.vehicle_no|uppercase}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="fullName">
-        <th mat-header-cell *matHeaderCellDef>Buyer name</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer.fullName}} </td>
-      </ng-container>
+        <ng-container matColumnDef="fullName">
+          <th mat-header-cell *matHeaderCellDef>Buyer name</th>
+          <td mat-cell *matCellDef="let buyer"> {{buyer.fullName}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="sold_date">
-        <th mat-header-cell *matHeaderCellDef>Sold date</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer.sold_date| date:'dd-MM-yyyy' }} </td>
-      </ng-container>
+        <ng-container matColumnDef="sold_date">
+          <th mat-header-cell *matHeaderCellDef>Sold date</th>
+          <td mat-cell *matCellDef="let buyer"> {{buyer.sold_date| date:'dd-MM-yyyy' }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="sold_amount">
-        <th mat-header-cell *matHeaderCellDef>Sold amount</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer.sold_amount}} </td>
-      </ng-container>
+        <ng-container matColumnDef="sold_amount">
+          <th mat-header-cell *matHeaderCellDef>Sold amount</th>
+          <td mat-cell *matCellDef="let buyer"> {{buyer.sold_amount}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="balance_amount">
-        <th mat-header-cell *matHeaderCellDef>Balance amount</th>
-        <td mat-cell *matCellDef="let buyer"> {{buyer.balance_amount}} </td>
-      </ng-container>
+        <ng-container matColumnDef="balance_amount">
+          <th mat-header-cell *matHeaderCellDef>Balance amount</th>
+          <td mat-cell *matCellDef="let buyer"> {{buyer.balance_amount}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="no_sale">
-        <mat-footer-cell *matFooterCellDef>No sales "please add sale first"</mat-footer-cell>
-      </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let i=index,let buyer">
+            <button mat-icon-button color="primary" (click)="editSale(i)">
+              <mat-icon>create</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteSale(buyer._id)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let i=index,let buyer">
-          <button mat-icon-button color="primary" (click)="editSale(i)">
-            <mat-icon>create</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="deleteSale(buyer._id)">
-            <mat-icon>delete_forever</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="['no_sale']" [ngClass]="{'hide':salesList!=null}" ></tr>
-    </table>
-    <span *ngIf="!salesList.filteredData.length"> No matching sale for "{{sharedService.searchData}}"</span>
-    <mat-paginator [pageSizeOptions]="[5,10,25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
-</div>
-<div>
-  <span *ngIf="!salesList">No sales yet "please add sale first"</span>
-</div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+      </table>
+      <span *ngIf="!salesList.filteredData.length"> No matching sale for "{{sharedService.searchData}}"</span>
+      <mat-paginator [pageSizeOptions]="[5,10,25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+    </div>
+    <div>
+      <span *ngIf="!salesList">No sales yet "please add sale first"</span>
+    </div>
   </mat-card>
 </div>

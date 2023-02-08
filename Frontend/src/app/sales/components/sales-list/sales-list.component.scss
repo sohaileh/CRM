@@ -1,33 +1,55 @@
-.container{
+.container {
   margin: 1rem 1rem;
 }
+
 table{
+  overflow: scroll;
   width: 100%;
 }
-mat-card{
-  overflow: auto;
+th.mat-header-cell,td.mat-cell{
+  text-align: center;
+  padding: 0 2rem;
 }
- button{
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type{
+  text-align: center;
+  padding:0;
+}
+button {
   margin: 0.1rem .1rem;
 }
-.hide{
+
+.hide {
   display: none;
 }
-.search-input{
+
+.search-input {
   display: flex;
   justify-content: center;
 }
-.search-input mat-form-field{
+
+.search-input mat-form-field {
   width: 70%;
 }
+
 ::ng-deep .snackbar-success {
   background-color: green;
-  color:white;
+  color: white;
 }
-::ng-deep .snackbar-fail{
+
+::ng-deep .snackbar-fail {
   background-color: red;
-  color:  white;
+  color: white;
 }
-::ng-deep .snackbar-fail .mat-simple-snackbar-action,::ng-deep .snackbar-success .mat-simple-snackbar-action{
-color: white;
+
+::ng-deep .snackbar-fail .mat-simple-snackbar-action,
+::ng-deep .snackbar-success .mat-simple-snackbar-action {
+  color: white;
+}
+mat-toolbar{
+  height: 3rem;
+  margin: 1rem 0;
+  padding: .5rem;
+}
+mat-toolbar>button{
+height: max-content !important;
 }

@@ -30,7 +30,7 @@ export class SharedService {
   constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
 
   filterData(matTableDataSource: any) {
-    matTableDataSource.filter = this.searchData.trim().toLowerCase();
+    matTableDataSource.filter=this.searchData.trim().toLowerCase();
   }
   clearSearch(matTableDataSource: any) {
     this.searchData = "";

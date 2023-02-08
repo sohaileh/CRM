@@ -84,7 +84,7 @@ export class AddSalesComponent implements OnInit {
         panelClass: ['snackbar-success']
       });
       this.route.navigateByUrl("/admin/sales/saleslist");
-    }, err => this.sharedService.snackbarNotification(err.error.message, "retry", {
+    }, err =>this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
       panelClass: ['snackbar-fail']
     }));
@@ -101,12 +101,15 @@ export class AddSalesComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-success']
       });
+      console.log(res.message);
+
       this.resetForm();
       this.saleService.index = -1;
       this.route.navigateByUrl("/admin/sales/saleslist");
-    }, err => this.sharedService.snackbarNotification(err.error.message, "retry", {
+    }, err => {this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
       panelClass: ['snackbar-fail']
-    }));
+    });
+  });
   }
 }

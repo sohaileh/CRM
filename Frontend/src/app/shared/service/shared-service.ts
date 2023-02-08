@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -27,7 +28,7 @@ export class SharedService {
     balance_amount: 10
   }
   ];
-  constructor(private snackbar: MatSnackBar, private http: HttpClient) {}
+  constructor(private snackbar: MatSnackBar, private http: HttpClient,private router:Router) {}
 
   filterData(matTableDataSource: any) {
     matTableDataSource.filter=this.searchData.trim().toLowerCase();
@@ -45,5 +46,8 @@ export class SharedService {
 
   viewPurchaseDetails(){
     return  this.http.get<any>(`${this.serverUrl}purchase/purchaselist`)
+  }
+  unAuthorized(){
+    this.router.navigateByUrl('/admin/login')
   }
 }

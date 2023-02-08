@@ -13,8 +13,8 @@ export class AddSalesComponent implements OnInit {
   vehicleExists = false;
   imagesUrl = {
     documents: {
-      agreement: "",
-      adhaar_card: ""
+      adhaar_card: "",
+      agreement: ""
     }
   };
   vehicle = ["JK01A 1111", "JK01A 2222"];

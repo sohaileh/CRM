@@ -6,10 +6,11 @@ import { AddProductComponent } from './purchase/components/add-product/add-produ
 import { ProductsListComponent } from './purchase/components/products-list/products-list.component';
 import { DashboardComponent } from './dashboard/components/dashboard/dashboard.component';
 import { LoginComponent } from './authentication/components/login/login.component';
+import { AuthGuard } from './authentication/authGuard/auth.guard';
 
 const routes: Routes = [
   {path:"admin/login",component:LoginComponent},
-  {path:"admin/dashboard",component:DashboardComponent},
+  {path:"admin/dashboard",component:DashboardComponent,canActivate:[AuthGuard]},
   {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
   {path:"admin/sales",children:[
     {
@@ -22,7 +23,7 @@ const routes: Routes = [
     {
       path:"saleslist",component:SalesListComponent,
     }
-  ]},
+  ],canActivate:[AuthGuard]},
   {path:"admin/purchase",children:[
       {
         path:"addvehicle",component:AddProductComponent
@@ -30,9 +31,9 @@ const routes: Routes = [
       {
         path:"purchaselist",component:ProductsListComponent
       }
-    ]
+    ],canActivate:[AuthGuard]
   },
-  {path:"dashboard",component:DashboardComponent}
+  {path:"dashboard",component:DashboardComponent,canActivate:[AuthGuard]}
 ];
 
 @NgModule({

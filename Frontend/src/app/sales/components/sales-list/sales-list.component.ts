@@ -18,12 +18,15 @@ export class SalesListComponent implements OnInit {
     this.sharedService.getSalesList().subscribe((res: any) => {
       if (res.data.length) {
         this.sharedService.salesData = res.data;
-        this.salesList = new MatTableDataSource(this.sharedService.salesData);
+    this.salesList = new MatTableDataSource(this.sharedService.salesData);
       }
-    }, err => this.sharedService.snackbarNotification(err.error.message, "OK", {
+    }, err => {this.sharedService.snackbarNotification(err.error.message, "OK", {
       duration: 3000,
       panelClass: ['snackbar-fail']
-    }));
+    });
+    if(err.status===401||403)
+    this.sharedService.unAuthorized();
+    });
   }
   @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
     if (paginator != undefined) {

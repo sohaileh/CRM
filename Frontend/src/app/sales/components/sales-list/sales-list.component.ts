@@ -36,7 +36,7 @@ export class SalesListComponent implements OnInit {
   }
   updateSale(index: any) {
     this.saleService.index = index;
-    this.router.navigateByUrl("/admin/sales/editsale");
+    this.router.navigateByUrl("/admin/sales/updatesale");
   }
   deleteSale(sell_id: any) {
     if (!confirm("Are you sure to delete this sale")) {

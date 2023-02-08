@@ -14,7 +14,7 @@ index=-1;
     return this.http.post(`${this.serverUrl}/addsale`,saleData);
   }
   editSale(updateSaleData:any){
-   return this.http.put(`${this.serverUrl}editsale`,updateSaleData);
+   return this.http.put(`${this.serverUrl}updatesale`,updateSaleData);
   }
   deleteSale(sel_id:any){
     return this.http.delete(`${this.serverUrl}deletesale${sel_id}`);

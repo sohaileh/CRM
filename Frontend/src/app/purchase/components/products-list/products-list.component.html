@@ -7,7 +7,7 @@
         </button>
       </mat-toolbar>
     </div>
-    <ng-template *ngIf="purchaseList">
+    <div *ngIf="purchaseList">
     <table mat-table [dataSource]="purchaseList" >
 
       <ng-container matColumnDef="vehicle_no">
@@ -40,6 +40,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</ng-template>
+</div>
 
 

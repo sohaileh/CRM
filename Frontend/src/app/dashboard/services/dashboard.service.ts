@@ -22,16 +22,10 @@ export class DashboardService {
      }
      let netSalesData=[{
       name:"test",
-      series:value
+      series:value,
+      dot: true
      }]
      return netSalesData;
   }
 
-  totalPurchase(){
-    let value=[]
-    for(let i=0;i<12;i++){
-      let str={name:this.month[i] ,value:this.sales[i]}
-      value.push(str);
-     }
-  }
 }

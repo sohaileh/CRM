@@ -10,11 +10,19 @@ export class PurchaseService {
   constructor(private http:HttpClient) { }
 
   addPurchaseDetails(data:any){
-    return this.http.post<any>(`${this.serverUrl}purchase/addvehicle`,data)
+    return this.http.post<any>(`${this.serverUrl}addvehicle`,data)
    //console.log(data);
   }
 
   deletePurchase(carNo:any){
-    return  this.http.delete<any>(`${this.serverUrl}purchase/deletepurchase:${carNo}`)
+    return  this.http.delete<any>(`${this.serverUrl}deletepurchase/${carNo}`)
+  }
+
+  findPurchase(carno:any){
+    return this.http.get<any>(`${this.serverUrl}findvehicle/${carno}`)
+  }
+
+  editPurchase(carNo:any,editedDetail:any){
+    return  this.http.put<any>(`${this.serverUrl}editpurchase${carNo}`,editedDetail)
   }
 }

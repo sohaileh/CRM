@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     MatDividerModule,
     MatMenuModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ], exports: [
     MatCardModule,
     MatFormFieldModule,
@@ -51,7 +53,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
     MatDividerModule,
     MatMenuModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ]
 })
 export class ModuleModule { }

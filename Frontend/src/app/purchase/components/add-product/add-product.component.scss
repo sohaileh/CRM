@@ -18,10 +18,19 @@ mat-toolbar{
   justify-content: space-between;
 }
 
-
-button{
-  margin:0px 5px;
-}
 img{
 width: 100%;
+}
+
+.documentheading{
+  font-size: 14px;
+  font-weight: bold;
+  button{
+    width: 120px !important;
+    padding: 0px 10px;
+  }
+}
+
+button{
+  margin:0px 2px
 }

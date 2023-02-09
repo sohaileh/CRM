@@ -12,14 +12,9 @@ export class SalesbymonthComponent implements OnInit {
   constructor(private sales:DashboardService) { }
 
   netSales:any=[];
-  
+
   ngOnInit(): void {
     this.netSales=this.sales.totalSales();
-    
   }
 
-  
-
- 
-  
 }

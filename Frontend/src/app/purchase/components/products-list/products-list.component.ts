@@ -16,7 +16,7 @@ export class ProductsListComponent implements OnInit {
 
   constructor(public sharedService: SharedService,private purchaseService:PurchaseService,private router:Router) { }
   purchaseList!: MatTableDataSource<any>;
-  displayedColumns = ["vehicle_no", "seller_name", "purchase_date", "totalAmount", "balanceAmount", "actions"]
+  displayedColumns = ["vehicle_no", "seller_name", "purchase_date", "actions"]
   ngOnInit(): void {
     this.sharedService.viewPurchaseDetails().subscribe(res=>{
       if(res){
@@ -32,6 +32,7 @@ export class ProductsListComponent implements OnInit {
     this.purchaseService.deletePurchase(carNo).subscribe((res)=>{
       if(res){
         alert("Vehicle "+carNo+" "+res.message)
+        this.ngOnInit();
       }else{
         alert(res.message)
       }
@@ -40,5 +41,9 @@ export class ProductsListComponent implements OnInit {
 
    onPurchaseAdd(){
     this.router.navigateByUrl('admin/purchase/addvehicle')
+   }
+
+   onEditPurchase(carNo:any){
+    this.router.navigate(['admin/purchase/addvehicle'],{queryParams:{carno:carNo}})
    }
 }

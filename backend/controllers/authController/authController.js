@@ -8,7 +8,7 @@ class authController {
   constructor() {}
 
   static login(req, res) {
-    if (req.body.email == "junaid@gmail.com") {
+    if (req.body.email == "admin@gmail.com") {
       bcrypt.compare(req.body.password, password, function (err, result) {
         if (err) {
          return res.status(500).json({ msg: "Authentication failed" }); //check error code

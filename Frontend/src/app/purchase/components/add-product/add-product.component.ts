@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
@@ -11,6 +11,7 @@ import { PurchaseService } from '../../services/purchase.service';
 export class AddProductComponent implements OnInit {
   vehicleDetails!: FormGroup;
   sellerDetails!: FormGroup;
+  vehicleNo='';
 
   showVehicleTemplate:boolean=true;
   oldCar=true;
@@ -19,10 +20,10 @@ export class AddProductComponent implements OnInit {
   documents:any={
   registration:null,
   purchaseAgrement:null,
-  identityProof:null,
-  addressProof:null,
+  aadharCard:null,
+  panCard:null,
 }
-  constructor(private fb: FormBuilder,private purchaseService:PurchaseService,private router:Router) { }
+  constructor(private fb: FormBuilder,private purchaseService:PurchaseService,private router:Router, private activatedroute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.showVehicleTemplate=true;
@@ -32,22 +33,36 @@ export class AddProductComponent implements OnInit {
       model: [""],
       color: [""],
       fuel_type: [""],
-      engine_no: [""],
-      vehicle_no: [""],
-      totalAmount:[""],
+      engine_no: ["",[Validators.required,Validators.minLength(8)]],
+      vehicle_no: ["",[Validators.required,Validators.minLength(8)]],
+      totalAmount:["",[Validators.required]],
       paidAmount:[""],
       balanceAmount:[""],
 
     });
 
     this.sellerDetails = this.fb.group({
-      seller_name: [""],
-      email: [""],
-      phone_no: [""],
-      address: [""],
-      postal_code: [""],
-      purchase_date: [""],
+      seller_name: ["",[Validators.required]],
+      email: ["",[Validators.required,Validators.email]],
+      phone_no: ["",[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      address: ["",[Validators.required]],
+      postal_code: ["",[Validators.required,Validators.maxLength(6)]],
+      purchase_date: ["",[Validators.required]],
     });
+
+    this.activatedroute.queryParams.subscribe(prams=>{
+      this.vehicleNo=prams['carno']
+    })
+    if(this.vehicleNo){
+     this.purchaseService.findPurchase(this.vehicleNo).subscribe(res=>{
+      this.vehicleDetails.patchValue(res.data);
+      this.documents.registration=res.data.registration;
+      this.documents.purchaseAgrement=res.data.purchaseAgrement
+      this.sellerDetails.patchValue(res.data);
+      this.documents.aadharCard=res.data.aadharCard
+      this.documents.panCard=res.data.panCard
+     })
+    }
   }
 
   getChassisNo(){
@@ -63,10 +78,10 @@ export class AddProductComponent implements OnInit {
         this.documents.registration=reader.result as string;
       }else if(value==='purchaseAgre'){
         this.documents.purchaseAgrement=reader.result as string
-      }else if(value==='identity'){
-        this.documents.identityProof=reader.result as string
-      }else if(value==='address'){
-        this.documents.addressProof=reader.result as string
+      }else if(value==='aadharcard'){
+        this.documents.aadharCard=reader.result as string
+      }else if(value==='pancard'){
+        this.documents.panCard=reader.result as string
       }
 
     })
@@ -80,7 +95,7 @@ export class AddProductComponent implements OnInit {
     this.showVehicleTemplate=!this.showVehicleTemplate;
     }
     else{
-      alert('Enter All Details')
+      alert('Upload the Documents ')
     }
   }
 
@@ -90,6 +105,7 @@ export class AddProductComponent implements OnInit {
       Object.assign(allDetails,this.sellerDetails.value,this.documents)
 
       this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
+        console.log(res)
         if(res){
           alert(res.message);
           this.router.navigateByUrl('admin/dashboard')
@@ -97,6 +113,8 @@ export class AddProductComponent implements OnInit {
         }else{
           alert(res.message)
         }
+      },(error)=>{
+        alert(error.message)
       })
     }
     else

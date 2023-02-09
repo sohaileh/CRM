@@ -16,6 +16,8 @@ export class TopwidgetComponent implements OnInit {
       this.purchaseData=res.data;
       this.calculateTotalAmount();
       this.calculateMonthAmount();
+    },(err)=>{
+      this.sharedservice.unAuthorized()
     })
 
   }

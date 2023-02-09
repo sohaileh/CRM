@@ -45,7 +45,7 @@ export class SharedService {
   }
 
   viewPurchaseDetails(){
-    return  this.http.get<any>(`${this.serverUrl}purchase/purchaselist`)
+    return  this.http.get<any>(`${this.serverUrl}purchaselist`)
   }
   unAuthorized(){
     this.router.navigateByUrl('/admin/login')

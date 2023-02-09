@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-const purchaseSchema=mongoose.Schema({
+const purchaseSchema=new mongoose.Schema({
     //_id: String,
     condition: String,
     car_name: String,
@@ -20,9 +20,9 @@ const purchaseSchema=mongoose.Schema({
     purchase_date:Date,
     registration:String,
     purchaseAgrement:String,
-    identityProof:String,
-    addressProof:String
+    aadharCard:String,
+    panCard:String
 
 })
-const Purchase=mongoose.model("Purchase",purchaseSchema,'purchases');
+const Purchase=mongoose.model("Purchase",purchaseSchema);
 module.exports=Purchase

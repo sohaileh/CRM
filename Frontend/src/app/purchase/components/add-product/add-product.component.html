@@ -52,7 +52,11 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Fuel Type</mat-label>
-          <input matInput type="text" required formControlName="fuel_type">
+          <mat-select matNativeControl required formControlName="fuel_type">
+            <mat-option value="Diesel">Diesel</mat-option>
+            <mat-option value="Petrol">Petrol</mat-option>
+            <mat-option value="CNG">CNG</mat-option>
+          </mat-select>
           <mat-error>Please Enter Fuel Type</mat-error>
         </mat-form-field>
     </div>
@@ -66,22 +70,24 @@
 
   <div fxFlex="50%" >
     <mat-form-field appearance="outline">
-      <mat-toolbar>
+      <div class="documentheading" fxLayoutAlign="space-between">
         <input matInput [value]="'Registration Certificate'" readonly>
-      </mat-toolbar>
+        <button mat-flat-button color="primary" type="button" (click)="registration.click()">Choose File</button>
+      </div>
       <div *ngIf="documents.registration"><img [src]="documents.registration"></div>
-      <input type="file" accept="image/*" (change)="upload($event,'rc')" required >
+      <input type="file" accept="image/*" (change)="upload($event,'rc')" required #registration hidden>
       <mat-error>Upload Registration Certificate</mat-error>
     </mat-form-field>
   </div>
 
   <div fxFlex="50%">
     <mat-form-field appearance="outline">
-      <mat-toolbar>
+      <div class="documentheading" fxLayoutAlign="space-between">
         <input matInput [value]="'Purchase Agreement'" readonly>
-      </mat-toolbar>
+        <button mat-flat-button color="primary" type="button" (click)="purchaseAgre.click()">Choose File</button>
+      </div>
       <div *ngIf="documents.purchaseAgrement"><img [src]="documents.purchaseAgrement"></div>
-      <input type="file" accept="image/*" (change)="upload($event,'purchaseAgre')" required  >
+      <input type="file" accept="image/*" (change)="upload($event,'purchaseAgre')" required  hidden #purchaseAgre>
       <mat-error>Upload Purchase Agreement</mat-error>
     </mat-form-field>
   </div>
@@ -145,7 +151,7 @@
         <div class="secoundColumn">
           <mat-form-field appearance="outline" >
             <mat-label>Full Address</mat-label>
-            <input matInput type="text" required formControlName="address">
+            <input matInput type="textbox" required formControlName="address">
             <mat-error>Please Enter Address</mat-error>
           </mat-form-field>
 
@@ -169,21 +175,23 @@
 
           <div fxFlex="50%" >
               <mat-form-field appearance="outline">
-                <mat-toolbar>
-                  <input matInput [value]="'Identity Proof'" readonly>
-                </mat-toolbar>
-                <div *ngIf="documents.identityProof"><img [src]="documents.identityProof"></div>
-                <input type="file" accept="image/*" (change)="upload($event,'identity')" required >
+                <div class="documentheading" fxLayoutAlign="space-between">
+                  <input matInput [value]="'Aadhar Card'" readonly>
+                  <button mat-flat-button color="primary" type="button" (click)="aadhar.click()">Choose File</button>
+                </div>
+                <div *ngIf="documents.aadharCard"><img [src]="documents.aadharCard"></div>
+                <input type="file" accept="image/*" (change)="upload($event,'aadharcard')" required #aadhar hidden>
               </mat-form-field>
           </div>
 
           <div fxFlex="50%">
             <mat-form-field appearance="outline">
-              <mat-toolbar>
-                <input matInput [value]="'Address Proof'" readonly>
-              </mat-toolbar>
-              <div *ngIf="documents.addressProof"><img [src]="documents.addressProof"></div>
-              <input type="file" accept="image/*" (change)="upload($event,'address')" required >
+              <div class="documentheading" fxLayoutAlign="space-between">
+                <input matInput [value]="'Pan Card'" readonly>
+                <button mat-flat-button color="primary" type="button" (click)="pancard.click()">Choose File</button>
+              </div>
+              <div *ngIf="documents.panCard"><img [src]="documents.panCard"></div>
+              <input type="file" accept="image/*" (change)="upload($event,'pancard')" required #pancard hidden>
             </mat-form-field>
           </div>
 

@@ -7,9 +7,10 @@ require("../services/db.connection");
 
 router.post("/login",authController.login)
 
-router.post("/purchase/addvehicle",isAuth,purchase.addPurchase)
-router.get('/purchase/purchaselist',isAuth,purchase.viewPurchase)
-router.delete('/purchase/deletepurchase:id',isAuth,purchase.deletePurchase)
+router.post("/addvehicle",isAuth,purchase.addPurchase)
+router.get('/purchaselist',isAuth,purchase.viewPurchase)
+router.delete('/deletepurchase/:carno',isAuth,purchase.deletePurchase)
+router.get('/findvehicle/:carno',isAuth,purchase.findPurchase)
 
 router.post("/addsale",isAuth,handle.addSale);
 router.get("/getsales",isAuth,handle.getSales);

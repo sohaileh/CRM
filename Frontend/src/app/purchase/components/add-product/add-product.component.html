@@ -198,7 +198,7 @@
         </div>
 
         <div class="action" fxLayoutAlign="center">
-          <button mat-raised-button color="primary" type="submit" [disabled]="sellerDetails.invalid">Add</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="sellerDetails.invalid">{{vehicleNo?"Update":"Add"}}</button>
           <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
         </div>
     </form>

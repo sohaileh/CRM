@@ -47,8 +47,16 @@ const purchase={
         })
     },
 
-   async editPurchase(req,res){
-        res.josn("hello from edit server")
+   async updatePurchase(req,res){
+    const carno=req.params.carno;
+    const updatedDetails=req.body;
+    try {
+        await Purchase.updateOne({vehicle_no:carno},updatedDetails)
+        res.status(200).json({message :"Updated Sucessfully"})
+    } catch (error) {
+        res.status(409).json({message :"Something Went Wrong"})
+    }
+    
     }
 }
 

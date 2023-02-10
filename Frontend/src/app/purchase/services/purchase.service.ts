@@ -22,7 +22,7 @@ export class PurchaseService {
     return this.http.get<any>(`${this.serverUrl}findvehicle/${carno}`)
   }
 
-  editPurchase(carNo:any,editedDetail:any){
-    return  this.http.put<any>(`${this.serverUrl}editpurchase${carNo}`,editedDetail)
+  updatePurchase(carNo:any,editedDetail:any){
+    return  this.http.put<any>(`${this.serverUrl}updatepurchase/${carNo}`,editedDetail)
   }
 }

@@ -46,7 +46,7 @@ export class AddProductComponent implements OnInit {
       email: ["",[Validators.required,Validators.email]],
       phone_no: ["",[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
       address: ["",[Validators.required]],
-      postal_code: ["",[Validators.required,Validators.maxLength(6)]],
+      postal_code: ["",[Validators.required,Validators.minLength(6)]],
       purchase_date: ["",[Validators.required]],
     });
 
@@ -103,19 +103,27 @@ export class AddProductComponent implements OnInit {
     if(this.sellerDetails.valid){
       let allDetails=this.vehicleDetails.value;
       Object.assign(allDetails,this.sellerDetails.value,this.documents)
-
-      this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
-        console.log(res)
-        if(res){
-          alert(res.message);
-          this.router.navigateByUrl('admin/dashboard')
-          this.showVehicleTemplate=!this.showVehicleTemplate
-        }else{
+      if(this.vehicleNo){
+        console.log("update Call")
+        this.purchaseService.updatePurchase(this.vehicleNo,allDetails).subscribe((res)=>{
+          console.log(res);
           alert(res.message)
-        }
+          this.router.navigateByUrl('admin/purchase/purchaselist')
+        },(error)=>{
+          alert(error.message)
+        })
+      }
+      else{
+        console.log("create call")
+      this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
+          console.log(res)
+          alert(res.message);
+          this.router.navigateByUrl('admin/purchase/purchaselist')
+          this.showVehicleTemplate=!this.showVehicleTemplate
       },(error)=>{
         alert(error.message)
       })
+    }
     }
     else
     alert('Enter All Details')
@@ -123,7 +131,7 @@ export class AddProductComponent implements OnInit {
 
   onCancel(){
     this.vehicleDetails.reset;
-    this.router.navigateByUrl('admin/dashboard');
+    this.router.navigateByUrl('admin/purchase/purchaselist');
   }
 
   calculateBalanced(total:any,paid:any){

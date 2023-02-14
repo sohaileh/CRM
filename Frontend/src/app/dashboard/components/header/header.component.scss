@@ -5,18 +5,16 @@ mat-toolbar{
 
 .header-action{
     .mat-button{
-        margin: 0px 10px;
-        font-size: 16px;
+      margin: 0px 10px;
+       font-size: 16px;
     }
     .mat-button:hover{
         background-color: rgba(0, 0, 0, 0.411);
     }
 
+
 }
-a{
-  text-decoration: none;
-  color: white;
-}
+
 .home{
   font-size: 26px;
   mat-icon{
@@ -24,3 +22,4 @@ a{
     margin-right: 8px;
   }
 }
+

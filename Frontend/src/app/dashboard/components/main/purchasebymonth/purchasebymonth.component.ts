@@ -24,13 +24,12 @@ export class PurchasebymonthComponent implements OnInit {
     let monthPurchase:any=[0,0,0,0,0,0,0,0,0,0,0,0]
     let graphData:any=[]
 
-    for(let i=0;i<this.purchaseData.length;i++){
-        let month=new Date(this.purchaseData[i].purchase_date).getMonth()
-        let value=this.purchaseData[i].totalAmount;
-        monthPurchase[month]+=value
-    }
-
-    for(let i=0;i<monthPurchase.length;i++){
+    this.purchaseData.forEach((ele:any) => {
+      let month=new Date(ele.purchase_date).getMonth()
+      let value=ele.totalAmount
+      monthPurchase[month]+=value
+    });
+    for(let i=0;i<12;i++){
       let str={name:this.month[i],value:monthPurchase[i]}
       graphData.push(str)
     }

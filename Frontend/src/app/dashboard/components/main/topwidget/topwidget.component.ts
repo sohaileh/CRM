@@ -8,18 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopwidgetComponent implements OnInit {
   purchaseData:any=[]
-
+  salesData:any=[]
   constructor(private sharedservice:SharedService) { }
 
   ngOnInit(): void {
     this.sharedservice.viewPurchaseDetails().subscribe((res)=>{
-      this.purchaseData=res.data;
-      this.calculateTotalAmount();
-      this.calculateMonthAmount();
+      this.purchaseData=res;
+
     },(err)=>{
       this.sharedservice.unAuthorized()
     })
 
+    this.sharedservice.getSalesList().subscribe((res)=>{
+      this.salesData=res;
+      this.calculateTotalAmount();
+      this.calculateMonthAmount();
+    })
   }
 
   topwidgetinfo=[
@@ -30,18 +34,27 @@ export class TopwidgetComponent implements OnInit {
   ]
 
   calculateTotalAmount(){
-    for(let i=0;i<this.purchaseData.length;i++){
-      this.topwidgetinfo[3].value+=this.purchaseData[i].totalAmount;
-    }
+    this.purchaseData.data.forEach((ele:any) => {
+      this.topwidgetinfo[3].value+=ele.totalAmount;
+    });
+    this.salesData.data.forEach((ele:any)=>{
+      this.topwidgetinfo[2].value+=ele.sold_amount
+    })
   }
 
   calculateMonthAmount(){
     let today=new Date().getMonth();
-    for(let i=0;i<this.purchaseData.length;i++){
-      let purchaseMonth=new Date(this.purchaseData[i].purchase_date).getMonth()
-      if(today== purchaseMonth){
-        this.topwidgetinfo[1].value+=this.purchaseData[i].totalAmount;
+    this.purchaseData.data.forEach((ele:any)=>{
+      let purchaseMonth=new Date(ele.purchase_date).getMonth()
+      if(today==purchaseMonth){
+        this.topwidgetinfo[1].value+=ele.totalAmount;
       }
-    }
+    })
+    this.salesData.data.forEach((ele:any)=>{
+      let salesMonth=new Date(ele.sold_date).getMonth()
+      if(today==salesMonth){
+        this.topwidgetinfo[0].value+=ele.sold_amount;
+      }
+    })
   }
 }

@@ -1,3 +1,4 @@
+import { PurchaseRoutingModule } from './purchase-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddProductComponent } from './components/add-product/add-product.component';
@@ -15,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ModuleModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    PurchaseRoutingModule
   ]
 })
 export class PurchaseModule { }

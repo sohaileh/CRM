@@ -44,7 +44,7 @@ export class AddProductComponent implements OnInit {
     this.sellerDetails = this.fb.group({
       seller_name: ["",[Validators.required]],
       email: ["",[Validators.required,Validators.email]],
-      phone_no: ["",[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
+      phone_no: ["",[Validators.required,Validators.maxLength(10)]],
       address: ["",[Validators.required]],
       postal_code: ["",[Validators.required,Validators.minLength(6)]],
       purchase_date: ["",[Validators.required]],
@@ -93,6 +93,7 @@ export class AddProductComponent implements OnInit {
   saveVehicle(){
     if(this.vehicleDetails.valid  && this.documents.registration!=null){
     this.showVehicleTemplate=!this.showVehicleTemplate;
+    console.log(this.vehicleDetails.value);
     }
     else{
       alert('Upload the Documents ')
@@ -106,11 +107,12 @@ export class AddProductComponent implements OnInit {
       if(this.vehicleNo){
         console.log("update Call")
         this.purchaseService.updatePurchase(this.vehicleNo,allDetails).subscribe((res)=>{
-          console.log(res);
           alert(res.message)
           this.router.navigateByUrl('admin/purchase/purchaselist')
-        },(error)=>{
-          alert(error.message)
+        },(err)=>{
+          console.log(err)
+          alert(err.message.message)
+          this.router.navigateByUrl('admin/purchase/purchaselist')
         })
       }
       else{
@@ -120,8 +122,8 @@ export class AddProductComponent implements OnInit {
           alert(res.message);
           this.router.navigateByUrl('admin/purchase/purchaselist')
           this.showVehicleTemplate=!this.showVehicleTemplate
-      },(error)=>{
-        alert(error.message)
+      },(err)=>{
+        alert(err.error.message)
       })
     }
     }
@@ -136,6 +138,7 @@ export class AddProductComponent implements OnInit {
 
   calculateBalanced(total:any,paid:any){
     this.balancedAmt=total-paid;
+    this.vehicleDetails.patchValue({'balanceAmount':this.balancedAmt})
   }
 
 }

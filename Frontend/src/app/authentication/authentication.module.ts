@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {HeaderInterceptor} from '../authentication/interceptor/header.interceptor'
 import { ModuleModule } from '../shared/module/module.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ModuleModule } from '../shared/module/module.module';
   ],
   imports: [
     CommonModule,
-     ModuleModule
+     ModuleModule,
+     AuthRoutingModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor,multi:true }

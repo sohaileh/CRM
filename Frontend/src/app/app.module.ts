@@ -7,18 +7,20 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PurchaseModule } from "./purchase/purchase.module";
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SalesModule } from './sales/sales.module';
+import { NotfoundRoutingModule } from './not-found/notfound-routing.module';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    DashboardModule,
     AuthenticationModule,
+    DashboardModule,
+    SalesModule,
     PurchaseModule,
-    SalesModule
+    AppRoutingModule,
+    NotfoundRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ module.exports=(req,res,next)=>{
         const authHeader=req.headers['authorization'] 
         const token=authHeader && authHeader.split(' ')[1] 
         if (token==null){
-             return next(new Error("Token missing"))
+             return next(unAuthorized("Token missing"))
         }
         jwt.verify(token,ACCESS_TOKEN_SECRET,(err,user)=>{
             if(err){

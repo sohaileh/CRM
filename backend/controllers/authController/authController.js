@@ -17,11 +17,11 @@ class authController {
             const emailId = req.body.email;
             const email = { name: emailId };
             const accessToken = jwt.sign(email, ACCESS_TOKEN_SECRET);
-            return res.status(200).json({ msg: "logged in successfully", accessToken });
+            return res.status(200).json({ message: "logged in successfully", accessToken });
           }
-            res.status(401).json({ msg: "Invalid password" });        
+            res.status(401).json({ message: "Invalid password" });        
       });
-    } else res.status(401).json({ msg: "Invalid Email" });
+    } else res.status(401).json({ message: "Invalid Email" });
   }
 
   // static securePassword= async(password)=>{

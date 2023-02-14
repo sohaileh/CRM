@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared/service/shared-service';
 import { AuthService } from '../../service/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   constructor(
-    private snackBar: MatSnackBar,
     private authservice: AuthService,
     private formBuilder: FormBuilder,
     private sharedService: SharedService
@@ -31,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+
   public showPassword: boolean = false;
 
   public togglePasswordVisibility(): void {
@@ -41,14 +40,14 @@ export class LoginComponent implements OnInit {
       this.authservice.authAdmin(this.loginForm.value).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.accessToken);
-          this.sharedService.snackbarNotification(res.msg,"OK",{
+          this.sharedService.snackbarNotification(res.message,"OK",{
           duration:3000,
           panelClass:['snackbar-success'],
           });
           this.authservice._router.navigateByUrl('/admin/dashboard');
         },
         (error) => {
-          this.sharedService.snackbarNotification(error.error.msg,"Retry",{
+          this.sharedService.snackbarNotification(error.error.message,"Retry",{
             duration:3000,
             panelClass:['snackbar-fail']
           });

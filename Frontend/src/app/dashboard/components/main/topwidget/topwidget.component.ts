@@ -21,6 +21,8 @@ export class TopwidgetComponent implements OnInit {
 
     this.sharedservice.getSalesList().subscribe((res)=>{
       this.salesData=res;
+      console.log(res);
+
       this.calculateTotalAmount();
       this.calculateMonthAmount();
     })
@@ -50,6 +52,8 @@ export class TopwidgetComponent implements OnInit {
         this.topwidgetinfo[1].value+=ele.totalAmount;
       }
     })
+    console.log(this.salesData.data);
+
     this.salesData.data.forEach((ele:any)=>{
       let salesMonth=new Date(ele.sold_date).getMonth()
       if(today==salesMonth){

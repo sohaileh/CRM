@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddSalesComponent implements OnInit {
   vehicleExists = false;
+  changesSaved=false;
   imagesUrl = {
     documents: {
       adhaar_card: "",
@@ -86,6 +87,7 @@ export class AddSalesComponent implements OnInit {
         duration: 3000,
         panelClass: ['snackbar-success']
       });
+      this.changesSaved=true;
       this.route.navigateByUrl("/admin/sales/saleslist");
     }, err =>this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
@@ -109,12 +111,22 @@ export class AddSalesComponent implements OnInit {
       });
       this.resetForm();
       this.saleService.index = -1;
+      this.changesSaved=true;
       this.route.navigateByUrl("/admin/sales/saleslist");
     }, err => {this.sharedService.snackbarNotification(err.error.message, "retry", {
       duration: 3000,
       panelClass: ['snackbar-fail']
     });
+    this.saleForm.get('vehicle_no')?.disable()
     this.route.navigateByUrl("/admin/sales/saleslist");
   });
+  }
+
+
+  canExit(){
+    if(!this.changesSaved){
+      return confirm('your changes will be lost, Are you sure?')
+    }
+    return true;
   }
 }

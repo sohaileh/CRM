@@ -2,16 +2,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
+import { deactivateGuard } from 'src/app/authentication/authGuard/auth.guard';
 
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss']
 })
-export class AddProductComponent implements OnInit {
+export class AddProductComponent implements OnInit,deactivateGuard {
   vehicleDetails!: FormGroup;
   sellerDetails!: FormGroup;
   vehicleNo='';
+  changesSaved=false;
 
   showVehicleTemplate:boolean=true;
   oldCar=true;
@@ -108,6 +110,7 @@ export class AddProductComponent implements OnInit {
         console.log("update Call")
         this.purchaseService.updatePurchase(this.vehicleNo,allDetails).subscribe((res)=>{
           alert(res.message)
+          this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
         },(err)=>{
           console.log(err)
@@ -120,6 +123,7 @@ export class AddProductComponent implements OnInit {
       this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
           console.log(res)
           alert(res.message);
+          this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
           this.showVehicleTemplate=!this.showVehicleTemplate
       },(err)=>{
@@ -139,6 +143,13 @@ export class AddProductComponent implements OnInit {
   calculateBalanced(total:any,paid:any){
     this.balancedAmt=total-paid;
     this.vehicleDetails.patchValue({'balanceAmount':this.balancedAmt})
+  }
+
+  canExit(){
+    if(!this.changesSaved){
+      return confirm('your changes will be lost, Are you sure?')
+    }
+    return true;
   }
 
 }

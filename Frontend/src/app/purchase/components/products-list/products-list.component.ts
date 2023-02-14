@@ -15,9 +15,8 @@ export class ProductsListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(public sharedService: SharedService,private purchaseService:PurchaseService,private router:Router) { }
-  purchaseList:any=[]
-
-  displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "actions"]
+  purchaseList!: MatTableDataSource<any>;
+  displayedColumns = ["vehicle_no", "seller_name", "purchase_date", "actions"]
   ngOnInit(): void {
     this.sharedService.viewPurchaseDetails().subscribe(res=>{
       if(res){
@@ -47,6 +46,4 @@ export class ProductsListComponent implements OnInit {
    onUpdatePurchase(carNo:any){
     this.router.navigate(['admin/purchase/addvehicle'],{queryParams:{carno:carNo}})
    }
-
-
 }

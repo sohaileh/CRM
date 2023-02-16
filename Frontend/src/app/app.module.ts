@@ -7,7 +7,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { PurchaseModule } from "./purchase/purchase.module";
 import { AuthenticationModule } from './authentication/authentication.module';
 import { SalesModule } from './sales/sales.module';
-import { NotfoundRoutingModule } from './not-found/notfound-routing.module';
+import { NotFoundModule } from './error/not-found.module';
+import { ToastrModule } from 'ngx-toastr'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +20,11 @@ import { NotfoundRoutingModule } from './not-found/notfound-routing.module';
     DashboardModule,
     SalesModule,
     PurchaseModule,
+    NotFoundModule,
     AppRoutingModule,
-    NotfoundRoutingModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent]

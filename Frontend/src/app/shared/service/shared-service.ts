@@ -50,4 +50,6 @@ export class SharedService {
   unAuthorized(){
     this.router.navigateByUrl('/admin/login')
   }
+
+
 }

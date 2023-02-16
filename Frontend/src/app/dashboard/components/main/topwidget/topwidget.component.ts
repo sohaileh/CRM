@@ -16,6 +16,7 @@ export class TopwidgetComponent implements OnInit {
       this.purchaseData=res;
 
     },(err)=>{
+
       this.sharedservice.unAuthorized()
     })
 

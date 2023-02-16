@@ -4,7 +4,7 @@ import {
   CanDeactivate,
   Router
 } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../authentication/service/auth.service';
 import { Observable } from 'rxjs';
 export interface deactivateGuard {
   canExit: () => boolean | Promise<boolean> | Observable<boolean>;

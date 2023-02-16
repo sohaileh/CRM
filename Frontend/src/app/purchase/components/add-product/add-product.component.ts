@@ -2,7 +2,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
-import { deactivateGuard } from 'src/app/authentication/authGuard/auth.guard';
+import { deactivateGuard } from 'src/app/authGuard/auth.guard';
 
 @Component({
   selector: 'app-add-product',

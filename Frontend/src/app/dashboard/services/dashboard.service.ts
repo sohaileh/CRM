@@ -1,4 +1,6 @@
-import { SharedService } from 'src/app/shared/service/shared-service';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -6,12 +8,15 @@ import { Injectable } from '@angular/core';
 })
 export class DashboardService {
 
-  constructor() {
+
+  constructor(private http:HttpClient) {
 
   }
    month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
    sales=[3000,4000,2000,4003,5456,5564,7898,2134,6789,2345,6754,3243]
    purchase=[]
+
+   serverUrl=environment.serverUrl
 
 
   totalSales(){
@@ -26,6 +31,10 @@ export class DashboardService {
       dot: true
      }]
      return netSalesData;
+  }
+
+  getTotalPurchaseByDate(){
+   return this.http.get<any>(`${this.serverUrl}totalpurchasebydate`)
   }
 
 }

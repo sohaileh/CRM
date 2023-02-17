@@ -1,15 +1,22 @@
 
 .container{
-
-  margin: 0px auto;
+  margin: 8px auto;
 }
-table{
+
+.purchaseList{
   width: 100%;
- }
-td, th {
-  text-align: center !important;
-
+  td, th {
+    text-align: center !important;
+  }
 }
+
+
 .addpurchase{
   margin-left: 40px;
+}
+.searchbar{
+  .mat-form-field{
+    width: 30%;
+    margin-left: 2.5rem;
+  }
 }

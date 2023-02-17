@@ -1,4 +1,4 @@
-import { SharedService } from 'src/app/shared/service/shared-service';
+import { DashboardService } from './../../../services/dashboard.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,57 +9,31 @@ import { Component, OnInit } from '@angular/core';
 export class TopwidgetComponent implements OnInit {
   purchaseData:any=[]
   salesData:any=[]
-  constructor(private sharedservice:SharedService) { }
+  constructor(private dashboardService:DashboardService) { }
 
   ngOnInit(): void {
-    this.sharedservice.viewPurchaseDetails().subscribe((res)=>{
-      this.purchaseData=res;
-
-    },(err)=>{
-
-      this.sharedservice.unAuthorized()
-    })
-
-    this.sharedservice.getSalesList().subscribe((res)=>{
-      this.salesData=res;
-      console.log(res);
-
-      this.calculateTotalAmount();
-      this.calculateMonthAmount();
+    this.dashboardService.getTotalPurchaseByDate().subscribe((res)=>{
+      this.purchaseData=res.data
+      this.topwidgetinfo[3].value=res.data.length
+      this.calculateMonthPurchase()
     })
   }
 
   topwidgetinfo=[
-    {icon:"account_balance" ,name:'Month Sales', value:0},
+    {icon:"account_balance" ,name:'Month Sales', value:99},
     {icon:"assignment",name:"Month Purchase", value:0},
-    {icon:"account_balance_wallet",name:"Total Sales",value:0},
+    {icon:"account_balance_wallet",name:"Total Sales",value:77},
     {icon:"add_shopping_cart",name:"Total Purchase", value:0}
   ]
 
-  calculateTotalAmount(){
-    this.purchaseData.data.forEach((ele:any) => {
-      this.topwidgetinfo[3].value+=ele.totalAmount;
+  calculateMonthPurchase(){
+    const today=new Date().getMonth()
+    this.purchaseData.forEach((purchase:any)=>{
+      const purchaseDate=new Date(purchase.purchase_date).getMonth()
+      if(today===purchaseDate){
+        this.topwidgetinfo[1].value+=1;
+      }
     });
-    this.salesData.data.forEach((ele:any)=>{
-      this.topwidgetinfo[2].value+=ele.sold_amount
-    })
   }
 
-  calculateMonthAmount(){
-    let today=new Date().getMonth();
-    this.purchaseData.data.forEach((ele:any)=>{
-      let purchaseMonth=new Date(ele.purchase_date).getMonth()
-      if(today==purchaseMonth){
-        this.topwidgetinfo[1].value+=ele.totalAmount;
-      }
-    })
-    console.log(this.salesData.data);
-
-    this.salesData.data.forEach((ele:any)=>{
-      let salesMonth=new Date(ele.sold_date).getMonth()
-      if(today==salesMonth){
-        this.topwidgetinfo[0].value+=ele.sold_amount;
-      }
-    })
-  }
 }

@@ -20,9 +20,9 @@ const purchaseSchema=new mongoose.Schema({
     purchase_date:Date,
     registration:String,
     purchaseAgrement:String,
-    aadharCard:String,
-    panCard:String
-
+    aadhar_card:String,
+    pan_card:String,
+   
 })
 const Purchase=mongoose.model("Purchase",purchaseSchema);
 module.exports=Purchase

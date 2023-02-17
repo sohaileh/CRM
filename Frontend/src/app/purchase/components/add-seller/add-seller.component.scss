@@ -1,22 +1,9 @@
 .container{
-  margin: 0 auto;
+  margin: 10px auto;
 }
 
 .mat-form-field {
   width: 100%;
-}
-
-mat-toolbar{
-  height: 35px;
-  margin-bottom: 0.2rem;
-}
-
-.vehicletype{
-margin-left: 10px;
-}
-
-img{
-width: 100%;
 }
 
 .documentheading{
@@ -27,11 +14,19 @@ width: 100%;
     padding: 0px 10px;
   }
 }
-.document_name{
-  margin-top:10px;
- }
+
 .action_button{
   button{
     margin:5px;
   }
+}
+
+.image_container{
+  img{
+    width: 100%;
+  }
+}
+
+.document_name{
+ margin-top:10px;
 }

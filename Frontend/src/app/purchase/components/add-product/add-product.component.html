@@ -1,19 +1,19 @@
 
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card>
-  <div class="showVehicleTemplate" *ngIf="showVehicleTemplate">
-    <mat-toolbar color="primary">
+  <div class="showVehicleTemplate">
+    <mat-card-header>
       VEHICLE DETAILS
-    </mat-toolbar>
+    </mat-card-header>
 
-  <form [formGroup]="vehicleDetails" (ngSubmit)="saveVehicle()">
+  <form [formGroup]="vehicleDetails" (ngSubmit)="onNext()">
 
-  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" class="vehicletype" (change)="getChassisNo()">
-    <mat-radio-button color="primary" value="old">OLD</mat-radio-button>
-    <mat-radio-button color="primary" value="new">NEW</mat-radio-button>
+  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" (change)="getChassisNo()">
+    <mat-radio-button color="primary" value="old" class="vehicletype">OLD</mat-radio-button>
+    <mat-radio-button color="primary" value="new" class="vehicletype">NEW</mat-radio-button>
   </mat-radio-group>
 
-  <div class="vehicleDetailContainer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+  <div class="vehicleDetailContainer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
 
     <div class="firstColumn" fxFlex="50%">
       <mat-form-field appearance="outline" >
@@ -64,14 +64,15 @@
       </div>
 
 <div class="carDocuments">
-<mat-toolbar color="primary">VEHICLE DOCUMENTS</mat-toolbar>
+<mat-card-header>VEHICLE DOCUMENTS</mat-card-header>
 </div>
-<div  fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+<div  fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
 
   <div fxFlex="50%" >
     <mat-form-field appearance="outline">
       <div class="documentheading" fxLayoutAlign="space-between">
-        <input matInput [value]="'Registration Certificate'" readonly>
+        <span class="document_name">Registration Certificate</span>
+        <input matInput formControlName="registration" readonly hidden>
         <button mat-flat-button color="primary" type="button" (click)="registration.click()">Choose File</button>
       </div>
       <div *ngIf="documents.registration"><img [src]="documents.registration"></div>
@@ -83,7 +84,8 @@
   <div fxFlex="50%">
     <mat-form-field appearance="outline">
       <div class="documentheading" fxLayoutAlign="space-between">
-        <input matInput [value]="'Purchase Agreement'" readonly>
+        <span class="document_name">Purchase Agrement</span>
+        <input matInput readonly formControlName="purchaseAgrement" hidden>
         <button mat-flat-button color="primary" type="button" (click)="purchaseAgre.click()">Choose File</button>
       </div>
       <div *ngIf="documents.purchaseAgrement"><img [src]="documents.purchaseAgrement"></div>
@@ -94,8 +96,8 @@
 </div>
 
 <div class="purchasedetails" >
-  <mat-toolbar color="primary">PURCHASE DETAILS</mat-toolbar>
-  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="20px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
+  <mat-card-header>PURCHASE DETAILS</mat-card-header>
+  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
     <mat-form-field appearance="outline" >
       <mat-label>Total Car Amount</mat-label>
       <input matInput type="number" required formControlName="totalAmount" #total (keyup)="calculateBalanced(total.value,paid.value)">
@@ -110,100 +112,17 @@
     <mat-form-field appearance="outline" >
       <mat-label>Balanced Amount</mat-label>
       <input matInput type="number" formControlName="balanceAmount" [value]="balancedAmt" readonly>
+      <mat-error>Nagative Number not Accepted</mat-error>
     </mat-form-field>
   </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="center">
-<button mat-flat-button color="primary" type="submit" [disabled]="!vehicleDetails.valid">Next</button>
+<div fxLayout="row" fxLayoutAlign="center" class="action_button">
+  <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
+<button mat-flat-button color="primary" type="submit">Next</button>
 </div>
 </form>
-
 </div>
-<div class="showSellerTemplate" *ngIf="!showVehicleTemplate">
-<div class="sellerDocuments">
-  <mat-toolbar color="primary">SELLER DETAILS</mat-toolbar>
-  </div>
-  <form   [formGroup]="sellerDetails" (ngSubmit)="onAddPurchase()" >
-      <div fxLayoutGap.gt-sm="20px" fxLayout="row" fxLayout.lt-sm="column">
-          <div class="firstColumn">
-          <mat-form-field appearance="outline" >
-            <mat-label>Full Name</mat-label>
-            <input matInput type="text" required formControlName="seller_name">
-            <mat-error>Please Enter Full Name</mat-error>
-          </mat-form-field>
 
-          <mat-form-field appearance="outline" >
-            <mat-label>Phone No</mat-label>
-            <input matInput type="number" required formControlName="phone_no">
-            <mat-error>Please Enter Phone No</mat-error>
-          </mat-form-field>
-
-            <mat-form-field appearance="outline" >
-              <mat-label>Email</mat-label>
-              <input matInput type="text" required formControlName="email">
-              <mat-error>Please Enter Email</mat-error>
-            </mat-form-field>
-
-
-        </div>
-
-        <div class="secoundColumn">
-          <mat-form-field appearance="outline" >
-            <mat-label>Full Address</mat-label>
-            <input matInput type="textbox" required formControlName="address">
-            <mat-error>Please Enter Address</mat-error>
-          </mat-form-field>
-
-            <mat-form-field appearance="outline">
-              <mat-label>Postal Code</mat-label>
-              <input matInput type="number" required formControlName="postal_code">
-              <mat-error>Please Enter Color</mat-error>
-            </mat-form-field>
-
-            <mat-form-field  appearance="outline">
-              <mat-label>Choose a date</mat-label>
-              <input matInput type="date" formControlName="purchase_date" required>
-              <mat-error>Enter Date</mat-error>
-            </mat-form-field>
-        </div>
-      </div>
-      <div class="sellerDocuments">
-        <mat-toolbar color="primary">SELLER DOCUMENTS</mat-toolbar>
-        </div>
-        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-
-          <div fxFlex="50%" >
-              <mat-form-field appearance="outline">
-                <div class="documentheading" fxLayoutAlign="space-between">
-                  <input matInput [value]="'Aadhar Card'" readonly>
-                  <button mat-flat-button color="primary" type="button" (click)="aadhar.click()">Choose File</button>
-                </div>
-                <div *ngIf="documents.aadharCard"><img [src]="documents.aadharCard"></div>
-                <input type="file" accept="image/*" (change)="upload($event,'aadharcard')" required #aadhar hidden>
-              </mat-form-field>
-          </div>
-
-          <div fxFlex="50%">
-            <mat-form-field appearance="outline">
-              <div class="documentheading" fxLayoutAlign="space-between">
-                <input matInput [value]="'Pan Card'" readonly>
-                <button mat-flat-button color="primary" type="button" (click)="pancard.click()">Choose File</button>
-              </div>
-              <div *ngIf="documents.panCard"><img [src]="documents.panCard"></div>
-              <input type="file" accept="image/*" (change)="upload($event,'pancard')" required #pancard hidden>
-            </mat-form-field>
-          </div>
-
-        </div>
-
-        <div class="action" fxLayoutAlign="center">
-          <button mat-raised-button color="primary" type="submit" [disabled]="sellerDetails.invalid">{{vehicleNo?"Update":"Add"}}</button>
-          <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
-        </div>
-    </form>
-    <div>
-      </div>
-      </div>
     </mat-card>
 </div>

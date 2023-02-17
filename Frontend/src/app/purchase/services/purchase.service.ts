@@ -7,11 +7,12 @@ import { Injectable } from '@angular/core';
 })
 export class PurchaseService {
   serverUrl=environment.serverUrl;
+  vehicleDetails:any;
+  allDetails:any;
   constructor(private http:HttpClient) { }
 
   addPurchaseDetails(data:any){
     return this.http.post<any>(`${this.serverUrl}addvehicle`,data)
-   //console.log(data);
   }
 
   deletePurchase(carNo:any){

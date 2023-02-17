@@ -10,7 +10,4 @@ export class AppComponent {
   constructor(public sharedService: SharedService,private _tsr:ToastrService){
 
   }
-  alert(){
-   this._tsr.info("hello","fuck");
-  }
 }

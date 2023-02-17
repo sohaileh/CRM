@@ -13,6 +13,8 @@ router.delete('/deletepurchase/:carno',isAuth,purchase.deletePurchase)
 router.get('/findvehicle/:carno',isAuth,purchase.findPurchase)
 router.put('/updatepurchase/:carno',isAuth,purchase.updatePurchase)
 
+router.get('/totalpurchasebydate',purchase.totalPurchase)
+
 router.post("/addsale",isAuth,handle.addSale);
 router.get("/getsales",isAuth,handle.getSales);
 router.put("/updatesale",isAuth,handle.updateSale);

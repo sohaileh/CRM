@@ -11,61 +11,51 @@ import { deactivateGuard } from 'src/app/authGuard/auth.guard';
 })
 export class AddProductComponent implements OnInit,deactivateGuard {
   vehicleDetails!: FormGroup;
-  sellerDetails!: FormGroup;
   vehicleNo='';
   changesSaved=false;
 
-  showVehicleTemplate:boolean=true;
   oldCar=true;
   balancedAmt:any='';
 
-  documents:any={
-  registration:null,
-  purchaseAgrement:null,
-  aadharCard:null,
-  panCard:null,
-}
+  documents:any={}
   constructor(private fb: FormBuilder,private purchaseService:PurchaseService,private router:Router, private activatedroute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.showVehicleTemplate=true;
+
     this.vehicleDetails = this.fb.group({
       condition: ["old"],
-      car_name: [""],
-      model: [""],
-      color: [""],
+      car_name: ["",[Validators.required,Validators.pattern('^[a-zA-Z0-9]*$')]],
+      model: ["",[Validators.required,Validators.pattern('^[a-zA-Z]*$')]],
+      color: ["",[Validators.required,Validators.pattern('^[a-zA-Z]*$')]],
       fuel_type: [""],
-      engine_no: ["",[Validators.required,Validators.minLength(8)]],
-      vehicle_no: ["",[Validators.required,Validators.minLength(8)]],
+      engine_no: ["",[Validators.required,Validators.minLength(8),Validators.pattern('^[a-zA-Z0-9]*$')]],
+      vehicle_no: ["",[Validators.required,Validators.pattern('^[a-zA-Z0-9]*$')]],
+      registration:["",[Validators.required]],
+      purchaseAgrement:["",[Validators.required]],
       totalAmount:["",[Validators.required]],
-      paidAmount:[""],
-      balanceAmount:[""],
-
+      paidAmount:["",[Validators.pattern('^[0-9]*$')]],
+      balanceAmount:["",[Validators.required]],
     });
 
-    this.sellerDetails = this.fb.group({
-      seller_name: ["",[Validators.required]],
-      email: ["",[Validators.required,Validators.email]],
-      phone_no: ["",[Validators.required,Validators.maxLength(10)]],
-      address: ["",[Validators.required]],
-      postal_code: ["",[Validators.required,Validators.minLength(6)]],
-      purchase_date: ["",[Validators.required]],
-    });
+    if(this.purchaseService.vehicleDetails){
+      this.vehicleDetails.patchValue(this.purchaseService.vehicleDetails)
+      this.documents.registration=this.purchaseService.vehicleDetails.registration
+      this.documents.purchaseAgrement=this.purchaseService.vehicleDetails.purchaseAgrement
+    }
 
     this.activatedroute.queryParams.subscribe(prams=>{
       this.vehicleNo=prams['carno']
     })
     if(this.vehicleNo){
      this.purchaseService.findPurchase(this.vehicleNo).subscribe(res=>{
-      this.vehicleDetails.patchValue(res.data);
-      this.documents.registration=res.data.registration;
-      this.documents.purchaseAgrement=res.data.purchaseAgrement
-      this.sellerDetails.patchValue(res.data);
-      this.documents.aadharCard=res.data.aadharCard
-      this.documents.panCard=res.data.panCard
-     })
+      this.purchaseService.allDetails=res.data
+      this.vehicleDetails.patchValue(this.purchaseService.allDetails);
+      this.documents.registration=this.purchaseService.allDetails.registration;
+      this.documents.purchaseAgrement=this.purchaseService.allDetails.purchaseAgrement
+    })
     }
   }
+/////
 
   getChassisNo(){
     this.oldCar=!this.oldCar;
@@ -77,72 +67,36 @@ export class AddProductComponent implements OnInit,deactivateGuard {
     reader.readAsDataURL(file)
     reader.addEventListener("load",()=>{
       if(value==='rc'){
+        this.vehicleDetails.patchValue({registration:reader.result as string})
         this.documents.registration=reader.result as string;
       }else if(value==='purchaseAgre'){
+        this.vehicleDetails.patchValue({purchaseAgrement:reader.result as string})
         this.documents.purchaseAgrement=reader.result as string
-      }else if(value==='aadharcard'){
-        this.documents.aadharCard=reader.result as string
-      }else if(value==='pancard'){
-        this.documents.panCard=reader.result as string
       }
-
     })
     reader.onerror=()=>{
       alert("Error")
     }
   }
 
-  saveVehicle(){
-    if(this.vehicleDetails.valid  && this.documents.registration!=null){
-    this.showVehicleTemplate=!this.showVehicleTemplate;
-    console.log(this.vehicleDetails.value);
+  onNext(){
+    if(this.vehicleDetails.valid ){
+    this.purchaseService.vehicleDetails=this.vehicleDetails.value
+    this.router.navigateByUrl('admin/purchase/addseller')
     }
-    else{
-      alert('Upload the Documents ')
-    }
-  }
-
-  onAddPurchase(){
-    if(this.sellerDetails.valid){
-      let allDetails=this.vehicleDetails.value;
-      Object.assign(allDetails,this.sellerDetails.value,this.documents)
-      if(this.vehicleNo){
-        console.log("update Call")
-        this.purchaseService.updatePurchase(this.vehicleNo,allDetails).subscribe((res)=>{
-          alert(res.message)
-          this.changesSaved=true;
-          this.router.navigateByUrl('admin/purchase/purchaselist')
-        },(err)=>{
-          console.log(err)
-          alert(err.message.message)
-          this.router.navigateByUrl('admin/purchase/purchaselist')
-        })
-      }
-      else{
-        console.log("create call")
-      this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
-          console.log(res)
-          alert(res.message);
-          this.changesSaved=true;
-          this.router.navigateByUrl('admin/purchase/purchaselist')
-          this.showVehicleTemplate=!this.showVehicleTemplate
-      },(err)=>{
-        alert(err.error.message)
-      })
-    }
-    }
-    else
-    alert('Enter All Details')
   }
 
   onCancel(){
-    this.vehicleDetails.reset;
-    this.router.navigateByUrl('admin/purchase/purchaselist');
+     this.vehicleDetails.reset;
+     this.router.navigateByUrl('admin/purchase/purchaselist');
   }
 
   calculateBalanced(total:any,paid:any){
     this.balancedAmt=total-paid;
     this.vehicleDetails.patchValue({'balanceAmount':this.balancedAmt})
+    if(this.balancedAmt<0){
+      this.vehicleDetails.controls['balanceAmount'].setValue("")
+    }
   }
 
   canExit(){

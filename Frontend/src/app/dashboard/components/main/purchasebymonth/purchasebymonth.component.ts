@@ -1,6 +1,7 @@
-import { SharedService } from 'src/app/shared/service/shared-service';
 import { DashboardService } from './../../../services/dashboard.service';
-import { Component, OnInit } from '@angular/core';
+import { SharedService } from 'src/app/shared/service/shared-service';
+import { Component, OnInit,Input } from '@angular/core';
+import { FlexStyleBuilder } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-purchasebymonth',
@@ -9,34 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchasebymonthComponent implements OnInit {
 
-  constructor(private sharedservice:SharedService  ) { }
+  constructor(private dashboardservice:DashboardService) { }
   totalPurchase:any=[]
-  purchaseData:any=[]
   month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+  value=[0,0,0,0,0,0,0,0,0,0,0,0]
+  purchase:any;
   ngOnInit(): void {
-    this.sharedservice.viewPurchaseDetails().subscribe(res=>{
-      this.purchaseData=res.data
-      this.calculateTotalPurchase();
+    this.dashboardservice.getTotalPurchaseByDate().subscribe((res)=>{
+      this.purchase=res.data;
+      this.calculateGraphData();
     })
   }
 
-  calculateTotalPurchase(){
-    let monthPurchase:any=[0,0,0,0,0,0,0,0,0,0,0,0]
-    let graphData:any=[]
-
-    this.purchaseData.forEach((ele:any) => {
-      let month=new Date(ele.purchase_date).getMonth()
-      let value=ele.totalAmount
-      monthPurchase[month]+=value
+  calculateGraphData(){
+    let purchases:any=[]
+    let value=[]
+    this.purchase.forEach((purchase:any) => {
+      const purchaseMonth=new Date(purchase.purchase_date).getMonth()
+      this.value[purchaseMonth]+=1
     });
-    for(let i=0;i<12;i++){
-      let str={name:this.month[i],value:monthPurchase[i]}
-      graphData.push(str)
-    }
-
+    this.month.forEach((month,index)=>{
+      purchases.push({name:month,value:this.value[index]})
+    })
     this.totalPurchase=[{
       name:"Total Purchase",
-      series:graphData
+      series:purchases
     }]
   }
+
+  yAxisFormat(val : any) {
+    if (val % 1 > 0)
+      return "";
+
+    return val ;
+ }
+
 }

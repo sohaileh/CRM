@@ -1,4 +1,4 @@
-import { DashboardService } from './../../../services/dashboard.service';
+import { SharedService } from 'src/app/shared/service/shared-service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -9,12 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalesbymonthComponent implements OnInit {
 
-  constructor(private sales:DashboardService) { }
+  constructor(private sharedservice:SharedService) { }
 
-  netSales:any=[];
+  totalSales:any=[];
+
 
   ngOnInit(): void {
-    this.netSales=this.sales.totalSales();
+
+    this.totalSales=[{
+      name:"Total sales",
+      series:[{
+        name:"jan",
+        value:30
+      },{name:"feb",value:40}]
+    }
+
+    ]
   }
+
+
 
 }

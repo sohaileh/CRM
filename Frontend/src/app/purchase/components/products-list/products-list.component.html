@@ -7,8 +7,14 @@
         </button>
       </mat-toolbar>
     </div>
-    <div *ngIf="purchaseList">
-    <table mat-table [dataSource]="purchaseList" >
+    <div class="searchbar">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="search" (keyup)="applyFilter($event)">
+      </mat-form-field>
+    </div>
+    <ng-container *ngIf="!length else showlist"><h3>No Purchase Found</h3></ng-container>
+    <ng-template #showlist>
+    <table mat-table [dataSource]="purchaseList" class="purchaseList" >
 
       <ng-container matColumnDef="vehicle_no">
         <th mat-header-cell *matHeaderCellDef>Vehicle no</th>
@@ -50,6 +56,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-</div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons [pageSize]="4"> </mat-paginator>
+</ng-template>
 
 

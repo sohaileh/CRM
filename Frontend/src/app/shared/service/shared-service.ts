@@ -12,22 +12,7 @@ export class SharedService {
   isDashboardComponent = true;
   searchData = "";
   salesData:any=[];
-  purchaseData = [{
-    _id: 1,
-    vehicle_no: "JK01A 2222",
-    fullName: "Suhail Ahmad",
-    purchase_date: new Date(),
-    purchase_amount: 100,
-    balance_amount: 10
-  }, {
-    _id: 2,
-    vehicle_no: "JK01A 1111",
-    fullName: "Suhail Bhat",
-    purchase_date: new Date(),
-    purchase_amount: 100,
-    balance_amount: 10
-  }
-  ];
+
   constructor(private snackbar: MatSnackBar, private http: HttpClient,private router:Router) {}
 
   filterData(matTableDataSource: any) {

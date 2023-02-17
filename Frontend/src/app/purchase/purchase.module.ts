@@ -6,11 +6,13 @@ import { ProductsListComponent } from './components/products-list/products-list.
 import { ModuleModule } from '../shared/module/module.module';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
+import { AddSellerComponent } from './components/add-seller/add-seller.component';
 
 @NgModule({
   declarations: [
     AddProductComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    AddSellerComponent
   ],
   imports: [
     CommonModule,

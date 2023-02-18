@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 })
 export class SalesService {
 serverUrl=environment.serverUrl;
-index=-1;
   constructor(public http:HttpClient) { }
 
   uploadSale(saleData:any){

@@ -8,6 +8,8 @@ const saleSchema=mongoose.Schema({
     postal_code:{type:Number,required:true},
     sold_date:{type:String,required:true},
     sold_amount:{type:Number,required:true},
+    bill_no:{type:String,required:true},
+    adhaar_no:{type:Number,required:true},
     balance_amount:{type:Number,required:true},
     documents:Object
 });

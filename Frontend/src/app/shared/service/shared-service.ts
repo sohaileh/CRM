@@ -13,28 +13,52 @@ export class SharedService {
   searchData = "";
   salesData:any=[];
 
-  constructor(private snackbar: MatSnackBar, private http: HttpClient,private router:Router) {}
-
-  filterData(matTableDataSource: any) {
-    matTableDataSource.filter=this.searchData.trim().toLowerCase();
+  purchaseData = [{
+    _id: 1,
+    vehicle_no: "JK01A 2222",
+    fullName: "Suhail Ahmad",
+    purchase_date: new Date(),
+    purchase_amount: 100,
+    balance_amount: 10
+  }, {
+    _id: 2,
+    vehicle_no: "JK01A 1111",
+    fullName: "Suhail Bhat",
+    purchase_date: new Date(),
+    purchase_amount: 100,
+    balance_amount: 10
+  }
+  ];
+  constructor(private snackbar: MatSnackBar, private http: HttpClient, private router: Router) { }
+  getSalesByFilter() {
+    return this.http.get(`${this.serverUrl}getsalesbyfilter${this.searchData}`);
   }
   clearSearch(matTableDataSource: any) {
     this.searchData = "";
-    this.filterData(matTableDataSource);
+    matTableDataSource.filter = this.searchData;
+    this.router.navigate(["/admin/dashboard"]).then(()=>{
+    return this.router.navigateByUrl("/admin/sales/saleslist");
+    });
   }
   snackbarNotification(msg: any, action: any, config: any) {
     this.snackbar.open(msg, action, config);
   }
   getSalesList() {
-   return this.http.get(`${this.serverUrl}getsales`);
+    return this.http.get(`${this.serverUrl}getsales`);
   }
 
-  viewPurchaseDetails(){
-    return  this.http.get<any>(`${this.serverUrl}purchaselist`)
+  viewPurchaseDetails() {
+    return this.http.get<any>(`${this.serverUrl}purchaselist`)
   }
-  unAuthorized(){
+  unAuthorized() {
     this.router.navigateByUrl('/admin/login')
   }
 
 
+  getPurchasesDropDown() {
+    return this.http.get<any>(`${this.serverUrl}purchaselist${10}`);
+  }
+  getPurchasesDropDownByFilter(query: any) {
+    return this.http.post<any>(`${this.serverUrl}purchaselistbyfilter`, { query });
+  }
 }

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AddSalesComponent } from './components/add-sales/add-sales.component';
 import { SalesListComponent } from './components/sales-list/sales-list.component';
 import { ModuleModule } from '../shared/module/module.module';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import { ModuleModule } from '../shared/module/module.module';
   ],
   imports: [
     CommonModule,
-    ModuleModule
+    ModuleModule,
+    NgMultiSelectDropDownModule.forRoot()
   ]
 })
 export class SalesModule { }

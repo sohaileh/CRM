@@ -1,6 +1,6 @@
 .container{
   margin: 1rem auto;
-}
+ }
 mat-toolbar{
   height: 3.5rem;
 }
@@ -9,7 +9,7 @@ mat-form-field{
 }
 button{
   height: fit-content;
-  margin-bottom: 2.5rem;
+  margin: 0 .5rem;
 }
 mat-toolbar{
   margin: .5rem 0;
@@ -30,17 +30,23 @@ p{
 color: white;
 }
 .image_style{
-  margin: .5rem;
   width: 60%;
   min-height: 20%;
   max-height: 17rem !important;
 }
 .image_container{
+  overflow: hidden;
   padding: .5rem;
-  margin: .5rem auto;
+  margin: .4rem 0;
   border: 1px solid black;
   border-radius: 5px;
 }
 .image_container span{
   text-align: center;
+}
+.multiselect-dropdown{
+  width: 96%;
+}
+.d-none{
+  display: none;
 }

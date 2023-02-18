@@ -19,4 +19,10 @@ router.post("/addsale",isAuth,handle.addSale);
 router.get("/getsales",isAuth,handle.getSales);
 router.put("/updatesale",isAuth,handle.updateSale);
 router.delete("/deletesale:sell_id",isAuth,handle.deleteSale);
+router.get("/findsalebyvehicleno:id",isAuth,handle.findSaleByVehicleNo);
+router.get("/getsalesbyfilter:search",isAuth,handle.getSalesByFilter);
+
+router.get('/purchaselist:limit',isAuth,purchase.purchaseListDropDown);
+router.post('/purchaselistbyfilter',isAuth,purchase.searchPurchaseListDropDown);
+
 module.exports=router

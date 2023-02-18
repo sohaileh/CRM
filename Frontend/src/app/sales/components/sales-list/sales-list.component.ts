@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from 'src/app/shared/service/shared-service';
 import { SalesService } from '../../services/sales.service';
 import { Router } from '@angular/router';
+import { AlertService } from 'src/app/alert/alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sales-list',
@@ -12,50 +14,61 @@ import { Router } from '@angular/router';
 })
 export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
-  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date", "sold_amount", "balance_amount", "actions"];
-  constructor(public sharedService: SharedService, public saleService: SalesService, public router: Router) { }
+  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date","bill_no","adhaar_no", "actions"];
+  constructor(public sharedService: SharedService,private alertService:AlertService, public saleService: SalesService, public router: Router) { }
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {
       if (res.data.length) {
-        this.sharedService.salesData = res.data;
-    this.salesList = new MatTableDataSource(this.sharedService.salesData);
+    this.salesList = new MatTableDataSource(res.data);
       }
-    }, err => {this.sharedService.snackbarNotification(err.error.message, "OK", {
-      duration: 3000,
-      panelClass: ['snackbar-fail']
-    });
+    }, err => {
+      this.alertService.showError("Internal Server error","Error");
     if(err.status===401||403)
     this.sharedService.unAuthorized();
     });
   }
-  @ViewChild(MatPaginator) set matPaginator(paginator: MatPaginator) {
-    if (paginator != undefined) {
-      this.salesList.paginator = paginator;
 
+  @ViewChild(MatPaginator) set paginator(matPaginator:MatPaginator){
+    if(matPaginator!=undefined){
+       this.salesList.paginator=matPaginator;
     }
   }
-  updateSale(index: any) {
-    this.saleService.index = index;
-    this.router.navigateByUrl("/admin/sales/updatesale");
+
+
+  updateSale(id: any) {
+    this.router.navigate(["/admin/sales/updatesale"],{queryParams:{id:id}});
   }
   deleteSale(sell_id: any) {
-    if (!confirm("Are you sure to delete this sale")) {
-      return;
-    }
-    this.saleService.deleteSale(sell_id).subscribe((res: any) => {
-      this.sharedService.snackbarNotification(res.message, "OK", {
-        duration: 3000,
-        panelClass: ['snackbar-success']
-      });
-      this.reloadComponet();
-    }, err => this.sharedService.snackbarNotification(err.error.message, "retry", {
-      duration: 3000,
-      panelClass: ['snackbar-fail']
-    }));
+      Swal.fire({
+        title:"Delete sale",
+        text:"Are you sure to delet this sale",
+        showCloseButton:true,
+        showCancelButton:true,
+        cancelButtonText:"Cancel",
+        showConfirmButton:true,
+        confirmButtonText:"Delete"
+      }).then(result=>{
+        if(result.isConfirmed){
+          this.saleService.deleteSale(sell_id).subscribe((res: any) => {
+            this.alertService.showSuccess(res.message,"Success");
+            this.reloadComponet();
+          }, err => this.alertService.showError(err.error.message,"Error"));
+        }else if(result.isDismissed){
+          this.alertService.showInfo("Your sale is safe","Not deleted");
+        }
+      }
+      )
+
   }
   reloadComponet() {
     this.router.navigate(["admin/dashboard"]).then(() => {
       return this.router.navigateByUrl("/admin/sales/saleslist");
     });
+  }
+  filterData(){
+   this.sharedService.getSalesByFilter().subscribe((res:any)=>{
+     this.salesList=new MatTableDataSource(res.data);
+   },err=>{console.log(err);
+   })
   }
 }

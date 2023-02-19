@@ -81,23 +81,22 @@ const purchase = {
     const carno=req.params.carno;
     const existingPurchase=await Purchase.exists({vehicle_no:req.body.vehicle_no})
      if(existingPurchase && carno!=req.body.vehicle_no){
-        return next(CustomErrorHandler.purchaseAlreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
+        //return next(CustomErrorHandler.purchaseAlreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
+        return res.status(403).json({message:"Vehicle Number Already Present"})
      }
     try {
        const updateStatus =await Purchase.updateOne({vehicle_no:carno},req.body)
        if(!updateStatus.modifiedCount){ 
        // throw new Error("No Changes Made")
-        return res.status(200).json({message:"No Changes Made"})
+        //return res.status(200).json({message:"No Changes Made"})
+        return next(CustomErrorHandler.noChanges("No Changes Made"))
        }
        res.status(200).json({message :"Updated Sucessfully"})
     } catch (error) {
        next(error)
     }
-},
+   },
     
-<<<<<<< Updated upstream
-    },
-=======
     async findPurchase(req, res) {
         const carno = req.params.carno
         await Purchase.findOne({ vehicle_no: carno }).then((doc) => {
@@ -105,18 +104,6 @@ const purchase = {
         }).catch((err) => {
             res.json({ message: err.message })
         })
-    },
-
-    async updatePurchase(req, res) {
-        const carno = req.params.carno;
-        const updatedDetails = req.body;
-        try {
-            await Purchase.updateOne({ vehicle_no: carno }, updatedDetails)
-            res.status(200).json({ message: "Updated Sucessfully" })
-        } catch (error) {
-            res.status(409).json({ message: "Something Went Wrong" })
-        }
-
     },
 
     async purchaseListDropDown(req,res,next){
@@ -140,16 +127,25 @@ const purchase = {
         catch (error) {
             return next(error);
         }
-    }
->>>>>>> Stashed changes
+    },
    
    async totalPurchase(req,res){
     try {
-        const data=await Purchase.find({},{'totalAmount':1,"purchase_date":1})        
+        const data=await Purchase.find({},{'vehicle_no':1,"purchase_date":1})        
         res.json({data:data})   
     } catch (error) {
         next(error)
     }
+    },
+
+    async searchVehicle(req,res){
+        const vehicleNumber=req.query.q.toLowerCase();
+        try{
+            const data=await Purchase.find({vehicle_no:new RegExp(vehicleNumber)},{vehicle_no:1})
+            res.json({data:data})
+        }catch(error){
+            res.json('error')
+        }
     }
 }
 

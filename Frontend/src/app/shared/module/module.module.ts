@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSelectModule } from '@angular/material/select';
+import{ MatAutocompleteModule} from '@angular/material/autocomplete'
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule
   ], exports: [
     MatCardModule,
     MatFormFieldModule,
@@ -54,7 +56,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatMenuModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatAutocompleteModule
   ]
 })
 export class ModuleModule { }

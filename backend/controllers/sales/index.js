@@ -1,6 +1,8 @@
 const { Sale } = require("../../model");
 
 const handle={
+    saleByDate:require("./totalsalesbydate"),
+    
     addSale:require("./addsale.handler"),
     updateSale:require("./updatesale.handle"),
     deleteSale:require("./deletesale.handler"),

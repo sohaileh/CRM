@@ -17,12 +17,17 @@ export class TopwidgetComponent implements OnInit {
       this.topwidgetinfo[3].value=res.data.length
       this.calculateMonthPurchase()
     })
+    this.dashboardService.getTotalSalesByDate().subscribe((res)=>{
+      this.salesData=res.data
+      this.topwidgetinfo[2].value=this.salesData.length;
+      this.calculateMonthSales();
+    })
   }
 
   topwidgetinfo=[
-    {icon:"account_balance" ,name:'Month Sales', value:99},
+    {icon:"account_balance" ,name:'Month Sales', value:0},
     {icon:"assignment",name:"Month Purchase", value:0},
-    {icon:"account_balance_wallet",name:"Total Sales",value:77},
+    {icon:"account_balance_wallet",name:"Total Sales",value:0},
     {icon:"add_shopping_cart",name:"Total Purchase", value:0}
   ]
 
@@ -36,4 +41,13 @@ export class TopwidgetComponent implements OnInit {
     });
   }
 
+  calculateMonthSales(){
+    const today=new Date().getMonth()
+    this.salesData.forEach((sale:any)=>{
+      const soldDate=new Date(sale.sold_date).getMonth()
+      if(today===soldDate){
+        this.topwidgetinfo[0].value+=1;
+      }
+    });
+  }
 }

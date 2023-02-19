@@ -8,9 +8,5 @@ import {ToastrService} from "ngx-toastr"
 })
 export class AppComponent {
   constructor(public sharedService: SharedService,private _tsr:ToastrService){
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
   }
 }

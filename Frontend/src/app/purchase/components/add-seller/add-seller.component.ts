@@ -47,6 +47,8 @@ export class AddSellerComponent implements OnInit {
          this.purchaseService.updatePurchase(this.purchaseService.allDetails.vehicle_no,allDetails).subscribe((res)=>{
           this.alertservice.showInfo(res.message,"Done")
           this.router.navigateByUrl("admin/purchase/purchaselist")
+         },(err)=>{
+          this.alertservice.showError(err.error.message,"Error")
          })
       }
     }else{
@@ -57,7 +59,7 @@ export class AddSellerComponent implements OnInit {
           this.alertservice.showSuccess(res.message,"Created")
           this.router.navigateByUrl('admin/purchase/purchaselist')
         },(err)=>{
-          console.log(err)
+          this.alertservice.showError(err.error.message,"Error")
         })
       }
     }

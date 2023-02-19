@@ -26,4 +26,12 @@ export class PurchaseService {
   updatePurchase(carNo:any,editedDetail:any){
     return  this.http.put<any>(`${this.serverUrl}updatepurchase/${carNo}`,editedDetail)
   }
+
+  getVehicleDate(){
+    return this.http.get<any>(`${this.serverUrl}totalpurchasebydate`)
+  }
+
+  getVehicleNumber(vehicleNumber:any){
+    return this.http.get<any>(`${this.serverUrl}/search?q=${vehicleNumber}`)
+  }
 }

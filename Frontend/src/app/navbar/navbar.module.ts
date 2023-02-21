@@ -1,3 +1,4 @@
+import { ModuleModule } from './../shared/module/module.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,7 +14,9 @@ import { FooterComponent } from './components/footer/footer.component';
   ],
   imports: [
     CommonModule,
-    NavbarRoutingModule
-  ]
+    NavbarRoutingModule,
+    ModuleModule
+  ],
+  exports:[HeaderComponent]
 })
 export class NavbarModule { }

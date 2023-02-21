@@ -1,3 +1,4 @@
+import { LayoutComponent } from './components/layout/layout.component';
 import { AddSellerComponent } from './components/add-seller/add-seller.component';
 import { NgModule } from "@angular/core";
 import{RouterModule,Routes} from '@angular/router'
@@ -7,9 +8,12 @@ import { AuthGuard } from "../authGuard/auth.guard";
 
 
 const routes:Routes=[
-{path:'purchaselist',component:ProductsListComponent},
-{path:'addvehicle',component:AddProductComponent},
-{path:'addseller',component:AddSellerComponent}
+  {path:"",component:LayoutComponent,children:[
+    {path:'purchaselist',component:ProductsListComponent},
+    {path:'addvehicle',component:AddProductComponent},
+    {path:'addseller',component:AddSellerComponent}
+  ]}
+
 ]
 
 @NgModule({

@@ -1,1 +1,26 @@
-<p>header works!</p>
+
+<div class="header" fxlayout="row wrap" >
+  <mat-toolbar color="primary" fxFlex="100%" fxLayoutAlign="space-between center">
+     <div class="header-name" fxLayout="row" >
+         <button mat-button class="home" (click)="onHome()"><mat-icon>dashboard</mat-icon>Dashboard</button>
+     </div>
+
+     <div class="header-action" fxShow fxHide.xs >
+     <button mat-button (click)="onHome()">HOME</button>
+     <button mat-button (click)="viewSales() ">SALES</button>
+     <button mat-button (click)="viewPurchase()">PURCHASES</button>
+
+        <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
+     </div>
+
+     <div fxHide fxShow.xs >
+        <button mat-button [matMenuTriggerFor]="menu"><mat-icon>menu</mat-icon></button>
+           <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="viewSales()">Sales</button>
+            <button mat-menu-item (click)="viewPurchase()">Purchase</button>
+            <button mat-menu-item (click)="onLogout()">Logout</button>
+           </mat-menu>
+        </div>
+  </mat-toolbar>
+
+</div>

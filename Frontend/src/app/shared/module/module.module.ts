@@ -39,7 +39,7 @@ import{ MatAutocompleteModule} from '@angular/material/autocomplete'
     HttpClientModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ], exports: [
     MatCardModule,
     MatFormFieldModule,
@@ -57,7 +57,7 @@ import{ MatAutocompleteModule} from '@angular/material/autocomplete'
     HttpClientModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ]
 })
 export class ModuleModule { }

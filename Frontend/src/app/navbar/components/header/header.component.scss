@@ -1,0 +1,25 @@
+
+mat-toolbar{
+  height: 50px;
+}
+
+.header-action{
+  .mat-button{
+    margin: 0px 10px;
+     font-size: 16px;
+  }
+  .mat-button:hover{
+      background-color: rgba(0, 0, 0, 0.411);
+  }
+
+
+}
+
+.home{
+font-size: 26px;
+mat-icon{
+  margin-bottom: 4px;
+  margin-right: 8px;
+}
+}
+

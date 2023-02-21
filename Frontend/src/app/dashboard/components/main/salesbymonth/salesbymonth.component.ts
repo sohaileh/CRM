@@ -20,7 +20,6 @@ export class SalesbymonthComponent implements OnInit {
   ngOnInit(): void {
     this.dashboradservice.getTotalSalesByDate().subscribe((res)=>{
       this.sales=res.data
-      console.log(this.sales)
       this.calculateGraphData();
     })
 

@@ -42,29 +42,6 @@ const purchase = {
         
     },
 
-    async viewPurchase(req, res) {
-        try {
-            const data = await Purchase.find({})
-            res.status(200).json({ message: "Purchase List", data: data })
-        }
-        catch (error) {
-            res.status(409).json({ message: error.message })
-        }
-    },
-
-    async deletePurchase(req, res) {
-        try{
-        const carnumber = req.params.carno;
-        await Purchase.deleteOne({ vehicle_no: carnumber }).then((data) => {
-            res.status(200).json({ message: "Deleted Sucessfully" })
-        }).catch((err) => {
-            res.status(409).json({ message: "Something Went Wrong" })
-        })
-        } catch (error) {
-          return next(error)
-        }  
-       
-    },
 
    async findPurchase(req,res){
         const carno=req.params.carno
@@ -87,9 +64,7 @@ const purchase = {
     try {
        const updateStatus =await Purchase.updateOne({vehicle_no:carno},req.body)
        if(!updateStatus.modifiedCount){ 
-       // throw new Error("No Changes Made")
-        //return res.status(200).json({message:"No Changes Made"})
-        return next(CustomErrorHandler.noChanges("No Changes Made"))
+        return res.status(200).json({message:"No Changes Made"})
        }
        res.status(200).json({message :"Updated Sucessfully"})
     } catch (error) {
@@ -132,7 +107,7 @@ const purchase = {
    async totalPurchase(req,res){
     try {
         const data=await Purchase.find({},{'vehicle_no':1,"purchase_date":1})        
-        res.json({data:data})   
+        res.status(200).json({data:data})   
     } catch (error) {
         next(error)
     }
@@ -142,9 +117,9 @@ const purchase = {
         const vehicleNumber=req.query.q.toLowerCase();
         try{
             const data=await Purchase.find({vehicle_no:new RegExp(vehicleNumber)},{vehicle_no:1})
-            res.json({data:data})
+            res.status(200).json({data:data})
         }catch(error){
-            res.json('error')
+            res.status(error.status).json('error')
         }
     }
 }

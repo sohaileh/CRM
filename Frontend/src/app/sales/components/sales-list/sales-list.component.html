@@ -10,7 +10,7 @@
         <mat-form-field floatLabel="never" appearance="outline">
           <input matInput type="text" placeholder="search by vehicle no" [(ngModel)]="sharedService.searchData"
             autocomplete="off" (keyup)="filterData()">
-          <button matSuffix mat-icon-button aria-label="Clear" (click)="sharedService.clearSearch(salesList)"
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="sharedService.clearSearch()"
             *ngIf="sharedService.searchData">
             <mat-icon>close</mat-icon>
           </button>
@@ -22,7 +22,7 @@
 
         <ng-container matColumnDef="sNo" sticky>
           <th mat-header-cell *matHeaderCellDef>S.No</th>
-          <td mat-cell *matCellDef="let i=index"> {{i+1}} </td>
+          <td mat-cell *matCellDef="let i=index"> {{ (i + 1) + (paginator.pageIndex * paginator.pageSize) }} </td>
         </ng-container>
 
         <ng-container matColumnDef="vehicle_no">
@@ -66,7 +66,7 @@
         <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
       </table>
       <span *ngIf="!salesList.filteredData.length"> No matching sale for "{{sharedService.searchData}}"</span>
-      <mat-paginator [pageSize]="20" showFirstLastButtons></mat-paginator>
+      <mat-paginator #paginator [pageSizeOptions]="[20,50,100]" [pageSize]="10"  (page)="pageEvent($event)"></mat-paginator>
     </div>
     <div>
       <span *ngIf="!salesList">No sales yet "please add sale first"</span>

@@ -1,29 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AddSalesComponent } from './sales/components/add-sales/add-sales.component';
-import { SalesListComponent } from './sales/components/sales-list/sales-list.component';
 import { AuthGuard } from './authGuard/auth.guard'
 import { NotFoundComponent } from './error/not-found.component';
 
 const routes: Routes = [
-  {path:"admin/login",loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule)},
-  {path:"admin/dashboard",loadChildren:()=>import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),canActivate:[AuthGuard]},
-  {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
-  {path:"admin/sales",children:[
-    {
-      path:"addsale",component:AddSalesComponent,canDeactivate:[AuthGuard],
+  // {path:"admin/login",loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule)},
+  //  {path:"admin/dashboard",loadChildren:()=>import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),canActivate:[AuthGuard]},
+  // {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+  // {path:"admin/sales",children:[
+  //   {
+  //     path:"addsale",component:AddSalesComponent,canDeactivate:[AuthGuard],
 
-    },{
-      path:"updatesale",component:AddSalesComponent,canDeactivate:[AuthGuard],
+  //   },{
+  //     path:"updatesale",component:AddSalesComponent,canDeactivate:[AuthGuard],
 
-    },
-    {
-      path:"saleslist",component:SalesListComponent,
-    }
-  ],canActivate:[AuthGuard]},
+  //   },
+  //   {
+  //     path:"saleslist",component:SalesListComponent,
+  //   }
+  // ],canActivate:[AuthGuard]},
 
-  {path:"admin/purchase",loadChildren:()=>import('./purchase/purchase.module').then((m)=>m.PurchaseModule),canActivate:[AuthGuard]},
-  {path:'**',component:NotFoundComponent}
+  // {path:"admin/purchase",loadChildren:()=>import('./purchase/purchase.module').then((m)=>m.PurchaseModule),canActivate:[AuthGuard]},
+  // {path:'**',component:NotFoundComponent}
+  {path:"admin",children:[
+    {path:"sales",loadChildren:()=>import("./sales/sales.module").then(mod=>mod.SalesModule)}
+  ]}
 ];
 
 @NgModule({

@@ -14,50 +14,49 @@ import Swal from 'sweetalert2';
 })
 export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
-  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date","bill_no","adhaar_no", "actions"];
-  constructor(public sharedService: SharedService,private alertService:AlertService, public saleService: SalesService, public router: Router) { }
+  pageSize=10;
+  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date", "bill_no", "adhaar_no", "actions"];
+  constructor(public sharedService: SharedService, private alertService: AlertService, public saleService: SalesService, public router: Router) { }
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {
       if (res.data.length) {
-    this.salesList = new MatTableDataSource(res.data);
+      this.salesList = new MatTableDataSource(res.data);
       }
     }, err => {
-      this.alertService.showError("Internal Server error","Error");
-    if(err.status===401||403)
-    this.sharedService.unAuthorized();
+      this.alertService.showError("Internal Server error", "Error");
+      if (err.status === 401 || 403)
+        this.sharedService.unAuthorized();
     });
   }
-
-  @ViewChild(MatPaginator) set paginator(matPaginator:MatPaginator){
-    if(matPaginator!=undefined){
-       this.salesList.paginator=matPaginator;
+  @ViewChild("paginator") set paginator(matPaginator: MatPaginator) {
+    if (matPaginator) {
+      this.salesList.paginator = matPaginator;
     }
   }
 
-
   updateSale(id: any) {
-    this.router.navigate(["/admin/sales/updatesale"],{queryParams:{id:id}});
+    this.router.navigate(["/admin/sales/updatesale"], { queryParams: { id: id } });
   }
   deleteSale(sell_id: any) {
-      Swal.fire({
-        title:"Delete sale",
-        text:"Are you sure to delet this sale",
-        showCloseButton:true,
-        showCancelButton:true,
-        cancelButtonText:"Cancel",
-        showConfirmButton:true,
-        confirmButtonText:"Delete"
-      }).then(result=>{
-        if(result.isConfirmed){
-          this.saleService.deleteSale(sell_id).subscribe((res: any) => {
-            this.alertService.showSuccess(res.message,"Success");
-            this.reloadComponet();
-          }, err => this.alertService.showError(err.error.message,"Error"));
-        }else if(result.isDismissed){
-          this.alertService.showInfo("Your sale is safe","Not deleted");
-        }
+    Swal.fire({
+      title: "Delete sale",
+      text: "Are you sure to delet this sale",
+      showCloseButton: true,
+      showCancelButton: true,
+      cancelButtonText: "Cancel",
+      showConfirmButton: true,
+      confirmButtonText: "Delete"
+    }).then(result => {
+      if (result.isConfirmed) {
+        this.saleService.deleteSale(sell_id).subscribe((res: any) => {
+          this.alertService.showSuccess(res.message, "Success");
+          this.reloadComponet();
+        }, err => this.alertService.showError(err.error.message, "Error"));
+      } else if (result.isDismissed) {
+        this.alertService.showInfo("Your sale is safe", "Not deleted");
       }
-      )
+    }
+    )
 
   }
   reloadComponet() {
@@ -65,10 +64,24 @@ export class SalesListComponent implements OnInit {
       return this.router.navigateByUrl("/admin/sales/saleslist");
     });
   }
-  filterData(){
-   this.sharedService.getSalesByFilter().subscribe((res:any)=>{
-     this.salesList=new MatTableDataSource(res.data);
-   },err=>{console.log(err);
-   })
+  filterData() {
+    this.sharedService.getSalesByFilter().subscribe((res: any) => {
+      this.salesList = new MatTableDataSource(res.data);
+    }, err => {
+      console.log(err);
+    })
   }
+  pageEvent(event: any) {
+    if(event.pageSize>this.pageSize)
+    {
+      this.pageSize=event.pageSize;
+      this.sharedService.getSalesByPagination(this.pageSize,this.salesList.data.length).subscribe((res: any) => {
+        this.salesList=new MatTableDataSource([...this.salesList.data,...res.data])
+      }, err => console.log(err));
+    }else if(event.previousPageIndex<event.pageIndex){
+      this.sharedService.getSalesByPagination(event.pageSize,this.salesList.data.length).subscribe((res: any) => {
+        this.salesList=new MatTableDataSource([...this.salesList.data,...res.data])
+      }, err => console.log(err));
+    }
+}
 }

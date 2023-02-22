@@ -1,5 +1,6 @@
 const CustomErrorHandler =require('../services/customErrorHandler')
 const Purchase=require('../model/purchase.model');
+const regex = require('../services/regex');
 
 const purchase = {
 
@@ -71,7 +72,7 @@ const purchase = {
        next(error)
     }
    },
-    
+
     async findPurchase(req, res) {
         const carno = req.params.carno
         await Purchase.findOne({ vehicle_no: carno }).then((doc) => {
@@ -94,7 +95,7 @@ const purchase = {
     },
     async searchPurchaseListDropDown(req,res,next){
         try {
-            const data = await Purchase.find({vehicle_no:{$regex:new RegExp("^"+req.body.query+".*","i")}}).select("vehicle_no -_id").limit(10);
+            const data = await Purchase.find({vehicle_no:{$regex:regex(req.body.query)}}).select("vehicle_no -_id").limit(10);
             if(data){
             return res.status(200).json({data});
             }

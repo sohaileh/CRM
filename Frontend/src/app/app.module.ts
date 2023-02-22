@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PurchaseModule } from "./purchase/purchase.module";
 import { AuthenticationModule } from './authentication/authentication.module';
-import { SalesModule } from './sales/sales.module';
 import { NotFoundModule } from './error/not-found.module';
 import { ToastrModule } from 'ngx-toastr'
 
@@ -19,7 +18,6 @@ import { ToastrModule } from 'ngx-toastr'
     BrowserModule,
     AuthenticationModule,
     DashboardModule,
-    SalesModule,
     PurchaseModule,
     NotFoundModule,
     AppRoutingModule,

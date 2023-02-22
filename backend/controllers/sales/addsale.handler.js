@@ -3,7 +3,7 @@ const CustomErrorHandler = require("../../services/customErrorHandler");
 const addSale = async (req, res, next) => {
     const existingSale = await Sale.exists({ vehicle_no: req.body.vehicle_no });
     if (existingSale) {
-        return next(CustomErrorHandler.saleAlreadyExists(`Existing sale found for vehicle no: ${req.body.vehicle_no}`));
+        return next(CustomErrorHandler.alreadyExists(`Existing sale found for vehicle no: ${req.body.vehicle_no}`));
     }
     const sale = new Sale(req.body);
     try {

@@ -33,9 +33,8 @@ export class SharedService {
   getSalesByFilter() {
     return this.http.get(`${this.serverUrl}getsalesbyfilter${this.searchData}`);
   }
-  clearSearch(matTableDataSource: any) {
+  clearSearch() {
     this.searchData = "";
-    matTableDataSource.filter = this.searchData;
     this.router.navigate(["/admin/dashboard"]).then(()=>{
     return this.router.navigateByUrl("/admin/sales/saleslist");
     });
@@ -60,5 +59,11 @@ export class SharedService {
   }
   getPurchasesDropDownByFilter(query: any) {
     return this.http.post<any>(`${this.serverUrl}purchaselistbyfilter`, { query });
+  }
+  getSalesByPagination(limit:number,skipdata:number){
+    return this.http.post(`${this.serverUrl}getsalesbypagination${limit}`,{skipdata});
+  }
+  epoch(date:Date){
+    return date.getTime();
   }
 }

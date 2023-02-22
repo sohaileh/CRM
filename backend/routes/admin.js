@@ -23,6 +23,7 @@ router.put("/updatesale",isAuth,handle.updateSale);
 router.delete("/deletesale:sell_id",isAuth,handle.deleteSale);
 router.get("/findsalebyvehicleno:id",isAuth,handle.findSaleByVehicleNo);
 router.get("/getsalesbyfilter:search",isAuth,handle.getSalesByFilter);
+router.post("/getsalesbypagination:limit",isAuth,handle.getSalesByPagination);
 
 router.get('/purchaselist:limit',isAuth,purchase.purchaseListDropDown);
 router.post('/purchaselistbyfilter',isAuth,purchase.searchPurchaseListDropDown);

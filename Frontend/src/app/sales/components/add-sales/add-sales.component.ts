@@ -2,16 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from '../../services/sales.service';
 import { SharedService } from 'src/app/shared/service/shared-service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { AlertService } from 'src/app/alert/alert.service';
 import { ISalesForm } from '../../model/saleForm.model';
+import { deactivateGuard } from 'src/app/authGuard/auth.guard';
 @Component({
   selector: 'app-add-sales',
   templateUrl: './add-sales.component.html',
-  styleUrls: ['./add-sales.component.scss']
+  styleUrls: ['./add-sales.component.scss'],
 })
-export class AddSalesComponent implements OnInit {
+export class AddSalesComponent implements OnInit,deactivateGuard {
   changesSaved = false;
   dropdownSettings: IDropdownSettings = {
     singleSelection: true,
@@ -109,7 +110,7 @@ export class AddSalesComponent implements OnInit {
       this.saleForm.get("documents")?.get("agreement")?.setValue(fileReader.result as string);
     };
     fileReader.onerror = (err) => {
-      alert("Some error ocurred" + err);
+      alert('Some error ocurred' + err);
     };
   }
   submitSale(){
@@ -135,12 +136,15 @@ export class AddSalesComponent implements OnInit {
       this.route.navigateByUrl("/admin/sales/saleslist");
     }, err => {
       this.alertService.showError("Nothing modified", "Error");
+      this.changesSaved = true;
       this.route.navigateByUrl("/admin/sales/saleslist");
     });
   }
   canExit() {
+    console.log("can exit callled");
+
     if (!this.changesSaved) {
-      return confirm('your changes will be lost, Are you sure?')
+      return this.alertService.confirmation("Are you sure?","all changes will be lost","warning")
     }
     return true;
   }

@@ -12,7 +12,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
-import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatSelectModule } from '@angular/material/select';
 import{ MatAutocompleteModule} from '@angular/material/autocomplete'
@@ -35,7 +34,6 @@ import{ MatAutocompleteModule} from '@angular/material/autocomplete'
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
-    HttpClientModule,
     MatSnackBarModule,
     MatSelectModule,
     MatAutocompleteModule,
@@ -53,7 +51,6 @@ import{ MatAutocompleteModule} from '@angular/material/autocomplete'
     MatToolbarModule,
     MatDividerModule,
     MatMenuModule,
-    HttpClientModule,
     MatSnackBarModule,
     MatSelectModule,
     MatAutocompleteModule,

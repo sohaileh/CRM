@@ -23,8 +23,13 @@ const routes: Routes = [
   // {path:"admin/purchase",loadChildren:()=>import('./purchase/purchase.module').then((m)=>m.PurchaseModule),canActivate:[AuthGuard]},
   // {path:'**',component:NotFoundComponent}
   {path:"admin",children:[
-    {path:"sales",loadChildren:()=>import("./sales/sales.module").then(mod=>mod.SalesModule)}
-  ]}
+    {path:"sales",loadChildren:()=>import("./sales/sales.module").then(mod=>mod.SalesModule),canActivate:[AuthGuard]},
+    {path:"dashboard",loadChildren:()=>import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),canActivate:[AuthGuard]},
+    {path:"login",loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule)},
+    {path:"purchase",loadChildren:()=>import('./purchase/purchase.module').then((m)=>m.PurchaseModule),canActivate:[AuthGuard]}
+  ]},
+  {path: '', redirectTo: '/admin/login', pathMatch: 'full'},
+  {path:'**',component:NotFoundComponent}
 ];
 
 @NgModule({

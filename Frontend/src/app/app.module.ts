@@ -5,15 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { PurchaseModule } from "./purchase/purchase.module";
+import { PurchaseModule } from './purchase/purchase.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { NotFoundModule } from './error/not-found.module';
-import { ToastrModule } from 'ngx-toastr'
+import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptor } from './interceptor/header/header.interceptor';
+import { ErrorInterceptor } from './interceptor/error/error.interceptor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AuthenticationModule,
@@ -23,9 +25,13 @@ import { ToastrModule } from 'ngx-toastr'
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NavbarModule
+    NavbarModule,
+    HttpClientModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

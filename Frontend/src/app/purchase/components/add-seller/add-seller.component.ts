@@ -11,12 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddSellerComponent implements OnInit {
   sellerDetails!:FormGroup;
-
+  changesSaved=false;
   sellerDocuments:any={}
   updateToggle=false;
   constructor(private fb:FormBuilder, private router:Router,
     private purchaseService:PurchaseService,
     private alertservice:AlertService,
+    private alertService:AlertService
     ) { }
 
   ngOnInit(): void {
@@ -46,6 +47,7 @@ export class AddSellerComponent implements OnInit {
         Object.assign(allDetails,this.sellerDetails.value)
          this.purchaseService.updatePurchase(this.purchaseService.allDetails.vehicle_no,allDetails).subscribe((res)=>{
           this.alertservice.showInfo(res.message,"Done")
+          this.changesSaved=true;
           this.router.navigateByUrl("admin/purchase/purchaselist")
          },(err)=>{
           this.alertservice.showError(err.error.message,"Error")
@@ -57,6 +59,7 @@ export class AddSellerComponent implements OnInit {
        Object.assign(allDetails,this.sellerDetails.value)
         this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
           this.alertservice.showSuccess(res.message,"Created")
+          this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
         },(err)=>{
           this.alertservice.showError(err.error.message,"Error")
@@ -81,6 +84,12 @@ export class AddSellerComponent implements OnInit {
     })
     }
 
+    canExit() {
+      if (!this.changesSaved) {
+        return this.alertService.confirmation('Are you sure?',"You won't be able to revert this!",'warning',)
+      }
+      return true;
+    }
   onBack(){
     this.router.navigateByUrl('admin/purchase/addvehicle')
   }

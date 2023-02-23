@@ -10,8 +10,8 @@ import { AuthGuard } from "../authGuard/auth.guard";
 const routes:Routes=[
   {path:"",component:LayoutComponent,children:[
     {path:'purchaselist',component:ProductsListComponent},
-    {path:'addvehicle',component:AddProductComponent},
-    {path:'addseller',component:AddSellerComponent}
+    {path:'addvehicle',component:AddProductComponent,canDeactivate:[AuthGuard]},
+    {path:'addseller',component:AddSellerComponent,canDeactivate:[AuthGuard]}
   ]}
 
 ]

@@ -9,10 +9,7 @@ import { SalesbymonthComponent } from './components/main/salesbymonth/salesbymon
 import{NgxChartsModule} from '@swimlane/ngx-charts';
 import { PurchasebymonthComponent } from './components/main/purchasebymonth/purchasebymonth.component'
 import { ModuleModule } from '../shared/module/module.module';
-<<<<<<< Updated upstream
 import { LayoutComponent } from './components/layout/layout.component';
-=======
->>>>>>> Stashed changes
 import { NavbarModule } from '../navbar/navbar.module';
 
 
@@ -30,14 +27,8 @@ import { NavbarModule } from '../navbar/navbar.module';
     NavbarModule,
     NgxChartsModule,
     ModuleModule,
-<<<<<<< Updated upstream
     DashboardRoutingModule,
     NavbarModule
   ],
-=======
-    DashboardRoutingModule
-  ]
-  // ,exports:[HeaderComponent]
->>>>>>> Stashed changes
 })
 export class DashboardModule { }

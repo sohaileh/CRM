@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { NavbarRoutingModule } from './navbar-routing.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ModuleModule } from '../shared/module/module.module';
 
 
 @NgModule({
@@ -17,11 +16,7 @@ import { ModuleModule } from '../shared/module/module.module';
     CommonModule,
     NavbarRoutingModule,
     ModuleModule
-<<<<<<< Updated upstream
   ],
-  exports:[HeaderComponent]
-=======
-  ],exports:[HeaderComponent,FooterComponent]
->>>>>>> Stashed changes
+  exports:[HeaderComponent,FooterComponent]
 })
 export class NavbarModule { }

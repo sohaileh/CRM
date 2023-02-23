@@ -1,15 +1,26 @@
 import { environment } from './../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PurchaseService {
   serverUrl=environment.serverUrl;
-  vehicleDetails:any;
-  allDetails:any;
-  constructor(private http:HttpClient) { }
+
+  vehicleDetails=new BehaviorSubject<any>(null)
+  allDetails=new BehaviorSubject<any>(null)
+
+  isUpdate:boolean=false;
+  isBack:boolean=false
+
+  constructor(private http:HttpClient) {
+   }
+
+   vehicleSubjectRaised(data:any){
+    this.vehicleDetails.next(data)
+   }
 
   addPurchaseDetails(data:any){
     return this.http.post<any>(`${this.serverUrl}addvehicle`,data)

@@ -1,10 +1,11 @@
+import { PurchaseService } from './../../services/purchase.service';
 import { AlertService } from 'src/app/alert/alert.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from 'src/app/shared/service/shared-service';
-import { PurchaseService } from '../../services/purchase.service';
+
 import Swal from 'sweetalert2'
 
 
@@ -27,7 +28,7 @@ export class ProductsListComponent implements OnInit {
   filterData:any;
   displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "actions"]
   ngOnInit(): void {
-    this.purchaseService.allDetails=this.purchaseService.vehicleDetails="";
+    this.purchaseService.isUpdate=false;
 
     this.sharedService.viewPurchaseDetails().subscribe(res=>{
         this.purchaseList=new MatTableDataSource(res.data);
@@ -61,6 +62,7 @@ export class ProductsListComponent implements OnInit {
    }
 
    onUpdatePurchase(carNo:any){
+    this.purchaseService.isUpdate=true;
     this.router.navigate(['admin/purchase/addvehicle'],{queryParams:{carno:carNo}})
    }
 

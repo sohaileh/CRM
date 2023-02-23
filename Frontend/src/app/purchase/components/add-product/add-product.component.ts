@@ -1,5 +1,5 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
 import { deactivateGuard } from 'src/app/authGuard/auth.guard';
@@ -10,7 +10,7 @@ import { AlertService } from 'src/app/alert/alert.service';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.scss'],
 })
-export class AddProductComponent implements OnInit, deactivateGuard {
+export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
   vehicleDetails!: FormGroup;
   vehicleNo = '';
   changesSaved = false;
@@ -28,27 +28,15 @@ export class AddProductComponent implements OnInit, deactivateGuard {
   ) {}
 
   ngOnInit(): void {
+
     this.vehicleDetails = this.fb.group({
       condition: ['old'],
-      car_name: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')],
-      ],
+      car_name: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')],],
       model: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       color: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       fuel_type: [''],
-      engine_no: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern('^[a-zA-Z0-9]*$'),
-        ],
-      ],
-      vehicle_no: [
-        '',
-        [Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')],
-      ],
+      engine_no: ['',[Validators.required,Validators.minLength(8),Validators.pattern('^[a-zA-Z0-9]*$'),]],
+      vehicle_no: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
       registration: ['', [Validators.required]],
       purchaseAgrement: ['', [Validators.required]],
       totalAmount: ['', [Validators.required]],
@@ -56,29 +44,29 @@ export class AddProductComponent implements OnInit, deactivateGuard {
       balanceAmount: ['', [Validators.required]],
     });
 
-    if (this.purchaseService.vehicleDetails) {
-      this.vehicleDetails.patchValue(this.purchaseService.vehicleDetails);
-      this.documents.registration =
-        this.purchaseService.vehicleDetails.registration;
-      this.documents.purchaseAgrement =
-        this.purchaseService.vehicleDetails.purchaseAgrement;
+    this.activatedroute.queryParams.subscribe(prams=>{
+      this.vehicleNo=prams['carno']
+    })
+
+    if(this.vehicleNo){
+     this.purchaseService.findPurchase(this.vehicleNo).subscribe(res=>{
+      this.purchaseService.allDetails.next(res.data)
+      this.vehicleDetails.patchValue(res.data);
+      this.documents.registration=res.data.registration
+      this.documents.purchaseAgrement=res.data.purchaseAgrement
+    })
     }
 
-    this.activatedroute.queryParams.subscribe((prams) => {
-      this.vehicleNo = prams['carno'];
-    });
-    if (this.vehicleNo) {
-      this.purchaseService.findPurchase(this.vehicleNo).subscribe((res) => {
-        this.purchaseService.allDetails = res.data;
-        this.vehicleDetails.patchValue(this.purchaseService.allDetails);
-        this.documents.registration =
-          this.purchaseService.allDetails.registration;
-        this.documents.purchaseAgrement =
-          this.purchaseService.allDetails.purchaseAgrement;
-      });
+    if(this.purchaseService.isBack){
+      console.log("back")
+      this.purchaseService.vehicleDetails.subscribe((res)=>{
+        this.vehicleDetails.patchValue(res.value)
+        this.documents.registration=res.value.registration
+      this.documents.purchaseAgrement=res.value.purchaseAgrement
+      })
     }
   }
-  /////
+
 
   getChassisNo() {
     this.oldCar = !this.oldCar;
@@ -106,34 +94,38 @@ export class AddProductComponent implements OnInit, deactivateGuard {
     };
   }
 
-  onNext() {
-    if (this.vehicleDetails.valid) {
-      this.purchaseService.vehicleDetails = this.vehicleDetails.value;
-      this.router.navigateByUrl('admin/purchase/addseller');
+  onNext(){
+    if(this.vehicleDetails.valid ){
+      this.purchaseService.vehicleSubjectRaised(this.vehicleDetails)
+      this.changesSaved=true;
+      this.router.navigateByUrl('admin/purchase/addseller')
     }
   }
 
-  onCancel() {
+
+  onCancel(){
+    this.changesSaved=true;
+    console.log("cancel")
     this.vehicleDetails.reset;
-    this.router.navigateByUrl('admin/purchase/purchaselist');
+    this.router.navigateByUrl('admin/purchase');
   }
 
-  calculateBalanced(total: any, paid: any) {
-    this.balancedAmt = total - paid;
-    this.vehicleDetails.patchValue({ balanceAmount: this.balancedAmt });
-    if (this.balancedAmt < 0) {
-      this.vehicleDetails.controls['balanceAmount'].setValue('');
+  calculateBalanced(total:any,paid:any){
+    this.balancedAmt=total-paid;
+    this.vehicleDetails.patchValue({'balanceAmount':this.balancedAmt})
+    if(this.balancedAmt<0){
+      this.vehicleDetails.controls['balanceAmount'].setValue("")
     }
   }
 
   canExit() {
     if (!this.changesSaved) {
-      return this.alertService.confirmation(
-        'Are you sure?',
-        "You won't be able to revert this!",
-        'warning'
-      );
+      return this.alertService.confirmation('Are you sure?',"You won't be able to revert this!",'warning',)
     }
     return true;
+  }
+
+  ngOnDestroy() {
+    this.purchaseService.isBack=false
   }
 }

@@ -2,11 +2,11 @@
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card>
   <div class="showVehicleTemplate">
-    <mat-card-header>
+    <mat-card-header class="container_header">
       VEHICLE DETAILS
     </mat-card-header>
 
-  <form [formGroup]="vehicleDetails" (ngSubmit)="onNext()">
+  <form [formGroup]="vehicleDetails" (ngSubmit)="onNext()" class="vehicle_form">
 
   <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" (change)="getChassisNo()">
     <mat-radio-button color="primary" value="old" class="vehicletype">OLD</mat-radio-button>
@@ -18,20 +18,26 @@
     <div class="firstColumn" fxFlex="50%">
       <mat-form-field appearance="outline" >
         <mat-label>Brand</mat-label>
-        <input matInput type="text" required formControlName="model">
-        <mat-error>Please Enter Model Name</mat-error>
+        <input matInput type="text" formControlName="model">
+        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('required')">Brand Name Required</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('pattern')">Enter a Valid Brand Name</mat-error>
+        <mat-hint align="end">Enter Only Characters</mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="outline" >
         <mat-label>Engine No</mat-label>
         <input matInput type="text" required formControlName="engine_no">
-        <mat-error>Please Enter Engine No</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('required')">Engine No. Required</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('pattern') || vehicleDetails.get('engine_no')?.hasError('minlength')">Enter a Valid Engine No.</mat-error>
+        <mat-hint align="end">Minumum 8 Characters</mat-hint>
       </mat-form-field>
 
         <mat-form-field appearance="outline" >
           <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
           <input matInput type="text" required formControlName="vehicle_no">
-          <mat-error>Please Enter Vehicle Reg. No.</mat-error>
+          <mat-hint align="end">Vehicle No. without Space</mat-hint>
+          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">Vehicle Reg. No. Required</mat-error>
+          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">Enter Valid Vehicle Reg. No.</mat-error>
         </mat-form-field>
 
 
@@ -41,13 +47,17 @@
       <mat-form-field appearance="outline" >
         <mat-label>Car Name</mat-label>
         <input matInput type="text" required formControlName="car_name">
-        <mat-error>Please Enter Car Name</mat-error>
+        <mat-hint align="end">Numbers and Characters</mat-hint>
+        <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('required')">Car Name Required</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('pattern')">Enter Valid Car Name</mat-error>
       </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Color</mat-label>
           <input matInput type="text" required formControlName="color">
-          <mat-error>Please Enter Color</mat-error>
+          <mat-hint align="end">Color Name</mat-hint>
+        <mat-error *ngIf="vehicleDetails.get('color')?.hasError('required')">Color Required</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('color')?.hasError('pattern')">Enter Valid Color Name</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
@@ -57,14 +67,15 @@
             <mat-option value="Petrol">Petrol</mat-option>
             <mat-option value="CNG">CNG</mat-option>
           </mat-select>
-          <mat-error>Please Enter Fuel Type</mat-error>
+          <mat-error>Fuel Type Required</mat-error>
+          <mat-hint align="end">Fuel Type</mat-hint>
         </mat-form-field>
     </div>
 
       </div>
 
 <div class="carDocuments">
-<mat-card-header>VEHICLE DOCUMENTS</mat-card-header>
+<mat-card-header class="container_header">VEHICLE DOCUMENTS</mat-card-header>
 </div>
 <div  fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
 
@@ -75,7 +86,7 @@
         <input matInput formControlName="registration" readonly hidden>
         <button mat-flat-button color="primary" type="button" (click)="registration.click()">Choose File</button>
       </div>
-      <div *ngIf="documents.registration"><img [src]="documents.registration"></div>
+      <div *ngIf="documents.registration" class="imagecontainer"><img [src]="documents.registration"></div>
       <input type="file" accept="image/*" (change)="upload($event,'rc')" required #registration hidden>
       <mat-error>Upload Registration Certificate</mat-error>
     </mat-form-field>
@@ -88,7 +99,7 @@
         <input matInput readonly formControlName="purchaseAgrement" hidden>
         <button mat-flat-button color="primary" type="button" (click)="purchaseAgre.click()">Choose File</button>
       </div>
-      <div *ngIf="documents.purchaseAgrement"><img [src]="documents.purchaseAgrement"></div>
+      <div *ngIf="documents.purchaseAgrement" class="imagecontainer"><img [src]="documents.purchaseAgrement"></div>
       <input type="file" accept="image/*" (change)="upload($event,'purchaseAgre')" required  hidden #purchaseAgre>
       <mat-error>Upload Purchase Agreement</mat-error>
     </mat-form-field>
@@ -96,12 +107,12 @@
 </div>
 
 <div class="purchasedetails" >
-  <mat-card-header>PURCHASE DETAILS</mat-card-header>
+  <mat-card-header class="container_header">PURCHASE DETAILS</mat-card-header>
   <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
     <mat-form-field appearance="outline" >
       <mat-label>Total Car Amount</mat-label>
       <input matInput type="number" required formControlName="totalAmount" #total (keyup)="calculateBalanced(total.value,paid.value)">
-      <mat-error>Enter Total Car Amount</mat-error>
+      <mat-error>Enter Valid Total Car Amount</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" >

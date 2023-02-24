@@ -1,7 +1,7 @@
 import { PurchaseService } from './../../services/purchase.service';
 import { AlertService } from 'src/app/alert/alert.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { SharedService } from 'src/app/shared/service/shared-service';
@@ -15,11 +15,17 @@ import Swal from 'sweetalert2'
   styleUrls: ['./products-list.component.scss']
 })
 
-export class ProductsListComponent implements OnInit {
+export class ProductsListComponent implements OnInit{
 
+  @ViewChild("paginator") set paginator(matPaginator: MatPaginator) {
+    if (matPaginator) {
+      this.purchaseList.paginator = matPaginator;
+    }
+  }
 
   constructor(public sharedService: SharedService,private purchaseService:PurchaseService,
-    private router:Router,private alertservice:AlertService) { }
+    private router:Router,private alertservice:AlertService) {
+     }
   purchaseList!:MatTableDataSource<any>;
   length:any;
 
@@ -35,6 +41,7 @@ export class ProductsListComponent implements OnInit {
         this.length=this.purchaseList.data.length
     })
   }
+
 
   onPurchaseDelete(carNo:any){
     Swal.fire({

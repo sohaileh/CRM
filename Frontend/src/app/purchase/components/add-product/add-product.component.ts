@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
 import { deactivateGuard } from 'src/app/authGuard/auth.guard';
 import { AlertService } from 'src/app/alert/alert.service';
@@ -12,7 +12,7 @@ import { AlertService } from 'src/app/alert/alert.service';
 })
 export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
   vehicleDetails!: FormGroup;
-  vehicleNo = '';
+  vehicleNo = null;;
   changesSaved = false;
 
   oldCar = true;
@@ -31,7 +31,7 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
 
     this.vehicleDetails = this.fb.group({
       condition: ['old'],
-      car_name: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')],],
+      car_name: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z0-9]*$')]),
       model: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       color: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       fuel_type: [''],
@@ -105,7 +105,6 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
 
   onCancel(){
     this.changesSaved=true;
-    console.log("cancel")
     this.vehicleDetails.reset;
     this.router.navigateByUrl('admin/purchase');
   }

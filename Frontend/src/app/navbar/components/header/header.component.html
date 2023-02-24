@@ -6,9 +6,9 @@
      </div>
 
      <div class="header-action" fxShow fxHide.xs >
-     <button mat-button (click)="onHome()">HOME</button>
-     <button mat-button (click)="viewSales() ">SALES</button>
-     <button mat-button (click)="viewPurchase()">PURCHASES</button>
+     <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">HOME</button>
+     <button mat-button routerLink="/admin/sales/saleslist" routerLinkActive="active">SALES</button>
+     <button mat-button routerLink="/admin/purchase" routerLinkActive="active">PURCHASES</button>
 
         <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
      </div>

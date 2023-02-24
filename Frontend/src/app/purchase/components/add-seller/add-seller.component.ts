@@ -24,23 +24,16 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
     ) { }
   ngOnInit(): void {
     this.sellerDetails = this.fb.group({
-      seller_name: ["",[Validators.required,Validators.pattern('^[a-zA-Z ]*$')]],
+      seller_name: ["",[Validators.required,Validators.pattern('^[a-zA-Z][ a-zA-Z]{2,}')]],
       email: ["",[Validators.required,Validators.email]],
-      phone_no: ["",[Validators.required]],
-      address: ["",[Validators.required,Validators.pattern('^[a-zA-Z0-9 ]*$')]],
-      postal_code: ["",[Validators.required,Validators.minLength(6)]],
+      phone_no: ["",[Validators.required,Validators.minLength(10),Validators.pattern('^[0-9]{10}')]],
+      address: ["",[Validators.required,Validators.pattern('^[a-zA-Z][ a-zA-Z]{2,}')]],
+      postal_code: ["",[Validators.required,Validators.minLength(6),Validators.pattern('^[0-9]{6}')]],
       purchase_date: ["",[Validators.required]],
       aadhar_card:["",[Validators.required]],
       pan_card:["",[Validators.required]],
     });
-/*
-    if(this.purchaseService.allDetails){
-      this.buttonToggle=!this.buttonToggle;
-      this.sellerDetails.patchValue(this.purchaseService.allDetails)
-      this.sellerDocuments.aadhar_card=this.purchaseService.allDetails.aadhar_card;
-      this.sellerDocuments.pan_card=this.purchaseService.allDetails.pan_card;
-    }
-    */
+
     if(this.purchaseService.isUpdate){
       this.purchaseService.allDetails.subscribe((res)=>{
         this.buttonToggle=!this.buttonToggle;

@@ -6,18 +6,18 @@ import Swal from 'sweetalert2/src/sweetalert2.js'
 })
 export class AlertService {
 
-  constructor(private toastr:ToastrService,) { }
+  constructor(private toastr:ToastrService) { }
 
   showSuccess(message:any, title:any){
-    this.toastr.success(message,title,{timeOut:3000,closeButton:true})
+    this.toastr.success(message,title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
 }
 
 showError(message:any, title:any){
-    this.toastr.error(message, title,{timeOut:3000,closeButton:true})
+    this.toastr.error(message, title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
 }
 
 showInfo(message:any, title:any){
-  this.toastr.info(message, title,{timeOut:3000,closeButton:true})
+  this.toastr.info(message, title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
 }
 
 async confirmation(title:any,text:any,icon:any){

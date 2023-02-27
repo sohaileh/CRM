@@ -1,0 +1,40 @@
+.container{
+  background-color: rgba($color: #303F9F, $alpha: 0.3);
+  position:relative;
+   bottom:-30px;
+   width: 100%;
+   text-align: center;
+}
+.header-name{
+  border-bottom: 1px solid black;
+  padding: 20px;
+}
+.header-name span{
+  font-size: 30px;
+}
+.nav-tools{
+margin-top: 20px;
+}
+.nav-tools a{
+  text-decoration: none;
+ color: black;
+ margin: 0 20px;
+}
+
+.social-media{
+  margin-top: 20px;;
+}
+
+.social-media button{
+  color: black;
+  margin: 0 20px;
+}
+
+.copyright{
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  margin-top: 10px;
+}
+.copyright a{
+  text-decoration: none;
+}

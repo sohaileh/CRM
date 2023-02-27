@@ -1,15 +1,3 @@
- ::ng-deep .snackbar-success {
-  background-color: green;
-  color:white;
-}
-::ng-deep .snackbar-fail{
-  background-color: red;
-  color:  white;
-}
-::ng-deep .snackbar-fail .mat-simple-snackbar-action,::ng-deep .snackbar-success .mat-simple-snackbar-action{
-color: white;
-}
-
 .containerLogin {
   text-align: center;
   width: 30rem;

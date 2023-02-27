@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SalesService } from '../../services/sales.service';
 import { SharedService } from 'src/app/shared/service/shared-service';
-import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { AlertService } from 'src/app/alert/alert.service';
 import { ISalesForm } from '../../model/saleForm.model';
@@ -141,8 +141,6 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     });
   }
   canExit() {
-    console.log("can exit callled");
-
     if (!this.changesSaved) {
       return this.alertService.confirmation("Are you sure?","all changes will be lost","warning")
     }

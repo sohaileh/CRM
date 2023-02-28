@@ -58,7 +58,6 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
     }
 
     if(this.purchaseService.isBack){
-      console.log("back")
       this.purchaseService.vehicleDetails.subscribe((res)=>{
         this.vehicleDetails.patchValue(res.value)
         this.documents.registration=res.value.registration
@@ -107,6 +106,7 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
     this.changesSaved=true;
     this.vehicleDetails.reset;
     this.router.navigateByUrl('admin/purchase');
+    this.purchaseService.vehicleDetails.complete();
   }
 
   calculateBalanced(total:any,paid:any){

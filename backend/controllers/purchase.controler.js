@@ -122,6 +122,18 @@ const purchase = {
         }catch(error){
             res.status(error.status).json('error')
         }
+    },
+
+    async purchaseByPage(req,res,next){
+        try {
+            const limit=req.query.limit;
+            const pageNo=req.query.pageno;
+            const offset=limit*pageNo;
+            const data=await Purchase.find({},{car_name:1,model:1,vehicle_no:1,seller_name:1,purchase_date:1}).skip(offset).limit(limit)
+            res.status(200).json({data:data});   
+        } catch (error) {
+            next(error)
+        }
     }
 }
 

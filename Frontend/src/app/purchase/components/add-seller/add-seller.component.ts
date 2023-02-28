@@ -47,18 +47,17 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
   onSubmit(){
     if(this.sellerDetails.valid){
-
+        let allDetails=""
       if(this.purchaseService.isUpdate){
-        let modifiedDetails=""
         let carNo="";
         this.purchaseService.allDetails.subscribe((res)=>{
           carNo=res.vehicle_no
         })
         this.purchaseService.vehicleDetails.subscribe((res)=>{
-          modifiedDetails=res.value
+          allDetails=res.value
         })
-        Object.assign(modifiedDetails,this.sellerDetails.value);
-        this.purchaseService.updatePurchase(carNo,modifiedDetails).subscribe((res)=>{
+        Object.assign(allDetails,this.sellerDetails.value);
+        this.purchaseService.updatePurchase(carNo,allDetails).subscribe((res)=>{
           this.alertservice.showSuccess(res.message,"Done")
           this.changesSaved=true;
 
@@ -68,7 +67,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
           //this.alertservice.showError(err.error.message,"Error");
         })
       }else{
-        let allDetails:any;
         this.purchaseService.vehicleDetails.subscribe((res)=>{
          allDetails=res.value;
         })

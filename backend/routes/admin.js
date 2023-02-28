@@ -16,6 +16,7 @@ router.put('/updatepurchase/:carno',isAuth,purchase.updatePurchase)
 router.get('/totalpurchasebydate',purchase.totalPurchase)
 router.get('/search',purchase.searchVehicle)
 router.get('/totalsalesbydate',isAuth,handle.saleByDate)
+router.get('/purchasebypage',purchase.purchaseByPage)
 
 router.post("/addsale",isAuth,handle.addSale);
 router.get("/getsales",isAuth,handle.getSales);

@@ -16,14 +16,11 @@
 }
 .searchbar{
   .mat-form-field{
+    min-width: 100px;
     width: 20%;
     margin-left: 2.5rem;
    }
    button{
     height: 32px;
    }
-}
-
-.clearSearch{
-  font-size: 18px;
 }

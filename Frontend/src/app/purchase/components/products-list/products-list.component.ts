@@ -15,11 +15,11 @@ import Swal from 'sweetalert2'
   styleUrls: ['./products-list.component.scss']
 })
 
-export class ProductsListComponent implements OnInit{
+export class ProductsListComponent implements OnInit {
 
-  @ViewChild("paginator") set paginator(matPaginator: MatPaginator) {
-    if (matPaginator) {
-      this.purchaseList.paginator = matPaginator;
+  @ViewChild("paginator") set paginator(value: MatPaginator) {
+    if (this.purchaseList) {
+      this.purchaseList.paginator = value;
     }
   }
 
@@ -27,7 +27,7 @@ export class ProductsListComponent implements OnInit{
     private router:Router,private alertservice:AlertService) {
      }
   purchaseList!:MatTableDataSource<any>;
-  length:any;
+
 
   options:any=[]
   showSearchResult=false;
@@ -38,10 +38,9 @@ export class ProductsListComponent implements OnInit{
 
     this.sharedService.viewPurchaseDetails().subscribe(res=>{
         this.purchaseList=new MatTableDataSource(res.data);
-        this.length=this.purchaseList.data.length
     })
-  }
 
+  }
 
   onPurchaseDelete(carNo:any){
     Swal.fire({
@@ -84,7 +83,7 @@ export class ProductsListComponent implements OnInit{
       })
       })
     }else{
-      this.ngOnInit()
+      this.onPageChange(true)
     }
    }
 
@@ -94,9 +93,10 @@ export class ProductsListComponent implements OnInit{
         if(res.data){
           let vehcile=new Array(res.data)
           this.purchaseList=new MatTableDataSource(vehcile);
-          this.length=this.purchaseList.data.length
+        //  this.length=this.purchaseList.data.length
         }else{
-          this.length=res.data
+       //   this.length=res.data
+       this.ngOnInit();
         }
       },(err)=>{
         console.log(err)
@@ -104,4 +104,12 @@ export class ProductsListComponent implements OnInit{
     }
    }
 
+   onPageChange(event:any){
+    console.log("page change")
+    let pageIndex=event.pageIndex||0
+    let pageSize=event.pageSize||2
+    this.purchaseService.getPurchaseByPage(pageIndex,pageSize).subscribe((res)=>{
+      this.purchaseList=res.data
+    })
+   }
 }

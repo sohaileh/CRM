@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable,EventEmitter } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
@@ -44,5 +44,12 @@ export class PurchaseService {
 
   getVehicleNumber(vehicleNumber:any){
     return this.http.get<any>(`${this.serverUrl}/search?q=${vehicleNumber}`)
+  }
+
+  getPurchaseByPage(pageNo:number,limit:number){
+    let prams:HttpParams=new HttpParams;
+    prams=prams.set('pageno',pageNo)
+    prams=prams.set('limit',limit)
+    return this.http.get<any>(`${this.serverUrl}/purchasebypage?`+prams.toString())
   }
 }

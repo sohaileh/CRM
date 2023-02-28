@@ -27,8 +27,9 @@
       search
     </ng-container>
 
-    <ng-container *ngIf="!length else showlist"><h3>No Purchase Found</h3></ng-container>
+    <ng-container *ngIf="!purchaseList else showlist"><h3>No Purchase Found</h3></ng-container>
     <ng-template #showlist>
+      <div class="div_table">
     <table mat-table [dataSource]="purchaseList" class="purchaseList" >
 
       <ng-container matColumnDef="vehicle_no">
@@ -38,7 +39,7 @@
 
       <ng-container matColumnDef="model">
         <th mat-header-cell *matHeaderCellDef>Model Name</th>
-        <td mat-cell *matCellDef="let vehicle"> {{vehicle.model}} </td>
+        <td mat-cell *matCellDef="let vehicle"> {{vehicle.model.toUpperCase()}} </td>
       </ng-container>
 
       <ng-container matColumnDef="car_name">
@@ -71,10 +72,12 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+  </div>
     <mat-paginator
     #paginator
-    [pageSize]="3"
-    [pageSizeOptions]="[3,6,9]"
+    (page)="onPageChange($event)"
+    [pageSize]="2"
+    [pageSizeOptions]="[2,4,6]"
     >
     </mat-paginator>
 </ng-template>

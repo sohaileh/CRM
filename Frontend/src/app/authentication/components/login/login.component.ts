@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       this.authservice.authAdmin(this.loginForm.value).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.accessToken);
-          this.alertService.showSuccess(res.message,'Success')
           this.authservice._router.navigateByUrl('/admin/dashboard');
         }
       );

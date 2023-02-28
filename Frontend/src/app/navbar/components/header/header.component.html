@@ -1,8 +1,8 @@
 
 <div class="header" fxlayout="row wrap" >
-  <mat-toolbar color="primary" fxFlex="100%" fxLayoutAlign="space-between center">
+  <mat-toolbar fxFlex="100%" fxLayoutAlign="space-between center">
      <div class="header-name" fxLayout="row" >
-         <button mat-button class="home" (click)="onHome()"><mat-icon>dashboard</mat-icon>Dashboard</button>
+         <button mat-button class="home" (click)="onHome()"><mat-icon>dashboard</mat-icon>CRM</button>
      </div>
 
      <div class="header-action" fxShow fxHide.xs >
@@ -10,7 +10,7 @@
      <button mat-button routerLink="/admin/sales/saleslist" routerLinkActive="active">SALES</button>
      <button mat-button routerLink="/admin/purchase" routerLinkActive="active">PURCHASES</button>
 
-        <button mat-raised-button color="warn" (click)="onLogout()">Logout</button>
+        <button mat-raised-button class="logout" (click)="onLogout()">Logout</button>
      </div>
 
      <div fxHide fxShow.xs >

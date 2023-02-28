@@ -1,9 +1,10 @@
 .container{
-  background-color: rgba($color: #3F51B5, $alpha: 0.3);
+  background-color: rgba($color: #197850, $alpha: 1);
   position:relative;
    bottom:-30px;
    width: 100%;
    text-align: center;
+   color: white;
 }
 .header-name{
   border-bottom: 1px solid black;
@@ -17,7 +18,7 @@ margin-top: 20px;
 }
 .nav-tools a{
   text-decoration: none;
- color: black;
+ color: white;
  margin: 0 20px;
 }
 
@@ -26,7 +27,7 @@ margin-top: 20px;
 }
 
 .social-media button{
-  color: black;
+  // color: black;
   margin: 0 20px;
 }
 

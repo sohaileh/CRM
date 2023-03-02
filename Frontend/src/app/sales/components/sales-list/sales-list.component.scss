@@ -1,6 +1,10 @@
 .container {
   margin:8px auto;
 }
+.add-sales{
+  background-color:#197850;
+  color: white;
+}
 
 table{
   overflow: scroll;
@@ -31,20 +35,6 @@ button {
   width: 70%;
 }
 
-::ng-deep .snackbar-success {
-  background-color: green;
-  color: white;
-}
-
-::ng-deep .snackbar-fail {
-  background-color: red;
-  color: white;
-}
-
-::ng-deep .snackbar-fail .mat-simple-snackbar-action,
-::ng-deep .snackbar-success .mat-simple-snackbar-action {
-  color: white;
-}
 mat-toolbar{
   height: 3rem;
   margin: 1rem 0;
@@ -53,4 +43,12 @@ mat-toolbar{
 mat-toolbar>button{
 height: max-content !important;
 margin-top: 0;
+}
+
+.update-button{
+  color: #197850 ;
+}
+
+.delete-button{
+  color:red;
 }

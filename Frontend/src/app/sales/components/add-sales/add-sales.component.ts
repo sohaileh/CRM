@@ -30,8 +30,8 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     address:["", [Validators.required]],
     postal_code:[0, [Validators.required, Validators.minLength(6), Validators.pattern(/^[0-9]\d*$/)]],
     sold_date:[0, [Validators.required]],
-    sold_amount:[0, [Validators.required]],
-    balance_amount:[0, [Validators.required]],
+    sold_amount:[0, [Validators.required,Validators.pattern(/^[0-9]\d*$/)]],
+    balance_amount:[0],
     bill_no:["", [Validators.required]],
     adhaar_no:[0, [Validators.required, Validators.minLength(12), Validators.maxLength(12),Validators.pattern(/^[0-9]\d*$/)]],
     documents:this.fb.group({
@@ -44,6 +44,7 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
 
   constructor(public saleService: SalesService, public alertService: AlertService, public sharedService: SharedService, public route: Router, private router: ActivatedRoute,private fb:FormBuilder) { }
   ngOnInit(): void {
+
     if (this.id !== undefined) {
       this.saleForm.enable();
       this.saleForm.get("vehicle_no")?.disable();
@@ -146,10 +147,13 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     }
     return true;
   }
-  invalidAmount(balanceAmount:number,soldAmount:number){
-    if(balanceAmount>soldAmount){
-      this.saleForm.get("balance_amount")?.patchValue('');
-      this.alertService.showError("Balance amount should be less or equal to sold amount","Error");
-    }
+
+  invalidAmount(soldAmount:number){
+    this.saleForm.controls['balance_amount']?.setValidators([ Validators.required,Validators.max(soldAmount),Validators.pattern(/^[0-9]\d*$/)]);
+        // this.saleForm.get("balance_amount")?.patchValue('');
   }
 }
+
+
+
+

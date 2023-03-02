@@ -5,9 +5,9 @@ mat-card{
     &:hover{
         cursor: pointer;
         background-color: #fab522;
-        color: white;
+        color: black;
         mat-icon{
-            color: white;
+            color: black;
         }
         h2{
             font-size: 2.5rem;
@@ -27,6 +27,5 @@ h2{
 .topwidgeticon{
     height: 40px;
     width: 40px;
-    color: #fab522;
     font-size: 40px;
 }

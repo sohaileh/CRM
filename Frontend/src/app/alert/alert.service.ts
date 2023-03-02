@@ -9,15 +9,15 @@ export class AlertService {
   constructor(private toastr:ToastrService) { }
 
   showSuccess(message:any, title:any){
-    this.toastr.success(message,title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
+    this.toastr.success(message,title,{timeOut:3000,closeButton:true})
 }
 
 showError(message:any, title:any){
-    this.toastr.error(message, title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
+    this.toastr.error(message, title,{timeOut:3000,closeButton:true})
 }
 
 showInfo(message:any, title:any){
-  this.toastr.info(message, title,{timeOut:3000,closeButton:true,positionClass:'toast-center-center'})
+  this.toastr.info(message, title,{timeOut:3000,closeButton:true})
 }
 
 async confirmation(title:any,text:any,icon:any){

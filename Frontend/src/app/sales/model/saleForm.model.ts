@@ -9,7 +9,7 @@ export interface ISalesForm extends Validators{
   postal_code:[number,Validators];
   sold_date:[number,Validators];
    sold_amount:[number,Validators];
-   balance_amount:[number,Validators];
+   balance_amount:[number];
    bill_no:[string,Validators];
    adhaar_no:[number,Validators];
    documents:any;

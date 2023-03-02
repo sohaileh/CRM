@@ -1,6 +1,10 @@
 .container{
   margin: 1rem auto;
  }
+ input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .mat-card-header{
   height: 25px;
   width: 100%;
@@ -26,17 +30,7 @@ p{
   width: 100%;
   text-align: center;
 }
-::ng-deep .snackbar-success {
-  background-color: green;
-  color:white;
-}
-::ng-deep .snackbar-fail{
-  background-color: red;
-  color:  white;
-}
-::ng-deep .snackbar-fail .mat-simple-snackbar-action,::ng-deep .snackbar-success .mat-simple-snackbar-action{
-color: white;
-}
+
 .image_style{
   width: 60%;
   min-height: 20%;
@@ -53,8 +47,20 @@ color: white;
   text-align: center;
 }
 .multiselect-dropdown{
-  width: 96%;
+  width: 98%;
 }
+// .dropdown{
+//   width: 100%;
+// }
+
+::ng-deep .item1 {
+  padding: 0;
+  list-style: none;
+ overflow: hidden !important;
+  margin: 0;
+}
+
+
 .d-none{
   display: none;
 }

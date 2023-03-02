@@ -11,7 +11,7 @@
       </p>
 
       <div class="multiselect-dropdown" *ngIf="!id">
-        <ng-multiselect-dropdown placeholder="Search Vehicle no" [data]="dropDownList"
+        <ng-multiselect-dropdown  placeholder="Search Vehicle no" [data]="dropDownList"
           [settings]="dropdownSettings"
           (click)="getPurchases()"
           (input)="searchPurchase($event)"
@@ -92,14 +92,19 @@
 
         <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
           <mat-form-field appearance="outline">
+
             <mat-label>Sold amount</mat-label>
             <input type="number" matInput required formControlName="sold_amount" #soldAmt/>
-            <mat-error>Sold amount is required</mat-error>
+            <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('required')">Sold amount is required</mat-error>
+            <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('pattern')">Sold amount can't be less than 0 INR</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Balance amount</mat-label>
-            <input type="number" matInput required formControlName="balance_amount" #balanceAmt (keyup)="invalidAmount(+balanceAmt.value,+soldAmt.value)"/>
+            <input type="number" matInput required formControlName="balance_amount" #balanceAmt  (keyup)="invalidAmount(+soldAmt.value)" />
             <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('required')">Balance amount is required</mat-error>
+            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('max')">Balance amount can be greater than sold amount</mat-error>
+            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('pattern')">Balance amount can't be less than 0 INR</mat-error>
+
           </mat-form-field>
         </div>
 
@@ -140,7 +145,7 @@
               (click)="adhaarCard.click()" />
             <input type="file" hidden required #adhaarCard (change)="documentChange($event,'adhaarCard')"
               accept="image/*" />
-              <mat-error *ngIf="saleForm.touched&& saleForm.get('documents')?.value.adhaar_card===null" class="custom-error">Adhaaar card is required</mat-error>
+              <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.adhaar_card" class="custom-error">Adhaaar card is required</mat-error>
           </div>
         </div>
 
@@ -151,7 +156,7 @@
             <img [src]=" saleForm.value.documents?.pan_card" class="image_style" alt="upload PAN card here"
               (click)="pan_card.click()" />
             <input type="file" hidden required #pan_card (change)="documentChange($event,'pan')" accept="image/*" />
-            <mat-error *ngIf="saleForm.touched&& saleForm.get('documents')?.value.pan_card===null" class="custom-error">Pan card is required</mat-error>
+            <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.pan_card===null" class="custom-error">Pan card is required</mat-error>
           </div>
 
           <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
@@ -165,10 +170,10 @@
           </div>
         </div>
 
-        <div fxLayoutAlign="end">
-          <button mat-raised-button color="accent" type="button"
+        <div  fxLayoutAlign="center">
+          <button mat-raised-button class="theme-background-color" type="button"
             (click)="route.navigateByUrl('/admin/sales/saleslist')">Cancel</button>
-          <button mat-raised-button color="primary" #btnSub>Submit</button>
+          <button mat-raised-button class="button-background-color" #btnSub>Submit</button>
         </div>
 
       </div>

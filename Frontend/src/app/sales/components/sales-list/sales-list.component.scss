@@ -2,13 +2,14 @@
   margin:8px auto;
 }
 .add-sales{
-  background-color:#197850;
   color: white;
+  margin : 6px;
 }
 
 table{
   overflow: scroll;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.429);
 }
 th.mat-header-cell,td.mat-cell{
   text-align: center;
@@ -31,24 +32,22 @@ button {
   justify-content: center;
 }
 
-.search-input mat-form-field {
-  width: 70%;
+.search-input {
+height: 50px;
+width:50%;
+margin-bottom: 10px;
+  mat-form-field {
+    width: 100%;
+  }
 }
 
-mat-toolbar{
-  height: 3rem;
-  margin: 1rem 0;
-  padding: .5rem;
-}
-mat-toolbar>button{
-height: max-content !important;
-margin-top: 0;
-}
 
-.update-button{
-  color: #197850 ;
+.Heading_name{
+  padding:6px ;
+  font-size: 22px;
 }
-
-.delete-button{
-  color:red;
+.salesHeading{
+  border: 1px solid rgba(0, 0, 0, 0.429);
+  background-color:rgb(226, 226, 226);
+  border-bottom: none;
 }

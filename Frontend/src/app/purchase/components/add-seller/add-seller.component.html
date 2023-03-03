@@ -60,7 +60,7 @@
       <div class="documentheading" fxLayoutAlign="space-between">
         <span class="document_name">Aadhar Card</span>
         <input matInput formControlName="aadhar_card" hidden>
-        <button mat-flat-button color="primary" type="button" (click)="aadhar.click()">Choose File</button>
+        <button mat-flat-button class="theme-background-color btn-color" type="button" (click)="aadhar.click()">Choose File</button>
       </div>
       <input type="file" accept="image/*"  required #aadhar hidden (change)="upload($event,'aadhar')">
       <div class="image_container" *ngIf="sellerDocuments.aadhar_card"><img [src]="sellerDocuments.aadhar_card"> </div>
@@ -71,7 +71,7 @@
       <div class="documentheading" fxLayoutAlign="space-between">
         <span class="document_name">Pan Card</span>
         <input matInput formControlName="pan_card" hidden>
-        <button mat-flat-button color="primary" type="button" (click)="pancard.click()">Choose File</button>
+        <button mat-flat-button class="theme-background-color btn-color" type="button" (click)="pancard.click()">Choose File</button>
       </div>
       <input type="file" accept="image/*" required #pancard (change)="upload($event,'pancard')" hidden>
       <div class="image_container" *ngIf="sellerDocuments.pan_card"><img [src]="sellerDocuments.pan_card"></div>
@@ -79,8 +79,8 @@
     </mat-form-field>
   </div>
   <div class="action_button" fxLayoutAlign="center">
-    <button mat-flat-button color="warn" (click)="onBack()">Back</button>
-    <button mat-raised-button color="primary" type="submit" >{{!buttonToggle?"Submit":"Update"}}</button>
+    <button mat-flat-button class="button-background-color btn-color" (click)="onBack()">Back</button>
+    <button mat-raised-button class="theme-background-color btn-color" type="submit" >{{!buttonToggle?"Submit":"Update"}}</button>
   </div>
   </form>
   </mat-card-content>

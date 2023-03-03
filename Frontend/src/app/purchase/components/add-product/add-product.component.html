@@ -84,7 +84,7 @@
       <div class="documentheading" fxLayoutAlign="space-between">
         <span class="document_name">Registration Certificate</span>
         <input matInput formControlName="registration" readonly hidden>
-        <button mat-flat-button color="primary" type="button" (click)="registration.click()">Choose File</button>
+        <button mat-flat-button class="theme-background-color btn-color" type="button" (click)="registration.click()">Choose File</button>
       </div>
       <div *ngIf="documents.registration" class="imagecontainer"><img [src]="documents.registration"></div>
       <input type="file" accept="image/*" (change)="upload($event,'rc')" required #registration hidden>
@@ -97,7 +97,7 @@
       <div class="documentheading" fxLayoutAlign="space-between">
         <span class="document_name">Purchase Agrement</span>
         <input matInput readonly formControlName="purchaseAgrement" hidden>
-        <button mat-flat-button color="primary" type="button" (click)="purchaseAgre.click()">Choose File</button>
+        <button mat-flat-button class="theme-background-color btn-color" type="button" (click)="purchaseAgre.click()">Choose File</button>
       </div>
       <div *ngIf="documents.purchaseAgrement" class="imagecontainer"><img [src]="documents.purchaseAgrement"></div>
       <input type="file" accept="image/*" (change)="upload($event,'purchaseAgre')" required  hidden #purchaseAgre>
@@ -129,8 +129,8 @@
 </div>
 
 <div fxLayout="row" fxLayoutAlign="center" class="action_button">
-  <button mat-flat-button color="warn" (click)="onCancel()">Cancel</button>
-<button mat-flat-button color="primary" type="submit">Next</button>
+  <button mat-flat-button class="button-background-color btn-color" (click)="onCancel()" type="button">Cancel</button>
+<button mat-flat-button class="theme-background-color btn-color" type="submit">Next</button>
 </div>
 </form>
 </div>

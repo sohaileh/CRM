@@ -11,14 +11,14 @@
     text-align: center !important;
   }
 }
-.addpurchase{
+.purchaseHeading{
   border: 1px solid rgba(0, 0, 0, 0.429);
   background-color:rgb(226, 226, 226);
 }
 
 .addPurchasebtn{
-background-color: #197850;
 margin:5px;
+color:white;
 }
 
 .searchbar{
@@ -27,11 +27,14 @@ margin:5px;
   padding-top:14px;
   font-size: 12px;
  }
-
-
 }
 
 .Heading_name{
   padding:6px ;
   font-size: 22px;
+}
+
+table{
+  overflow: scroll;
+  min-width: 400px;
 }

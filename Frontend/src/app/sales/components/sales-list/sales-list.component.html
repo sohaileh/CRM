@@ -1,10 +1,8 @@
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card class="mat-elevation-z8">
 
-    <mat-toolbar fxLayoutAlign="space-between centre">
-      Sales List
-      <button class="add-sales" mat-raised-button (click)="router.navigateByUrl('/admin/sales/addsale')">Add sale</button>
-    </mat-toolbar>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="salesHeading" fxLayout.lt-sm="column">
+      <span class="Heading_name"> Sales List</span>
 
       <div class="search-input" *ngIf="salesList">
         <mat-form-field floatLabel="never" appearance="outline">
@@ -16,7 +14,23 @@
           </button>
         </mat-form-field>
       </div>
+      <div>
+      <button class="add-sales theme-background-color" mat-raised-button (click)="router.navigateByUrl('/admin/sales/addsale')">Add sale</button>
+    </div>
+    </div>
 
+    <!--
+      <div class="search-input" *ngIf="salesList">
+        <mat-form-field floatLabel="never" appearance="outline">
+          <input matInput type="text" placeholder="search by vehicle no" [(ngModel)]="sharedService.searchData"
+            autocomplete="off" (keyup)="filterData()">
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="sharedService.clearSearch()"
+            *ngIf="sharedService.searchData">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      -->
     <div *ngIf="salesList">
       <table mat-table [dataSource]="salesList" fxLayout.lt-sm="column wrap" fxLayout.lt-md="column wrap">
 
@@ -53,10 +67,11 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let buyer">
-            <button class="update-button" mat-icon-button (click)="updateSale(buyer.vehicle_no)">
+            <button mat-icon-button color="primary"><mat-icon>visibility</mat-icon></button>
+            <button class="update-button" color="primary" mat-icon-button (click)="updateSale(buyer.vehicle_no)">
               <mat-icon>create</mat-icon>
             </button>
-            <button class="delete-button"  mat-icon-button (click)="deleteSale(buyer.vehicle_no)">
+            <button class="delete-button" color="warn"  mat-icon-button (click)="deleteSale(buyer.vehicle_no)">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </td>

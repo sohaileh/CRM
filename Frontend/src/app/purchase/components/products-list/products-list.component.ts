@@ -112,4 +112,9 @@ export class ProductsListComponent implements OnInit {
       this.purchaseList=res.data
     })
    }
+
+   onViewPurchase(carNo:String){
+    console.log(carNo);
+
+   }
 }

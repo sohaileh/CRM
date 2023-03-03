@@ -84,6 +84,10 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
   upload(event:any,name:string){
     const file=event.target.files[0]
+    if(file.size>100000){
+      Swal.fire('Error',"Image Size Should Be Less than 100kb")
+      return
+    }
     const reader=new FileReader();
     reader.readAsDataURL(file)
     reader.addEventListener("load",()=>{

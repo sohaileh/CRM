@@ -1,28 +1,31 @@
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card class="mat-elevation-z8" >
-    <div class="addpurchase">
-      <mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">Purchase List
-        <button mat-flat-button color="primary" (click)="onPurchaseAdd()">
+    <div class="addpurchase" >
+      <div fxLayout="row wrap" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-sm="column">
+       <span class="Heading_name"> Purchase List</span>
+       <div class="searchbar" fxFlex="40%" fxLayout="row" fxLayoutAlign="center center">
+        <mat-form-field appearance="outline">
+          <mat-placeholder>Search Vehicle No.</mat-placeholder>
+          <input matInput type="search" #searchText [matAutocomplete]="auto" (input)="applyFilter(searchText.value)">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let item of options" [value]="item">
+                {{item}}
+            </mat-option>
+          </mat-autocomplete>
+          <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="onSearch(searchText.value)" class="search_btn">
+            <mat-icon>search</mat-icon>
+        </button>
+        </mat-form-field>
+
+
+      </div>
+
+        <button mat-flat-button color="primary" (click)="onPurchaseAdd()" class="addPurchasebtn">
           Add Purchase
         </button>
-      </mat-toolbar>
+      </div>
     </div>
-    <div class="searchbar" >
-      <mat-form-field >
-        <mat-placeholder>Search Vehicle No.</mat-placeholder>
-        <input matInput type="search" #searchText [matAutocomplete]="auto" (input)="applyFilter(searchText.value)">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let item of options" [value]="item">
-              {{item}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-      <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="onSearch(searchText.value)" class="search_btn">
-        <mat-icon>search</mat-icon>
-    </button>
 
-
-    </div>
     <ng-container *ngIf="showSearchResult">
       search
     </ng-container>
@@ -81,4 +84,3 @@
     >
     </mat-paginator>
 </ng-template>
-

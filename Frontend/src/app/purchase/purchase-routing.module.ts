@@ -1,4 +1,4 @@
-import { LayoutComponent } from './components/layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { AddSellerComponent } from './components/add-seller/add-seller.component';
 import { NgModule } from "@angular/core";
 import{RouterModule,Routes} from '@angular/router'

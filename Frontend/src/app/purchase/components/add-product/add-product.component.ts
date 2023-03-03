@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -31,12 +32,12 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
 
     this.vehicleDetails = this.fb.group({
       condition: ['old'],
-      car_name: new FormControl(null,[Validators.required,Validators.pattern('^[a-zA-Z0-9]*$')]),
+      car_name: ["",[Validators.required,Validators.pattern('^[a-zA-Z0-9]*$')]],
       model: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       color: ['', [Validators.required, Validators.pattern('^[a-zA-Z]*$')]],
       fuel_type: [''],
       engine_no: ['',[Validators.required,Validators.minLength(8),Validators.pattern('^[a-zA-Z0-9]*$'),]],
-      vehicle_no: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]*$')]],
+      vehicle_no: ['',[Validators.required, Validators.pattern('[a-zA-Z]+[0-9]+[a-zA-Z]+[0-9]+')]],
       registration: ['', [Validators.required]],
       purchaseAgrement: ['', [Validators.required]],
       totalAmount: ['', [Validators.required]],
@@ -73,6 +74,10 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
   //  Documnets//
   upload(event: any, value: any) {
     const file = event.target.files[0];
+    if(file.size>100000){
+      Swal.fire('Error',"Image Size Should Be Less than 100kb")
+      return
+    }
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.addEventListener('load', () => {

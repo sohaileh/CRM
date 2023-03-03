@@ -4,23 +4,34 @@
 }
 
 .purchaseList{
+  border: 1px solid rgba(0, 0, 0, 0.429);
+  border-top:none;
   width: 100%;
   td, th {
     text-align: center !important;
   }
 }
-
-
 .addpurchase{
-  margin-left: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.429);
+  background-color:rgb(226, 226, 226);
 }
+
+.addPurchasebtn{
+background-color: #197850;
+margin:5px;
+}
+
 .searchbar{
-  .mat-form-field{
-    min-width: 100px;
-    width: 20%;
-    margin-left: 2.5rem;
-   }
-   button{
-    height: 32px;
-   }
+  height: 60px;
+ mat-form-field{
+  padding-top:14px;
+  font-size: 12px;
+ }
+
+
+}
+
+.Heading_name{
+  padding:6px ;
+  font-size: 22px;
 }

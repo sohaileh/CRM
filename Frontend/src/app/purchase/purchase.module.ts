@@ -8,7 +8,7 @@ import { ModuleModule } from '../shared/module/module.module';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule } from '@angular/forms';
 import { AddSellerComponent } from './components/add-seller/add-seller.component';
-import { LayoutComponent } from './components/layout/layout.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [

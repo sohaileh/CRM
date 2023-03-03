@@ -19,7 +19,7 @@
       <mat-form-field appearance="outline" >
         <mat-label>Model Name</mat-label>
         <input matInput type="text" formControlName="model">
-        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('required')">Brand Name Required</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('required')">Model Name Required</mat-error>
         <mat-error *ngIf="vehicleDetails.get('model')?.hasError('pattern')">Enter a Valid Brand Name</mat-error>
         <mat-hint align="end">Enter Only Characters</mat-hint>
       </mat-form-field>
@@ -35,7 +35,7 @@
         <mat-form-field appearance="outline" >
           <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
           <input matInput type="text" required formControlName="vehicle_no">
-          <mat-hint align="end">Vehicle No. without Space</mat-hint>
+          <mat-hint align="end">Vehicle No. without Space :JK99b9999</mat-hint>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">Vehicle Reg. No. Required</mat-error>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">Enter Valid Vehicle Reg. No.</mat-error>
         </mat-form-field>

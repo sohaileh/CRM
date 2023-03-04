@@ -1,3 +1,4 @@
+import { LoaderModule } from './../loader/loader.module';
 import { NavbarModule } from './../navbar/navbar.module';
 import { PurchaseRoutingModule } from './purchase-routing.module';
 import { NgModule } from '@angular/core';
@@ -23,7 +24,7 @@ import { LayoutComponent } from './layout/layout.component';
     MatRadioModule,
     FormsModule,
     PurchaseRoutingModule,
-    NavbarModule
+    NavbarModule,LoaderModule
   ]
 })
 export class PurchaseModule { }

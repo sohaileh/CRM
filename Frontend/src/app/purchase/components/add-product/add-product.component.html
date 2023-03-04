@@ -1,7 +1,7 @@
-
+<app-spinner *ngIf="loaderservice.showSpinner"></app-spinner>
 <div class="container" fxFlex="80%" fxFlex.lt-md="100%">
   <mat-card>
-  <div class="showVehicleTemplate">
+  <div class="showVehicleTemplate" (click)="makeFormTouched()">
     <mat-card-header class="container_header">
       VEHICLE DETAILS
     </mat-card-header>
@@ -35,9 +35,9 @@
         <mat-form-field appearance="outline" >
           <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
           <input matInput type="text" required formControlName="vehicle_no">
-          <mat-hint align="end">Vehicle No. without Space :JK99b9999</mat-hint>
-          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">Vehicle Reg. No. Required</mat-error>
-          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">Enter Valid Vehicle Reg. No.</mat-error>
+          <mat-hint align="end">{{oldCar?"Vehicle No. without Space :JK99b9999":"Enter Full Chassis Number"}}</mat-hint>
+          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">{{oldCar?"Vehicle Reg. No. Required":"Chassis Number Required"}}</mat-error>
+          <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">{{oldCar?"Enter Valid Vehicle Reg. No.":"Enter Valid Chassis Number"}}</mat-error>
         </mat-form-field>
 
 

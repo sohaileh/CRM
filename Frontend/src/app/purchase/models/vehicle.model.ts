@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
 
-export interface VehicleModel {
+export interface VehicleModel extends Validators{
       condition:[string,Validators],
       car_name: [string,Validators],
       model: [string,Validators],
@@ -8,9 +8,9 @@ export interface VehicleModel {
       fuel_type:[string,Validators],
       engine_no:[string,Validators],
       vehicle_no:[string,Validators],
-      registration:[any],
-      purchaseAgrement:[any],
-      totalAmount: [number,Validators],
-      paidAmount: [number],
-      balanceAmount:[number,Validators],
+      registration:[any,Validators],
+      purchaseAgrement:[any,Validators],
+      totalAmount: [string,Validators],
+      paidAmount: [string,Validators],
+      balanceAmount:[string,Validators],
 }

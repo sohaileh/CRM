@@ -1,3 +1,4 @@
+import { LoaderService } from './../../../loader/service/loader.service';
 import { PurchaseService } from './../../services/purchase.service';
 import { AlertService } from 'src/app/alert/alert.service';
 import { Router } from '@angular/router';
@@ -24,7 +25,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   constructor(public sharedService: SharedService,private purchaseService:PurchaseService,
-    private router:Router,private alertservice:AlertService) {
+    private router:Router,private alertservice:AlertService,public loaderservice:LoaderService) {
      }
   purchaseList!:MatTableDataSource<any>;
 

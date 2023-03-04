@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { SellerModel } from '../../models/seller.model';
 
 @Component({
   selector: 'app-add-seller',
@@ -23,12 +24,12 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
     private alertService:AlertService
     ) { }
   ngOnInit(): void {
-    this.sellerDetails = this.fb.group({
+    this.sellerDetails = this.fb.group<SellerModel>({
       seller_name: ["",[Validators.required,Validators.pattern('^[a-zA-Z][ a-zA-Z]{2,}')]],
       email: ["",[Validators.required,Validators.email]],
       phone_no: ["",[Validators.required,Validators.minLength(10),Validators.pattern('^[0-9]{10}')]],
       address: ["",[Validators.required,Validators.pattern('^[a-zA-Z][ a-zA-Z]{2,}')]],
-      postal_code: ["",[Validators.required,Validators.minLength(6),Validators.pattern('^[0-9]{6}')]],
+      postal_code: ['',[Validators.required,Validators.minLength(6),Validators.pattern('^[0-9]{6}')]],
       purchase_date: ["",[Validators.required]],
       aadhar_card:["",[Validators.required]],
       pan_card:["",[Validators.required]],
@@ -63,6 +64,7 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
           this.router.navigateByUrl('admin/purchase')
         },(err)=>{
+          console.log(err)
           Swal.fire(err.error.message)
           //this.alertservice.showError(err.error.message,"Error");
         })
@@ -76,6 +78,7 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
           this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
         },(err)=>{
+          console.log(err)
           this.alertservice.showError(err.error.message,"Error")
         })
       }
@@ -106,6 +109,9 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
         return this.alertService.confirmation('Are you sure?',"You won't be able to revert this!",'warning',)
       }
       return true;
+    }
+    makeFormTouched(){
+      this.sellerDetails.markAllAsTouched();
     }
 
   onBack(){

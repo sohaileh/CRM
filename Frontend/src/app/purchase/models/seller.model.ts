@@ -3,10 +3,10 @@ import { Validators } from '@angular/forms';
 export interface SellerModel extends Validators {
       seller_name: [string,Validators]
       email:[string,Validators],
-      phone_no:[number,Validators],
+      phone_no:[string,Validators],
       address:[string,Validators],
-      postal_code:[number,Validators],
-      purchase_date:Date,
-      aadhar_card:any,
-      pan_card:any
+      postal_code:[string,Validators],
+      purchase_date:[string,Validators]
+      aadhar_card:[any,Validators],
+      pan_card:[any,Validators]
 }

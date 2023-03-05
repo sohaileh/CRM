@@ -7,6 +7,7 @@ import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { AlertService } from 'src/app/alert/alert.service';
 import { ISalesForm } from '../../model/saleForm.model';
 import { deactivateGuard } from 'src/app/authGuard/auth.guard';
+import Swal from "sweetalert2"
 @Component({
   selector: 'app-add-sales',
   templateUrl: './add-sales.component.html',
@@ -29,11 +30,10 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     phone_no: [0, [Validators.required, Validators.minLength(10), Validators.pattern(/^[0-9]\d*$/)]],
     address:["", [Validators.required]],
     postal_code:[0, [Validators.required, Validators.minLength(6), Validators.pattern(/^[0-9]\d*$/)]],
-    sold_date:[0, [Validators.required]],
+    solddate:["", [Validators.required]],
     sold_amount:[0, [Validators.required,Validators.pattern(/^[0-9]\d*$/)]],
+    paid_amount:[0],
     balance_amount:[0],
-    bill_no:["", [Validators.required]],
-    adhaar_no:[0, [Validators.required, Validators.minLength(12), Validators.maxLength(12),Validators.pattern(/^[0-9]\d*$/)]],
     documents:this.fb.group({
       bill:["",Validators.required],
       adhaar_card:["",Validators.required],
@@ -95,7 +95,8 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
   }
   documentChange(event: any, value: any) {
     const file: File = event.target.files[0];
-    if (!file) {
+    if (file.size>100000) {
+      Swal.fire("Error","Image Size Should Be Less Than 100kb")
       return;
     }
     const fileReader = new FileReader();
@@ -116,6 +117,7 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
   }
   submitSale(){
     this.saleForm.get("sold_date")?.setValue(this.sharedService.epoch(this.saleForm.value.sold_date));
+    console.log(this.saleForm.get('documents')?.value)
     if (this.saleForm.invalid || this.saleForm.get("documents")?.invalid) {
       return;
     }
@@ -148,9 +150,12 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     return true;
   }
 
-  invalidAmount(soldAmount:number){
-    this.saleForm.controls['balance_amount']?.setValidators([ Validators.required,Validators.max(soldAmount),Validators.pattern(/^[0-9]\d*$/)]);
-        // this.saleForm.get("balance_amount")?.patchValue('');
+  balanceAmount(soldAmount:number,paidAmount:number){
+    this.saleForm.controls['balance_amount'].touched;
+    this.saleForm.controls['balance_amount'].patchValue(soldAmount-paidAmount)
+    if(this.saleForm.controls['balance_amount'].value<0){
+      this.saleForm.controls['balance_amount'].setErrors(Validators.pattern)
+    }
   }
 }
 

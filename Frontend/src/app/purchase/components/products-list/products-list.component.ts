@@ -54,7 +54,9 @@ export class ProductsListComponent implements OnInit {
         confirmButtonText:"Delete"
     }).then(result=>{
       if(result.isConfirmed){
+        this.loaderservice.showSpinner=!this.loaderservice.showSpinner
         this.purchaseService.deletePurchase(carNo).subscribe((res)=>{
+          this.loaderservice.showSpinner=!this.loaderservice.showSpinner
           this.alertservice.showSuccess(res.message,"success")
           this.ngOnInit()
         })
@@ -106,9 +108,8 @@ export class ProductsListComponent implements OnInit {
    }
 
    onPageChange(event:any){
-    console.log("page change")
-    let pageIndex=event.pageIndex||0
-    let pageSize=event.pageSize||2
+    let pageIndex=event.pageIndex|0
+    let pageSize=event.pageSize|10
     this.purchaseService.getPurchaseByPage(pageIndex,pageSize).subscribe((res)=>{
       this.purchaseList=res.data
     })

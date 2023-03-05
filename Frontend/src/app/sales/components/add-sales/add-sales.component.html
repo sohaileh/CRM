@@ -85,43 +85,29 @@
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Sold date</mat-label>
-            <input type="datetime-local" matInput required formControlName="sold_date" />
-            <mat-error>Sold date is required</mat-error>
+            <input type="date" matInput required formControlName="solddate">
+            <mat-error *ngIf="saleForm.get('sold_date')?.hasError('required')">Sold date is required</mat-error>
           </mat-form-field>
         </div>
 
         <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
           <mat-form-field appearance="outline">
 
-            <mat-label>Sold amount</mat-label>
-            <input type="number" matInput required formControlName="sold_amount" #soldAmt/>
+            <mat-label>Sold Amount</mat-label>
+            <input type="number" matInput required formControlName="sold_amount" #soldAmt (keyup)="balanceAmount(+soldAmt.value,+paidAmt.value)"/>
             <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('required')">Sold amount is required</mat-error>
             <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('pattern')">Sold amount can't be less than 0 INR</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
-            <mat-label>Balance amount</mat-label>
-            <input type="number" matInput required formControlName="balance_amount" #balanceAmt  (keyup)="invalidAmount(+soldAmt.value)" />
-            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('required')">Balance amount is required</mat-error>
-            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('max')">Balance amount can be greater than sold amount</mat-error>
-            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('pattern')">Balance amount can't be less than 0 INR</mat-error>
-
+            <mat-label>Paid Amount</mat-label>
+            <input type="number" matInput formControlName="paid_amount" #paidAmt (keyup)="balanceAmount(+soldAmt.value,+paidAmt.value)"/>
           </mat-form-field>
-        </div>
-
-        <div fxLayoutAlign="space-between centre" fxLayout.lt-sm="column wrap" fxLayoutGap=".5rem">
-          <mat-form-field appearance="outline" fxFlex.gt-sm="50%">
-            <mat-label>Bill number</mat-label>
-            <input type="text" matInput required formControlName="bill_no" />
-            <mat-error>Bill number is required</mat-error>
+          <mat-form-field appearance="outline">
+            <mat-label>Balance Amount</mat-label>
+            <input type="number" matInput required formControlName="balance_amount" #balanceAmt readonly/>
+            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('required')">Balance Amount Required</mat-error>
+            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('pattern')">Nagitive Number Not Accepted</mat-error>
           </mat-form-field>
-          <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
-            fxFlex.sm="50%">
-            <span fxLayout.lt-sm="50%">Bill photo*</span>
-            <img [src]=" saleForm.value.documents?.bill" class="image_style" alt="upload bill here" (click)="bill.click()"
-              fxLayout.lt-sm="50%" />
-            <input type="file" hidden required #bill (change)="documentChange($event,'bill')" accept="image/*"/>
-            <mat-error *ngIf="saleForm.touched&& saleForm.get('documents')?.value.bill===null" class="custom-error">Bill is required</mat-error>
-          </div>
         </div>
 
         <mat-card-header class="mat-card-header" color="primary">
@@ -130,14 +116,17 @@
         <p><u>Please upload below documents (only Images)</u></p>
 
         <div fxLayoutAlign="space-between centre" fxLayout.lt-sm="column wrap" fxLayoutGap=".5rem">
-          <mat-form-field appearance="outline" fxFlex.gt-sm="50%">
-            <mat-label>Adhaar number</mat-label>
-            <input type="text" matInput required formControlName="adhaar_no" />
-            <mat-error *ngIf="saleForm.get('adhaar_no')?.hasError('required')">Adhaar number is required</mat-error>
-            <mat-error *ngIf="saleForm.get('adhaar_no')?.hasError('minlength')">Adhaar no must be 12 digit long</mat-error>
-            <mat-error *ngIf="saleForm.get('adhaar_no')?.hasError('maxlength')">Adhaar no can't exceed 12 digits</mat-error>
-            <mat-error *ngIf="saleForm.get('adhaar_no')?.hasError('pattern')">Please enter a valid adhaar number</mat-error>
-          </mat-form-field>
+
+          <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
+          fxFlex.sm="50%">
+
+          <span fxLayout.lt-sm="50%">Bill photo*</span>
+          <img [src]=" saleForm.value.documents?.bill" class="image_style" alt="upload bill here" (click)="bill.click()"
+            fxLayout.lt-sm="50%" />
+          <input type="file" hidden required #bill (change)="documentChange($event,'bill')" accept="image/*"/>
+          <mat-error *ngIf="saleForm.get('documents')?.value.bill===null &&saleForm.value.documents.touched" class="custom-error">Bill is required</mat-error>
+        </div>
+
           <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
             fxFlex.sm="50%">
             <span>Adhaaar card*</span>
@@ -166,7 +155,7 @@
               (click)="agreement.click()" />
             <input type="file" hidden required #agreement (change)="documentChange($event,'agreement')"
               accept="image/*" />
-              <mat-error *ngIf="saleForm.touched&& saleForm.get('documents')?.value.agreement===null" class="custom-error">Agreement is required</mat-error>
+              <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.agreement===null" class="custom-error">Agreement is required</mat-error>
           </div>
         </div>
 

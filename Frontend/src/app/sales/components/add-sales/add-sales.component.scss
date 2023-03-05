@@ -40,7 +40,7 @@ p{
   overflow: hidden;
   padding: .5rem;
   margin: .4rem 0;
-  border: 1px solid black;
+  border: 1px solid rgb(204, 204, 204);
   border-radius: 5px;
 }
 .image_container span{
@@ -49,9 +49,9 @@ p{
 .multiselect-dropdown{
   width: 98%;
 }
-// .dropdown{
-//   width: 100%;
-// }
+ .dropdown{
+   width: 100%;
+ }
 
 ::ng-deep .item1 {
   padding: 0;

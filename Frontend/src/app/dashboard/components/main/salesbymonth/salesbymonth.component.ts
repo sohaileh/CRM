@@ -29,7 +29,7 @@ export class SalesbymonthComponent implements OnInit {
     let sale:any=[]
     let value=[]
     this.sales.forEach((sale:any) => {
-      const saleMonth=new Date(sale.sold_date).getMonth()
+      const saleMonth=new Date(sale.solddate).getMonth()
       this.value[saleMonth]+=1
     });
     this.month.forEach((month,index)=>{

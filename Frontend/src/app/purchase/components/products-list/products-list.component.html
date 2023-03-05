@@ -32,7 +32,7 @@
 
     <ng-container *ngIf="!purchaseList else showlist"><h3>No Purchase Found</h3></ng-container>
     <ng-template #showlist>
-      <div class="div_table">
+      <div class="div_table" style="overflow-x: scroll;">
     <table mat-table [dataSource]="purchaseList" class="purchaseList" >
 
       <ng-container matColumnDef="vehicle_no">

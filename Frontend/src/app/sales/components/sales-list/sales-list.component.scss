@@ -6,23 +6,15 @@
   margin : 6px;
 }
 
-table{
-  overflow: scroll;
+.mat-table{
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.429);
 }
-th.mat-header-cell,td.mat-cell{
-  text-align: center;
-  padding: 0 2rem;
+.salesList{
+  td, th {
+    text-align: center !important;
+  }
 }
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type{
-  text-align: center;
-  padding:0;
-}
-button {
-  margin: 0.1rem .1rem;
-}
-
 .hide {
   display: none;
 }
@@ -34,14 +26,12 @@ button {
 
 .search-input {
 height: 50px;
-width:50%;
+width:40%;
 margin-bottom: 10px;
   mat-form-field {
     width: 100%;
   }
 }
-
-
 .Heading_name{
   padding:6px ;
   font-size: 22px;

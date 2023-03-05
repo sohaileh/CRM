@@ -15,11 +15,12 @@ import Swal from 'sweetalert2';
 export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
   pageSize=10;
-  displayedColumns = ["sNo", "vehicle_no", "fullName", "sold_date", "bill_no", "adhaar_no", "actions"];
+  displayedColumns = ["vehicle_no", "fullName", "sold_date", "phone_no","actions"];
   constructor(public sharedService: SharedService, private alertService: AlertService, public saleService: SalesService, public router: Router) { }
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {
       if (res.data.length) {
+        console.log(res)
       this.salesList = new MatTableDataSource(res.data);
       }
     }, err => {
@@ -40,7 +41,7 @@ export class SalesListComponent implements OnInit {
   deleteSale(sell_id: any) {
     Swal.fire({
       title: "Delete sale",
-      text: "Are you sure to delet this sale",
+      text: "Are you sure to Delete this sale",
       showCloseButton: true,
       showCancelButton: true,
       cancelButtonText: "Cancel",

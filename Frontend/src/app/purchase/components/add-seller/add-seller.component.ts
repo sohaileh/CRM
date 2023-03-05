@@ -110,9 +110,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
       }
       return true;
     }
-    makeFormTouched(){
-      this.sellerDetails.markAllAsTouched();
-    }
 
   onBack(){
     this.changesSaved=true

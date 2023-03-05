@@ -135,10 +135,6 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
     return true;
   }
 
-  makeFormTouched(){
-    this.vehicleDetails.markAllAsTouched();
-  }
-
   ngOnDestroy() {
     this.purchaseService.isBack=false
   }

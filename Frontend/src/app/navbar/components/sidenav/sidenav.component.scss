@@ -1,0 +1,22 @@
+.logocontainer{
+  padding-top: 40px;
+  height: 100px;
+  margin: 12px;
+  h2{
+    font-size: 40px;
+  }
+}
+
+.header-action{
+  .mat-button{
+    font-size: 14px;
+  }
+  mat-icon{
+    padding-top:6px;
+  }
+}
+
+.active{
+  background-color: rgba(7, 37, 25, 0.249);
+  border-bottom: 2px solid #fab522;
+}

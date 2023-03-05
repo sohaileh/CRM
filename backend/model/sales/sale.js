@@ -6,10 +6,9 @@ const saleSchema=mongoose.Schema({
     phone_no:{type:Number,required:true},
     address:{type:String,required:true},
     postal_code:{type:Number,required:true},
-    sold_date:{type:String,required:true},
+    solddate:{type:String,required:true},
     sold_amount:{type:Number,required:true},
-    bill_no:{type:String,required:true},
-    adhaar_no:{type:Number,required:true},
+    paid_amount:{type:Number},
     balance_amount:{type:Number,required:true},
     documents:Object
 });

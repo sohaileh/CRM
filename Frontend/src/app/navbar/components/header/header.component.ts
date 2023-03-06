@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/shared/service/shared-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SalesService } from 'src/app/sales/services/sales.service';
@@ -9,7 +10,8 @@ import { SalesService } from 'src/app/sales/services/sales.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private _router:Router,private saleService:SalesService,public rout:ActivatedRoute) { }
+  constructor(private _router:Router,private saleService:SalesService,public rout:ActivatedRoute,
+   private sharedservice:SharedService) { }
 
   ngOnInit(): void {
   }
@@ -29,4 +31,9 @@ export class HeaderComponent implements OnInit {
     onLogout(){
       this._router.navigateByUrl('admin/login')
     }
+
+    sideNavClicked(){
+       console.log("Side nav Clicked");
+
+        }
 }

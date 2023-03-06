@@ -20,7 +20,6 @@ export class SalesListComponent implements OnInit {
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {
       if (res.data.length) {
-        console.log(res)
       this.salesList = new MatTableDataSource(res.data);
       }
     }, err => {
@@ -69,7 +68,7 @@ export class SalesListComponent implements OnInit {
     this.sharedService.getSalesByFilter().subscribe((res: any) => {
       this.salesList = new MatTableDataSource(res.data);
     }, err => {
-      console.log(err);
+      this.alertService.showError(err.error.message,"Error");
     })
   }
   pageEvent(event: any) {
@@ -78,11 +77,13 @@ export class SalesListComponent implements OnInit {
       this.pageSize=event.pageSize;
       this.sharedService.getSalesByPagination(this.pageSize,this.salesList.data.length).subscribe((res: any) => {
         this.salesList=new MatTableDataSource([...this.salesList.data,...res.data])
-      }, err => console.log(err));
+      }, err => this.alertService.showError(err.message,"Error"));
     }else if(event.previousPageIndex<event.pageIndex){
       this.sharedService.getSalesByPagination(event.pageSize,this.salesList.data.length).subscribe((res: any) => {
         this.salesList=new MatTableDataSource([...this.salesList.data,...res.data])
-      }, err => console.log(err));
+      }, err => {
+        this.alertService.showError(err.error.message,"Error")
+      });
     }
 }
 }

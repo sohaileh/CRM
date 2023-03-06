@@ -33,81 +33,88 @@
         </mat-card-header>
         <p><u>Please enter buyer details below</u></p>
 
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
-          <mat-form-field appearance="outline">
+        <div class="outer_wraper" fxLayout="row" fxLayoutGap.gt-xs="10px" fxLayout.xs="column">
+          <div class="column1">
             <mat-label>Full Name</mat-label>
-            <input type="text" matInput required formControlName="fullName" />
-            <mat-error *ngIf="saleForm.get('fullName')?.hasError('required')">Full name is required</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('fullName')?.hasError('pattern')&&!saleForm.get('fullName')?.hasError('minlength')">Full
-              name must contain alphabets only</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('fullName')?.hasError('minlength') &&!saleForm.get('fullName')?.hasError('pattern')">Full
-              name sould be at least 5 charecters long</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline">
+              <input type="text" matInput required formControlName="fullName" />
+              <mat-error *ngIf="saleForm.get('fullName')?.hasError('required')">Full name is required</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('fullName')?.hasError('pattern')&&!saleForm.get('fullName')?.hasError('minlength')">Full
+                name must contain alphabets only</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('fullName')?.hasError('minlength') &&!saleForm.get('fullName')?.hasError('pattern')">Full
+                name sould be at least 5 charecters long</mat-error>
+            </mat-form-field>
             <mat-label>Email</mat-label>
-            <input type="email" matInput required formControlName="email" />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field appearance="outline">
 
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
-          <mat-form-field appearance="outline">
+              <input type="email" matInput required formControlName="email" />
+              <mat-error>This field is required</mat-error>
+            </mat-form-field>
+
             <mat-label>Phone no</mat-label>
-            <input type="text" matInput required formControlName="phone_no" />
-            <mat-error *ngIf="saleForm.get('phone_no')?.hasError('required')">Phone no is required</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('phone_no')?.hasError('pattern') &&!saleForm.get('phone_no')?.hasError('minlength')">Please
-              enter a valid phone number</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('phone_no')?.hasError('minlength') && !saleForm.get('phone_no')?.hasError('pattern')">Please
-              enter 10 digit phone number</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline">
+              <input type="text" matInput required formControlName="phone_no" />
+              <mat-error *ngIf="saleForm.get('phone_no')?.hasError('required')">Phone no is required</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('phone_no')?.hasError('pattern') &&!saleForm.get('phone_no')?.hasError('minlength')">Please
+                enter a valid phone number</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('phone_no')?.hasError('minlength') && !saleForm.get('phone_no')?.hasError('pattern')">Please
+                enter 10 digit phone number</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="column2">
             <mat-label>Address</mat-label>
-            <input type="text" matInput required formControlName="address" />
-            <mat-error>Address is required</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field appearance="outline">
 
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
-          <mat-form-field appearance="outline">
+              <input type="text" matInput required formControlName="address" />
+              <mat-error>Address is required</mat-error>
+            </mat-form-field>
             <mat-label>Postal/Zip code</mat-label>
-            <input type="text" matInput required formControlName="postal_code" />
-            <mat-error *ngIf="saleForm.get('postal_code')?.hasError('required')">Zip code is required</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('postal_code')?.hasError('minlength') &&!saleForm.get('postal_code')?.hasError('pattern')">Zip
-              code must be 6 digits long</mat-error>
-            <mat-error
-              *ngIf="saleForm.get('postal_code')?.hasError('pattern') &&saleForm.get('postal_code')?.hasError('minlength')">Please
-              enter valid postal code</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline">
+              <input type="text" matInput required formControlName="postal_code" />
+              <mat-error *ngIf="saleForm.get('postal_code')?.hasError('required')">Zip code is required</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('postal_code')?.hasError('minlength') &&!saleForm.get('postal_code')?.hasError('pattern')">Zip
+                code must be 6 digits long</mat-error>
+              <mat-error
+                *ngIf="saleForm.get('postal_code')?.hasError('pattern') &&saleForm.get('postal_code')?.hasError('minlength')">Please
+                enter valid postal code</mat-error>
+            </mat-form-field>
             <mat-label>Sold date</mat-label>
-            <input type="date" matInput required formControlName="solddate">
-            <mat-error *ngIf="saleForm.get('sold_date')?.hasError('required')">Sold date is required</mat-error>
-          </mat-form-field>
+            <mat-form-field appearance="outline">
+              <input type="date" matInput required formControlName="solddate">
+              <mat-error *ngIf="saleForm.get('sold_date')?.hasError('required')">Sold date is required</mat-error>
+            </mat-form-field>
+          </div>
         </div>
 
         <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
-          <mat-form-field appearance="outline">
-
+          <div>
             <mat-label>Sold Amount</mat-label>
-            <input type="number" matInput required formControlName="sold_amount" #soldAmt (keyup)="balanceAmount(+soldAmt.value,+paidAmt.value)"/>
-            <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('required')">Sold amount is required</mat-error>
-            <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('pattern')">Sold amount can't be less than 0 INR</mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline">
+              <input type="number" matInput required formControlName="sold_amount" #soldAmt (keyup)="balanceAmount(+soldAmt.value,+paidAmt.value)"/>
+              <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('required')">Sold amount is required</mat-error>
+              <mat-error *ngIf="saleForm.get('sold_amount')?.hasError('pattern')">Sold amount can't be less than 0 INR</mat-error>
+            </mat-form-field>
+          </div>
+          <div>
             <mat-label>Paid Amount</mat-label>
+          <mat-form-field appearance="outline">
             <input type="number" matInput formControlName="paid_amount" #paidAmt (keyup)="balanceAmount(+soldAmt.value,+paidAmt.value)"/>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          </div>
+          <div>
             <mat-label>Balance Amount</mat-label>
+          <mat-form-field appearance="outline">
             <input type="number" matInput required formControlName="balance_amount" #balanceAmt readonly/>
             <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('required')">Balance Amount Required</mat-error>
             <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('pattern')">Nagitive Number Not Accepted</mat-error>
           </mat-form-field>
+          </div>
+
         </div>
 
         <mat-card-header class="mat-card-header" color="primary">

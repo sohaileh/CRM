@@ -1,3 +1,4 @@
+import { SharedService } from 'src/app/shared/service/shared-service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
 export class SidenavComponent implements OnInit {
 
   constructor() { }
-  showFiller = false;
   ngOnInit(): void {
   }
 

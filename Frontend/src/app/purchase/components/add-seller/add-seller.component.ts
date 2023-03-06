@@ -64,7 +64,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
           this.router.navigateByUrl('admin/purchase')
         },(err)=>{
-          console.log(err)
           Swal.fire(err.error.message)
           //this.alertservice.showError(err.error.message,"Error");
         })
@@ -78,7 +77,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
           this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
         },(err)=>{
-          console.log(err)
           this.alertservice.showError(err.error.message,"Error")
         })
       }

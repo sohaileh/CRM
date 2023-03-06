@@ -51,7 +51,7 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
       this.saleService.http.get(`${this.sharedService.serverUrl}findsalebyvehicleno${this.id}`).subscribe((res: any) => {
         this.saleForm.patchValue(res.data);
       }, err => {
-        console.log(err);
+        this.alertService.showError(err.error.message,"Error")
       })
     }
     else {
@@ -64,7 +64,7 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
         return vehicle.vehicle_no;
       });
     }, err => {
-      console.log(err);
+      this.alertService.showError(err.error.message,"Error")
     });
   }
   searchPurchase(event: any) {
@@ -76,7 +76,7 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
         return vehicle.vehicle_no;
       });
     }, err => {
-      console.log(err);
+      this.alertService.showError(err.error.message,"Error")
     });
   }
   selectedVehicle(event: any) {
@@ -117,7 +117,6 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
   }
   submitSale(){
     this.saleForm.get("sold_date")?.setValue(this.sharedService.epoch(this.saleForm.value.sold_date));
-    console.log(this.saleForm.get('documents')?.value)
     if (this.saleForm.invalid || this.saleForm.get("documents")?.invalid) {
       return;
     }

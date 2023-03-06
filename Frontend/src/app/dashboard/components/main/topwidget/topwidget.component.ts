@@ -44,7 +44,7 @@ export class TopwidgetComponent implements OnInit {
   calculateMonthSales(){
     const today=new Date().getMonth()
     this.salesData.forEach((sale:any)=>{
-      const soldDate=new Date(sale.sold_date).getMonth()
+      const soldDate=new Date(sale.solddate).getMonth()
       if(today===soldDate){
         this.topwidgetinfo[0].value+=1;
       }

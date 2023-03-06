@@ -7,7 +7,7 @@
     </mat-card-header>
 
   <form [formGroup]="vehicleDetails" (ngSubmit)="onNext()" class="vehicle_form">
-
+    <mat-label>Vehicle Type:-</mat-label>
   <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" (change)="getChassisNo()">
     <mat-radio-button color="primary" value="old" class="vehicletype">OLD</mat-radio-button>
     <mat-radio-button color="primary" value="new" class="vehicletype">NEW</mat-radio-button>
@@ -16,52 +16,62 @@
   <div class="vehicleDetailContainer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
 
     <div class="firstColumn" fxFlex="50%">
-      <mat-form-field appearance="outline" >
+      <div>
         <mat-label>Model Name</mat-label>
-        <input matInput type="text" formControlName="model">
-        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('required')">Model Name Required</mat-error>
-        <mat-error *ngIf="vehicleDetails.get('model')?.hasError('pattern')">Enter a Valid Brand Name</mat-error>
-        <mat-hint align="end">Enter Only Characters</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" >
-        <mat-label>Engine No</mat-label>
-        <input matInput type="text" required formControlName="engine_no">
-        <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('required')">Engine No. Required</mat-error>
-        <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('pattern') || vehicleDetails.get('engine_no')?.hasError('minlength')">Enter a Valid Engine No.</mat-error>
-        <mat-hint align="end">Minumum 8 Characters</mat-hint>
-      </mat-form-field>
-
         <mat-form-field appearance="outline" >
-          <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
+          <input matInput type="text" formControlName="model">
+          <mat-error *ngIf="vehicleDetails.get('model')?.hasError('required')">Model Name Required</mat-error>
+          <mat-error *ngIf="vehicleDetails.get('model')?.hasError('pattern')">Enter a Valid Brand Name</mat-error>
+          <mat-hint align="end">Enter Only Characters</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-label>Engine No</mat-label>
+        <mat-form-field appearance="outline" >
+          <input matInput type="text" required formControlName="engine_no">
+          <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('required')">Engine No. Required</mat-error>
+          <mat-error *ngIf="vehicleDetails.get('engine_no')?.hasError('pattern') || vehicleDetails.get('engine_no')?.hasError('minlength')">Enter a Valid Engine No.</mat-error>
+          <mat-hint align="end">Minumum 8 Characters</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
+        <mat-form-field appearance="outline" >
           <input matInput type="text" required formControlName="vehicle_no">
           <mat-hint align="end">{{oldCar?"Vehicle No. without Space :JK99b9999":"Enter Full Chassis Number"}}</mat-hint>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">{{oldCar?"Vehicle Reg. No. Required":"Chassis Number Required"}}</mat-error>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">{{oldCar?"Enter Valid Vehicle Reg. No.":"Enter Valid Chassis Number"}}</mat-error>
         </mat-form-field>
-
-
+      </div>
     </div>
 
     <div class="secoundColumn" fxFlex="50%">
-      <mat-form-field appearance="outline" >
+      <div>
         <mat-label>Car Name</mat-label>
-        <input matInput type="text" required formControlName="car_name">
-        <mat-hint align="end">Numbers and Characters</mat-hint>
-        <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('required')">Car Name Required</mat-error>
-        <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('pattern')">Enter Valid Car Name</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="outline" >
+          <input matInput type="text" required formControlName="car_name">
+          <mat-hint align="end">Numbers and Characters</mat-hint>
+          <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('required')">Car Name Required</mat-error>
+          <mat-error *ngIf="vehicleDetails.get('car_name')?.hasError('pattern')">Enter Valid Car Name</mat-error>
+        </mat-form-field>
+      </div>
 
+      <div>
+        <mat-label>Color</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>Color</mat-label>
           <input matInput type="text" required formControlName="color">
           <mat-hint align="end">Color Name</mat-hint>
         <mat-error *ngIf="vehicleDetails.get('color')?.hasError('required')">Color Required</mat-error>
         <mat-error *ngIf="vehicleDetails.get('color')?.hasError('pattern')">Enter Valid Color Name</mat-error>
         </mat-form-field>
+      </div>
 
+      <div>
+        <mat-label>Fuel Type</mat-label>
         <mat-form-field appearance="outline">
-          <mat-label>Fuel Type</mat-label>
+
           <mat-select matNativeControl required formControlName="fuel_type">
             <mat-option value="Diesel">Diesel</mat-option>
             <mat-option value="Petrol">Petrol</mat-option>
@@ -70,6 +80,8 @@
           <mat-error>Fuel Type Required</mat-error>
           <mat-hint align="end">Fuel Type</mat-hint>
         </mat-form-field>
+      </div>
+
     </div>
 
       </div>
@@ -108,23 +120,30 @@
 
 <div class="purchasedetails" >
   <mat-card-header class="container_header">PURCHASE DETAILS</mat-card-header>
-  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
-    <mat-form-field appearance="outline" >
+  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column">
+
+    <div>
       <mat-label>Total Car Amount</mat-label>
-      <input matInput type="number" required formControlName="totalAmount" #total (keyup)="calculateBalanced(total.value,paid.value)">
-      <mat-error>Enter Valid Total Car Amount</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" >
+      <mat-form-field appearance="outline" >
+        <input matInput type="number" required formControlName="totalAmount" #total (keyup)="calculateBalanced(total.value,paid.value)">
+        <mat-error>Enter Valid Total Car Amount</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
       <mat-label>Paid Amount</mat-label>
-      <input matInput type="number" formControlName="paidAmount" #paid (keyup)="calculateBalanced(total.value,paid.value)">
-    </mat-form-field>
+      <mat-form-field appearance="outline" >
 
-    <mat-form-field appearance="outline" >
+        <input matInput type="number" formControlName="paidAmount" #paid (keyup)="calculateBalanced(total.value,paid.value)">
+      </mat-form-field>
+    </div>
+
+    <div>
       <mat-label>Balanced Amount</mat-label>
-      <input matInput type="number" formControlName="balanceAmount" [value]="balancedAmt" readonly>
-      <mat-error>Nagative Number not Accepted</mat-error>
-    </mat-form-field>
+      <mat-form-field appearance="outline" >
+        <input matInput type="number" formControlName="balanceAmount" [value]="balancedAmt" readonly>
+        <mat-error>Nagative Number not Accepted</mat-error>
+      </mat-form-field>
+    </div>
   </div>
 </div>
 

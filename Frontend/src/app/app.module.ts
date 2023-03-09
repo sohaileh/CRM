@@ -1,3 +1,4 @@
+import { MainlayoutComponent } from './mainlayout/mainlayout.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,10 +14,12 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderInterceptor } from './interceptor/header/header.interceptor';
 import { ErrorInterceptor } from './interceptor/error/error.interceptor';
 import { HttpClientModule } from '@angular/common/http';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,MainlayoutComponent],
   imports: [
+    MatSidenavModule,
     BrowserModule,
     AuthenticationModule,
     DashboardModule,

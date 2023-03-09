@@ -74,8 +74,9 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
   }
 
 
-  getChassisNo() {
-    this.oldCar = !this.oldCar;
+  getChassisNo(value:string) {
+    console.log("mat menu clicked")
+   // this.oldCar = !this.oldCar;
   }
   //  Documnets//
   upload(event: any, value: any) {
@@ -125,6 +126,7 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
     this.vehicleDetails.patchValue({'balanceAmount':this.balancedAmt})
     if(this.balancedAmt<0){
       this.vehicleDetails.controls['balanceAmount'].setValue("")
+      this.vehicleDetails.controls['balanceAmount'].setErrors(Validators.pattern)
     }
   }
 

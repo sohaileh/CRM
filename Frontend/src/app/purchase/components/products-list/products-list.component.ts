@@ -34,6 +34,7 @@ export class ProductsListComponent implements OnInit {
   showSearchResult=false;
   filterData:any;
   displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "actions"]
+
   ngOnInit(): void {
     this.purchaseService.isUpdate=false;
 

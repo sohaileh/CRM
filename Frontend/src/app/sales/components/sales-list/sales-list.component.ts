@@ -85,5 +85,9 @@ export class SalesListComponent implements OnInit {
         this.alertService.showError(err.error.message,"Error")
       });
     }
-}
+  }
+
+  viewSale(vehicleNo:string){
+    console.log(vehicleNo);
+  }
 }

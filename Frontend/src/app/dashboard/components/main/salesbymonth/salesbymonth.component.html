@@ -1,13 +1,16 @@
-<ngx-charts-line-chart
-[results]="totalSales"
-[xAxis]="true"
-[yAxis]="true"
-[xAxisLabel]="'Months'"
-[yAxisLabel]="'Total Sales'"
-[showXAxisLabel]="true"
-[showYAxisLabel]="true"
-[scheme]="'forest'"
-[yAxisTickFormatting]="yAxisFormat"
->
+<div #containerRef>
+  <ngx-charts-bar-vertical
 
-</ngx-charts-line-chart>
+  [results]="totalSales"
+  [xAxis]="true"
+  [yAxis]="true"
+  [xAxisLabel]="'Months'"
+  [yAxisLabel]="'Total Sales'"
+  [showXAxisLabel]="true"
+  [showYAxisLabel]="true"
+  [scheme]="'forest'"
+  [yAxisTickFormatting]="yAxisFormat"
+  >
+
+  </ngx-charts-bar-vertical>
+</div>

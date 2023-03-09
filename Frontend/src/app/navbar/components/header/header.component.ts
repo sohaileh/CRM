@@ -1,6 +1,6 @@
 import { SharedService } from 'src/app/shared/service/shared-service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter,Output } from '@angular/core';
 import { SalesService } from 'src/app/sales/services/sales.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { SalesService } from 'src/app/sales/services/sales.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @Output() sideBarClicked:EventEmitter<any>=new EventEmitter();
 
   constructor(private _router:Router,private saleService:SalesService,public rout:ActivatedRoute,
    private sharedservice:SharedService) { }
@@ -32,8 +34,7 @@ export class HeaderComponent implements OnInit {
       this._router.navigateByUrl('admin/login')
     }
 
-    sideNavClicked(){
-       console.log("Side nav Clicked");
-
-        }
+    toggleSideBar(){
+      this.sideBarClicked.emit();
+    }
 }

@@ -1,24 +1,24 @@
 <div class="sidenav_container theme-background-color btn-color">
   <div class="sidenavHeading">
-    <div class="logocontainer">
-      <h2>CRM</h2>
+    <div class="logocontainer" fxFlex="100%" fxLayout="column" fxLayoutAlign="center center">
+      <div class="user" fxLayoutAlign="center center">
+        <h2>UN</h2>
+      </div>
+      <h2>Username</h2>
     </div>
-    <hr>
-  </div>
 
-  <div class="header-action" fxLayout="column">
+  </div>
+  <hr>
+  <div class="header-menu" fxLayout="column">
     <button mat-button routerLink="/admin/dashboard" routerLinkActive="active">
-      <div fxLayoutAlign="space-around"><mat-icon>home</mat-icon>HOME</div>
+      <div fxLayoutAlign="start" class="headerAction"><mat-icon>home</mat-icon>HOME</div>
       </button>
     <button mat-button routerLink="/admin/sales/saleslist" routerLinkActive="active">
-      <div fxLayoutAlign="space-around"><mat-icon>redeem</mat-icon>SALES</div>
+      <div fxLayoutAlign="start"><mat-icon>redeem</mat-icon>SALES</div>
     </button>
     <button mat-button routerLink="/admin/purchase" routerLinkActive="active">
-      <div fxLayoutAlign="space-around"><mat-icon>commute</mat-icon>PURCHASES</div>
+      <div fxLayoutAlign="start"><mat-icon>commute</mat-icon>PURCHASES</div>
     </button>
     </div>
     <hr>
-    <div fxLayout="column">
-    <button mat-button class="logout" >Logout</button>
-  </div>
 </div>

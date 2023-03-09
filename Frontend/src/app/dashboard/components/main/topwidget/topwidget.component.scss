@@ -1,17 +1,11 @@
 
 mat-card{
     text-align: center;
-    margin: 4px;
-    &:hover{
-        cursor: pointer;
-        background-color: #fab522;
-        color: black;
-        mat-icon{
-            color: black;
-        }
-        h2{
-            font-size: 2.5rem;
-        }
+    margin:12px;
+    box-shadow: none !important;
+    border: 1px solid rgb(230, 228, 228);
+    mat-icon{
+      margin-top:20px;
     }
 }
 
@@ -24,8 +18,6 @@ h2{
     font-weight: bold;
 }
 
-.topwidgeticon{
-    height: 40px;
-    width: 40px;
-    font-size: 40px;
+.widgetInfo{
+width: 100%;
 }

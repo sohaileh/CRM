@@ -1,14 +1,22 @@
 
 <app-topwidget></app-topwidget>
 
-<div class="container" fxLayout="row wrap" fxLayoutAlign="space-evenly center">
- <div class="salesbymonth" fxFlex="47%" fxFlex.xs="90%" fxFlex.sm="90%">
-  <mat-toolbar>Sales By Months</mat-toolbar>
-    <app-salesbymonth ></app-salesbymonth>
- </div>
+<div class="container">
 
- <div class="purchasebymonth" fxFlex="47%" fxFlex.xs="90%" fxFlex.sm="90%">
-  <mat-toolbar class="tool-bar">Purchase By Month</mat-toolbar>
-   <app-purchasebymonth ></app-purchasebymonth>
- </div>
+  <div class="salesbymonth">
+    <mat-card>
+      <h2>Total Sales</h2>
+    <app-salesbymonth></app-salesbymonth>
+  </mat-card>
+  </div>
+
+  <div class="purchasebymonth">
+    <mat-card>
+      <h2>Total Purchase</h2>
+      <app-purchasebymonth></app-purchasebymonth>
+    </mat-card>
+
+  </div>
+
 </div>
+

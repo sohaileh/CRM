@@ -1,10 +1,14 @@
-<div class="topwidget" fxFlex="100%" fxFlex.xs="100%" fxFlex.gt-sm="100%" fxLayout="row wrap" fxLayoutAlign="space-around center">
+<div class="topwidget" fxFlex="100%" fxLayout="row wrap" fxLayoutAlign="space-around">
 
-       <mat-card fxFlex="20%" fxFlex.sm="40%" fxFlex.xs="90%" fxLayoutAlign="center center" fxLayout="column"
+       <mat-card fxFlex="20%" fxFlex.sm="40%" fxFlex.xs="90%" fxLayoutAlign="space-between start" fxLayout="column"
        *ngFor="let item of topwidgetinfo">
-            <mat-icon class="topwidgeticon theme-color">{{item.icon}}</mat-icon>
-            <h3 class="widgetname">{{item.name}}</h3>
-            <h2>{{item.value}}</h2>
+        <div fxLayout="row" fxLayoutAlign="space-between" class="widgetInfo">
+          <h2>{{item.value}}</h2>
+          <mat-icon>{{item.icon}}</mat-icon>
+        </div>
+        <div>
+          <h3>{{item.name}}</h3>
+        </div>
         </mat-card>
 
 </div>

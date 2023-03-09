@@ -91,7 +91,7 @@
           </div>
         </div>
 
-        <div fxLayout.gt-sm="row" fxLayoutGap.gt-sm=".5rem">
+        <div fxLayout="row" fxLayoutGap.gt-sm=".5rem" fxLayoutAlign="space-between" fxLayout.lt-md="column">
           <div>
             <mat-label>Sold Amount</mat-label>
             <mat-form-field appearance="outline">
@@ -111,10 +111,9 @@
           <mat-form-field appearance="outline">
             <input type="number" matInput required formControlName="balance_amount" #balanceAmt readonly/>
             <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('required')">Balance Amount Required</mat-error>
-            <mat-error *ngIf="saleForm.get('balance_amount')?.hasError('pattern')">Nagitive Number Not Accepted</mat-error>
+            <mat-error *ngIf="!saleForm.get('balance_amount')?.hasError('required')">Nagitive Number Not Accepted</mat-error>
           </mat-form-field>
           </div>
-
         </div>
 
         <mat-card-header class="mat-card-header" color="primary">
@@ -131,7 +130,7 @@
           <img [src]=" saleForm.value.documents?.bill" class="image_style" alt="upload bill here" (click)="bill.click()"
             fxLayout.lt-sm="50%" />
           <input type="file" hidden required #bill (change)="documentChange($event,'bill')" accept="image/*"/>
-          <mat-error *ngIf="saleForm.get('documents')?.value.bill===null &&saleForm.value.documents.touched" class="custom-error">Bill is required</mat-error>
+
         </div>
 
           <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
@@ -141,7 +140,7 @@
               (click)="adhaarCard.click()" />
             <input type="file" hidden required #adhaarCard (change)="documentChange($event,'adhaarCard')"
               accept="image/*" />
-              <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.adhaar_card" class="custom-error">Adhaaar card is required</mat-error>
+
           </div>
         </div>
 
@@ -152,7 +151,7 @@
             <img [src]=" saleForm.value.documents?.pan_card" class="image_style" alt="upload PAN card here"
               (click)="pan_card.click()" />
             <input type="file" hidden required #pan_card (change)="documentChange($event,'pan')" accept="image/*" />
-            <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.pan_card===null" class="custom-error">Pan card is required</mat-error>
+
           </div>
 
           <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
@@ -162,7 +161,7 @@
               (click)="agreement.click()" />
             <input type="file" hidden required #agreement (change)="documentChange($event,'agreement')"
               accept="image/*" />
-              <mat-error *ngIf="saleForm.value.documents.touched&& saleForm.get('documents')?.value.agreement===null" class="custom-error">Agreement is required</mat-error>
+
           </div>
         </div>
 

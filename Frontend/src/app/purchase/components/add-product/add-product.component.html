@@ -1,5 +1,5 @@
 <app-spinner *ngIf="loaderservice.showSpinner"></app-spinner>
-<div class="container" fxFlex="80%" fxFlex.lt-md="100%">
+<div class="container" fxFlex="90%" fxFlex.lt-md="100%">
   <mat-card>
   <div class="showVehicleTemplate">
     <mat-card-header class="container_header">
@@ -7,8 +7,18 @@
     </mat-card-header>
 
   <form [formGroup]="vehicleDetails" (ngSubmit)="onNext()" class="vehicle_form">
-    <mat-label>Vehicle Type:-</mat-label>
-  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition" (change)="getChassisNo()">
+    <div class="vehicleType">
+      <mat-label>Vehicle Type</mat-label>
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl required formControlName="condition">
+          <mat-option value="old" (click)="getChassisNo('false')">OLD</mat-option>
+          <mat-option value="new">NEW</mat-option>
+        </mat-select>
+        <mat-error>Vehicle Type Required</mat-error>
+      </mat-form-field>
+    </div>
+
+  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition">
     <mat-radio-button color="primary" value="old" class="vehicletype">OLD</mat-radio-button>
     <mat-radio-button color="primary" value="new" class="vehicletype">NEW</mat-radio-button>
   </mat-radio-group>
@@ -40,7 +50,7 @@
         <mat-label>{{oldCar?"Vehicle Reg No":"Chassis Number"}}</mat-label>
         <mat-form-field appearance="outline" >
           <input matInput type="text" required formControlName="vehicle_no">
-          <mat-hint align="end">{{oldCar?"Vehicle No. without Space :JK99b9999":"Enter Full Chassis Number"}}</mat-hint>
+          <mat-hint align="end">{{oldCar?"Vehicle No. without Space":"Enter Full Chassis Number"}}</mat-hint>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('required')">{{oldCar?"Vehicle Reg. No. Required":"Chassis Number Required"}}</mat-error>
           <mat-error *ngIf="vehicleDetails.get('vehicle_no')?.hasError('pattern')">{{oldCar?"Enter Valid Vehicle Reg. No.":"Enter Valid Chassis Number"}}</mat-error>
         </mat-form-field>
@@ -71,7 +81,6 @@
       <div>
         <mat-label>Fuel Type</mat-label>
         <mat-form-field appearance="outline">
-
           <mat-select matNativeControl required formControlName="fuel_type">
             <mat-option value="Diesel">Diesel</mat-option>
             <mat-option value="Petrol">Petrol</mat-option>
@@ -120,7 +129,7 @@
 
 <div class="purchasedetails" >
   <mat-card-header class="container_header">PURCHASE DETAILS</mat-card-header>
-  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column">
+  <div class="purchaseAmt" fxLayout="row" fxLayoutGap.gt-sm="10px" fxLayout.lt-md="column" fxLayoutAlign="space-between">
 
     <div>
       <mat-label>Total Car Amount</mat-label>
@@ -141,7 +150,8 @@
       <mat-label>Balanced Amount</mat-label>
       <mat-form-field appearance="outline" >
         <input matInput type="number" formControlName="balanceAmount" [value]="balancedAmt" readonly>
-        <mat-error>Nagative Number not Accepted</mat-error>
+        <mat-error *ngIf="vehicleDetails.get('balanceAmount')?.hasError('required')">Balance Amount Required</mat-error>
+        <mat-error *ngIf="!vehicleDetails.get('balanceAmount')?.hasError('required')">Nagative Number not Accepted</mat-error>
       </mat-form-field>
     </div>
   </div>

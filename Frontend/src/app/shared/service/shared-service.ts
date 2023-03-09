@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -11,11 +12,14 @@ export class SharedService {
   serverUrl = environment.serverUrl;
   isDashboardComponent = true;
   searchData = '';
+
   constructor(
     private snackbar: MatSnackBar,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) {}
+
+
   getSalesByFilter() {
     return this.http.get(`${this.serverUrl}getsalesbyfilter${this.searchData}`);
   }

@@ -1,6 +1,6 @@
 <app-spinner *ngIf="loaderservice.showSpinner"></app-spinner>
-<div class="container" fxFlex="80%" fxFlex.lt-md="100%">
-  <mat-card class="mat-elevation-z8" >
+<div class="container" fxFlex="100%" fxFlex.lt-md="100%">
+  <mat-card >
     <div class="purchaseHeading" >
       <div fxLayout="row wrap" fxLayout="row wrap" fxLayoutAlign="space-between center" fxLayout.lt-sm="column">
        <span class="Heading_name"> Purchase List</span>
@@ -32,7 +32,7 @@
 
     <ng-container *ngIf="!purchaseList else showlist"><h3>No Purchase Found</h3></ng-container>
     <ng-template #showlist>
-      <div class="div_table" style="overflow-x: scroll;">
+      <div class="div_table">
     <table mat-table [dataSource]="purchaseList" class="purchaseList" >
 
       <ng-container matColumnDef="vehicle_no">

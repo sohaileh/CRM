@@ -1,5 +1,6 @@
 .container{
   margin: 0 auto;
+  padding:12px;
 }
 .vehicle_form{
   .mat-form-field {
@@ -14,9 +15,8 @@
   }
 }
 
-.vehicletype{
-margin-left: 10px;
-margin-bottom: 6px;
+.vehicleType{
+width:50%
 }
 
 
@@ -40,4 +40,5 @@ margin-bottom: 6px;
 .container_header{
   margin-left:-30px;
   font-size: 20px;
+  color:maroon;
 }

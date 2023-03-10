@@ -4,7 +4,7 @@ const regex = require('../services/regex');
 
 const purchase = {
 
- async   addPurchase(req,res,next){
+ async   addPurchase(req,res){
     const exitstingPurchase=await Purchase.exists({vehicle_no:req.body.vehicle_no})
     if(exitstingPurchase){
        // res.status(403).json({message:"Vehicle Already Present"})
@@ -15,8 +15,7 @@ const purchase = {
         await newPurchase.save()
         res.status(201).json({message:"Purchase Added sucessfully"})
     } catch (error) {
-       // res.status(409).json({message:error.message})
-       next(error)
+        res.status(409).json({message:error.message})
     }
 }
 },
@@ -27,8 +26,8 @@ const purchase = {
         res.status(200).json({data:purchaseList})
     }
     catch(error){
-    //      res.status(409).json({message:error.message})
-        next(error)
+          res.status(409).json({message:error.message})
+      //  next(error)
     }
     },
 
@@ -38,7 +37,7 @@ const purchase = {
             await Purchase.deleteOne({vehicle_no:carnumber}).then((data)=>{
             res.status(200).json({message:"Deleted Sucessfully"})
    })}catch (error) {
-                res.status(409).json({ message: error.message })
+               return res.status(409).json({ message: error.message })
             }
         
     },
@@ -51,7 +50,7 @@ const purchase = {
                 res.json({data:doc})
             })
         } catch (error) {
-            return next(error)
+            return res.status(409).json({ message: error.message })
         }
     },
 
@@ -60,16 +59,18 @@ const purchase = {
     const existingPurchase=await Purchase.exists({vehicle_no:req.body.vehicle_no})
      if(existingPurchase && carno!=req.body.vehicle_no){
         //return next(CustomErrorHandler.purchaseAlreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
-        return res.status(403).json({message:"Vehicle Number Already Present"})
+        return res.status(409).json({message:"Vehicle Number Already Present"})
      }
     try {
        const updateStatus =await Purchase.updateOne({vehicle_no:carno},req.body)
        if(!updateStatus.modifiedCount){ 
         return res.status(200).json({message:"No Changes Made"})
+       }else{
+        res.status(200).json({message :"Updated Sucessfully"})
        }
-       res.status(200).json({message :"Updated Sucessfully"})
+       
     } catch (error) {
-       next(error)
+       next(error);
     }
    },
 

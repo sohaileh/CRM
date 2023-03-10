@@ -1,7 +1,7 @@
 <app-spinner *ngIf="loaderservice.showSpinner"></app-spinner>
-<div class="container" fxFlex="90%" fxFlex.lt-md="100%">
+<div class="container" fxFlex="100%" fxFlex.lt-md="100%">
   <mat-card>
-  <div class="showVehicleTemplate">
+  <div class="vehicleTemplate">
     <mat-card-header class="container_header">
       VEHICLE DETAILS
     </mat-card-header>
@@ -10,19 +10,13 @@
     <div class="vehicleType">
       <mat-label>Vehicle Type</mat-label>
       <mat-form-field appearance="outline">
-        <mat-select matNativeControl required formControlName="condition">
-          <mat-option value="old" (click)="getChassisNo('false')">OLD</mat-option>
+        <mat-select matNativeControl required formControlName="condition" (selectionChange)="getChassisNo()">
+          <mat-option value="old">OLD</mat-option>
           <mat-option value="new">NEW</mat-option>
         </mat-select>
         <mat-error>Vehicle Type Required</mat-error>
       </mat-form-field>
     </div>
-
-  <mat-radio-group aria-label="Selet Vehicle" required formControlName="condition">
-    <mat-radio-button color="primary" value="old" class="vehicletype">OLD</mat-radio-button>
-    <mat-radio-button color="primary" value="new" class="vehicletype">NEW</mat-radio-button>
-  </mat-radio-group>
-
   <div class="vehicleDetailContainer" fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
 
     <div class="firstColumn" fxFlex="50%">

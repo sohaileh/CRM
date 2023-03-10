@@ -1,0 +1,27 @@
+
+.container{
+  padding:12px;
+}
+
+.image_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(180, 180, 180);
+height: 200px;
+padding:10px;
+margin:10px;
+img{
+  width:80%;
+  height: 90%;
+}
+}
+
+.headings{
+  font-size: 20px;
+  color: maroon;
+  background-color: rgb(238, 238, 238);
+  padding:12px
+}
+
+

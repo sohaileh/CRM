@@ -9,7 +9,7 @@ import { SalesbymonthComponent } from './components/main/salesbymonth/salesbymon
 
 import{NgxChartsModule} from '@swimlane/ngx-charts';
 import { PurchasebymonthComponent } from './components/main/purchasebymonth/purchasebymonth.component'
-import { ModuleModule } from '../shared/module/module.module';
+import { ModuleModule } from '../custom-module/material-module';
 import { LayoutComponent } from './layout/layout.component';
 
 

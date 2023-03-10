@@ -74,9 +74,8 @@ export class AddProductComponent implements OnInit, deactivateGuard,OnDestroy {
   }
 
 
-  getChassisNo(value:string) {
-    console.log("mat menu clicked")
-   // this.oldCar = !this.oldCar;
+  getChassisNo() {
+     this.oldCar = !this.oldCar;
   }
   //  Documnets//
   upload(event: any, value: any) {

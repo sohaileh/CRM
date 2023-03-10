@@ -34,12 +34,14 @@ export class ProductsListComponent implements OnInit {
   showSearchResult=false;
   filterData:any;
   displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "actions"]
+  length=0;
 
   ngOnInit(): void {
     this.purchaseService.isUpdate=false;
 
     this.sharedService.viewPurchaseDetails().subscribe(res=>{
         this.purchaseList=new MatTableDataSource(res.data);
+        this.length=this.purchaseList.data.length;
     })
 
   }
@@ -117,7 +119,7 @@ export class ProductsListComponent implements OnInit {
    }
 
    onViewPurchase(carNo:String){
-    console.log(carNo);
-
+    this.router.navigate(['admin/viewdetails'],{queryParams:{q:'purchase',carno:carNo}})
+    //this.router.navigateByUrl('admin/viewdetails')
    }
 }

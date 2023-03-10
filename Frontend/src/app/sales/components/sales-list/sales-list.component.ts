@@ -88,6 +88,6 @@ export class SalesListComponent implements OnInit {
   }
 
   viewSale(vehicleNo:string){
-    console.log(vehicleNo);
+    this.router.navigate(['admin/viewdetails'],{queryParams:{q:'sales',carno:vehicleNo}})
   }
 }

@@ -1,4 +1,4 @@
-import { MainlayoutComponent } from './mainlayout/mainlayout.component';
+import { MainlayoutComponent } from './main-layout/mainlayout.component';
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './authGuard/auth.guard'
@@ -11,6 +11,7 @@ const routes: Routes = [
       {path:"purchase",loadChildren:()=>import('./purchase/purchase.module').then((m)=>m.PurchaseModule),canActivate:[AuthGuard]},
       {path:'dashboard',loadChildren:()=>import('./dashboard/dashboard.module').then((m)=>m.DashboardModule),canActivate:[AuthGuard]},
       {path:"sales",loadChildren:()=>import("./sales/sales.module").then(mod=>mod.SalesModule),canActivate:[AuthGuard]},
+      {path:'viewdetails',loadChildren:()=>import("./shared/shared.module").then(m=>m.SharedModule)}
     ]},
     {path:"login",loadChildren:()=>import('./authentication/authentication.module').then(m=>m.AuthenticationModule)},
   ]},

@@ -3,7 +3,7 @@
 
     <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="salesHeading" fxLayout.lt-sm="column">
       <span class="Heading_name"> Sales List</span>
-
+      <!--
       <div class="search-input" *ngIf="salesList">
         <mat-form-field floatLabel="never" appearance="outline">
           <input matInput type="text" placeholder="search by vehicle no" [(ngModel)]="sharedService.searchData"
@@ -14,6 +14,7 @@
           </button>
         </mat-form-field>
       </div>
+      -->
       <div>
       <button class="add-sales theme-background-color" mat-raised-button (click)="router.navigateByUrl('/admin/sales/addsale')">Add sale</button>
     </div>

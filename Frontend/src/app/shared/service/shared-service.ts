@@ -60,4 +60,12 @@ export class SharedService {
     // let newDate = new Date(date);
     return new Date(date).getTime();
   }
+
+  findPurchase(carno:any){
+    return this.http.get<any>(`${this.serverUrl}findvehicle/${carno}`)
+  }
+  findSales(carno:any){
+  return this.http.get<any>(`${this.serverUrl}findsalebyvehicleno${carno}`)
+  }
+
 }

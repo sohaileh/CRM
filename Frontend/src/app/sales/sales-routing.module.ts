@@ -7,6 +7,7 @@ import { AuthGuard } from '../authGuard/auth.guard';
 
 const routes: Routes = [
   {path:"",component:LayoutsComponent,children:[
+    {path:"",redirectTo:'saleslist',pathMatch:'full'},
     {path:"addsale",component:AddSalesComponent,canDeactivate:[AuthGuard]},
     {path:"saleslist",component:SalesListComponent},
     {path:"updatesale",component:AddSalesComponent,canDeactivate:[AuthGuard]}

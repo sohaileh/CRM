@@ -1,0 +1,68 @@
+<app-spinner *ngIf="showSpinner"></app-spinner>
+<div class="container" fxFlex="100%">
+<mat-card fxFlex="100%">
+  <mat-toolbar class="theme-background-color btn-color">
+    {{queryFrom!=='sales'?"Purchase Details":"Sales Details"}}
+  </mat-toolbar>
+  <div class="vehicleHeading headings">Vehicle Details</div>
+  <div fxLayout="row" fxLayout.lt-sm="column">
+  <div class="column1" fxFlex="50%">
+    <h3>Model Name : {{details.model}}</h3>
+    <h3>Engine No. : {{details.engine_no}}</h3>
+    <h3>Vehicle No. : {{details.vehicle_no}}</h3>
+  </div>
+  <div class="column2" fxFlex="50%">
+    <h3>Car Name : {{details.car_name}}</h3>
+    <h3>Color : {{details.color}}</h3>
+    <h3>Fuel Type : {{details.fuel_type}}</h3>
+  </div>
+</div>
+<div class="headings">Amount Details</div>
+<div class="amountDetails" fxLayoutAlign="space-around center" fxLayout.lt-md="column" fxLayoutAlign.lt-md="start">
+<h3>{{queryFrom!=='sales'?"Purchase Amount":"Sold Amount" }}: {{details.totalAmount|| details.sold_amount}}</h3>
+<h3>Paid Amount : {{details.paidAmount || details.paid_amount}}</h3>
+<h3>Balance Amount : {{details.balanceAmount || details.balance_amount}}</h3>
+</div>
+<div class="headings">{{queryFrom!=='sales'?"Seller Details":"Buyer Details"}}</div>
+<div class="sellerDetails" fxLayout="row" fxLayout.lt-sm="column">
+  <div fxFlex="50%">
+    <h3>{{queryFrom!=='sales'?"Seller":"Buyer"}} Name : {{details.seller_name || details.fullName}}</h3>
+    <h3>Address : {{details.address}}</h3>
+    <h3>Zip Code : {{details.postal_code}}</h3>
+  </div>
+  <div fxFlex="50%">
+    <h3>{{queryFrom!=='sales'?"Seller":"Buyer"}} Email : {{details.email}}</h3>
+    <h3>{{queryFrom!=='sales'?"Seller":"Buyer"}} Phone No : {{details.phone_no}}</h3>
+    <h3>{{queryFrom!=='sales'?"Purchase":"Sold"}} Date : {{details.purchase_date||details.solddate |date}}</h3>
+  </div>
+</div>
+<div class="headings">Documents</div>
+<div class="documnets" fxLayout="row" fxLayout.lt-md="column">
+  <div class="col1" fxFlex="50%">
+    <h3>{{queryFrom!=='sales'?"Registration Certificate":"Bill"}}</h3>
+    <div class="image_container">
+      <img [src]="details.registration">
+    </div>
+    <h3>{{queryFrom!=='sales'?"Purchase Agrement":"Sold Agrement"}}</h3>
+    <div class="image_container">
+      <img [src]="details.purchaseAgrement">
+    </div>
+  </div>
+  <div class="col2" fxFlex="50%">
+    <h3>{{queryFrom!=='sales'?"Seller":"Buyer"}} Aadhar Card</h3>
+    <div class="image_container">
+      <img [src]="details.aadhar_card">
+    </div>
+    <h3>{{queryFrom!=='sales'?"Seller":"Buyer"}} Pan Card</h3>
+    <div class="image_container">
+      <img [src]="details.pan_card">
+    </div>
+  </div>
+
+</div>
+<div class="buttonDiv" fxLayoutAlign="center center">
+  <button mat-flat-button class="theme-background-color btn-color" (click)="onBack()">Back</button>
+</div>
+
+</mat-card>
+</div>

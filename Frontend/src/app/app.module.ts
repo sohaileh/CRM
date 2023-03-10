@@ -1,4 +1,4 @@
-import { MainlayoutComponent } from './mainlayout/mainlayout.component';
+import { MainlayoutComponent } from './main-layout/mainlayout.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';

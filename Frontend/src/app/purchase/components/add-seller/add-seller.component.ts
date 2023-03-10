@@ -61,11 +61,10 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
         this.purchaseService.updatePurchase(carNo,allDetails).subscribe((res)=>{
           this.alertservice.showSuccess(res.message,"Done")
           this.changesSaved=true;
-
           this.router.navigateByUrl('admin/purchase')
         },(err)=>{
-          Swal.fire(err.error.message)
-          //this.alertservice.showError(err.error.message,"Error");
+          console.log(err)
+          this.alertservice.showError(err.message,"Error");
         })
       }else{
         this.purchaseService.vehicleDetails.subscribe((res)=>{

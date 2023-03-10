@@ -1,5 +1,5 @@
-<div class="container" fxFlex="80%" fxFlex.lt-sm="80%" fxFlex.xs="100%" fxLayout="column wrap">
-  <mat-card class="mat-elevation-z8" fxLayout="column wrap"
+<div class="container" fxFlex="100%" fxLayout="column wrap">
+  <mat-card fxLayout="column wrap"
     fxLayoutAlign="space-between centre">
 
     <form [formGroup]="saleForm" (ngSubmit)="!id?submitSale():updateSale()">
@@ -29,7 +29,7 @@
 
       <div fxLayout="column wrap">
         <mat-card-header class="mat-card-header" color="primary">
-          Buyer details
+          Buyer Details
         </mat-card-header>
         <p><u>Please enter buyer details below</u></p>
 
@@ -117,7 +117,7 @@
         </div>
 
         <mat-card-header class="mat-card-header" color="primary">
-          Buyer documents
+          Buyer Documents
         </mat-card-header>
         <p><u>Please upload below documents (only Images)</u></p>
 

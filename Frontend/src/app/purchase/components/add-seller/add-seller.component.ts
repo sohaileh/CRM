@@ -3,7 +3,7 @@ import { deactivateGuard } from './../../../authGuard/auth.guard';
 import { AlertService } from 'src/app/alert/alert.service';
 import { PurchaseService } from './../../services/purchase.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { SellerModel } from '../../models/seller.model';
@@ -21,7 +21,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
   constructor(private fb:FormBuilder, private router:Router,
     private purchaseService:PurchaseService,
     private alertservice:AlertService,
-    private alertService:AlertService
     ) { }
   ngOnInit(): void {
     this.sellerDetails = this.fb.group<SellerModel>({
@@ -48,35 +47,27 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
   onSubmit(){
     if(this.sellerDetails.valid){
-        let allDetails=""
+        let allDetails="";
+        this.purchaseService.vehicleDetails.subscribe((res)=>{
+          allDetails=res.value
+        })
+        Object.assign(allDetails,this.sellerDetails.value);
+
       if(this.purchaseService.isUpdate){
         let carNo="";
         this.purchaseService.allDetails.subscribe((res)=>{
           carNo=res.vehicle_no
         })
-        this.purchaseService.vehicleDetails.subscribe((res)=>{
-          allDetails=res.value
-        })
-        Object.assign(allDetails,this.sellerDetails.value);
         this.purchaseService.updatePurchase(carNo,allDetails).subscribe((res)=>{
           this.alertservice.showSuccess(res.message,"Done")
           this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase')
-        },(err)=>{
-          console.log(err)
-          this.alertservice.showError(err.message,"Error");
         })
       }else{
-        this.purchaseService.vehicleDetails.subscribe((res)=>{
-         allDetails=res.value;
-        })
-        Object.assign(allDetails,this.sellerDetails.value)
         this.purchaseService.addPurchaseDetails(allDetails).subscribe((res)=>{
           this.alertservice.showSuccess(res.message,"Created")
           this.changesSaved=true;
           this.router.navigateByUrl('admin/purchase/purchaselist')
-        },(err)=>{
-          this.alertservice.showError(err.error.message,"Error")
         })
       }
     }
@@ -103,7 +94,7 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
 
     canExit() {
       if (!this.changesSaved) {
-        return this.alertService.confirmation('Are you sure?',"You won't be able to revert this!",'warning',)
+        return this.alertservice.confirmation('Are you sure?',"You won't be able to revert this!",'warning',)
       }
       return true;
     }
@@ -113,4 +104,6 @@ export class AddSellerComponent implements OnInit,deactivateGuard {
     this.purchaseService.isBack=true;
     this.router.navigateByUrl('admin/purchase/addvehicle')
   }
+
+
 }

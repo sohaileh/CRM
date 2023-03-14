@@ -1,14 +1,17 @@
 .container {
+  padding:14px;
   margin:0px auto;
+  height: 100vh;
 }
 .add-sales{
-  color: white;
-  margin : 6px;
+  margin:10px;
+color:white;
+font-size: 10px !important;
 }
 
 .mat-table{
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, 0.429);
+  border: 1px solid rgb(187, 187, 187);
 }
 .salesList{
   td, th {
@@ -33,11 +36,24 @@ margin-bottom: 10px;
   }
 }
 .Heading_name{
-  padding:6px ;
-  font-size: 22px;
+  padding:15px ;
+  font-size: 15px;
 }
 .salesHeading{
-  border: 1px solid rgba(0, 0, 0, 0.429);
+  border: 1px solid rgb(187, 187, 187);
   background-color:rgb(226, 226, 226);
   border-bottom: none;
+}
+.preview{
+  background-color: rgb(242, 242, 242);
+  width: 100px;
+  mat-icon{
+    padding-top:5px;
+    font-size: 18px;
+  }
+}
+.action{
+  mat-icon{
+    font-size: 20px;
+  }
 }

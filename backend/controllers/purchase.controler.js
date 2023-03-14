@@ -1,14 +1,14 @@
-const CustomErrorHandler =require('../services/customErrorHandler')
+//const CustomErrorHandler =require('../services/customErrorHandler')
 const Purchase=require('../model/purchase.model');
 const regex = require('../services/regex');
 
 const purchase = {
 
- async   addPurchase(req,res){
+ async   addPurchase(req,res,next){
     const exitstingPurchase=await Purchase.exists({vehicle_no:req.body.vehicle_no})
     if(exitstingPurchase){
-       // res.status(403).json({message:"Vehicle Already Present"})
-        return next(CustomErrorHandler.purchaseAlreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
+    return res.status(403).json({message:"Vehicle Already Present"})
+       // return next(CustomErrorHandler.alreadyExists(`Vehcle No. Already Exits`))
     }else{
     try {
         const newPurchase=new Purchase(req.body)
@@ -54,23 +54,24 @@ const purchase = {
         }
     },
 
-   async updatePurchase(req,res,next){
+   async updatePurchase(req,res){
     const carno=req.params.carno;
     const existingPurchase=await Purchase.exists({vehicle_no:req.body.vehicle_no})
      if(existingPurchase && carno!=req.body.vehicle_no){
-        //return next(CustomErrorHandler.purchaseAlreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
-        return res.status(409).json({message:"Vehicle Number Already Present"})
+      //  return next(CustomErrorHandler.alreadyExists(`Vehcle No ${req.body.vehicle_no} Already Exits`))
+      return   res.status(409).json({message:"Vehicle Number Already Present"})
      }
     try {
        const updateStatus =await Purchase.updateOne({vehicle_no:carno},req.body)
        if(!updateStatus.modifiedCount){ 
+        console.log(req.body)
         return res.status(200).json({message:"No Changes Made"})
        }else{
         res.status(200).json({message :"Updated Sucessfully"})
        }
        
     } catch (error) {
-       next(error);
+       res.status(500).json({message:"Something Went Wrong"})
     }
    },
 
@@ -119,6 +120,7 @@ const purchase = {
         const vehicleNumber=req.query.q.toLowerCase();
         try{
             const data=await Purchase.find({vehicle_no:new RegExp(vehicleNumber)},{vehicle_no:1})
+      
             res.status(200).json({data:data})
         }catch(error){
             res.status(error.status).json('error')
@@ -134,6 +136,15 @@ const purchase = {
             res.status(200).json({data:data});   
         } catch (error) {
             next(error)
+        }
+    },
+    async viewVehicle(req,res){
+        try{
+            console.log(req.params)
+            const vehicle=await Purchase.findOne({vehicle_no:req.params.carno},{car_name:1,model:1,engine_no:1,color:1,fuel_type:1})
+            res.status(200).json({data:vehicle})
+        }catch(error){
+            res.status(404).json({message:"Vehicle Not Found"})
         }
     }
 }

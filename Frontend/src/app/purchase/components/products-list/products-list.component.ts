@@ -33,7 +33,7 @@ export class ProductsListComponent implements OnInit {
   options:any=[]
   showSearchResult=false;
   filterData:any;
-  displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "actions"]
+  displayedColumns = ["vehicle_no","model","car_name" ,"seller_name", "purchase_date", "preview","actions"]
   length=0;
 
   ngOnInit(): void {

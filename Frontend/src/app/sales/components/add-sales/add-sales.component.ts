@@ -117,7 +117,11 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
   }
   submitSale(){
     this.saleForm.get("sold_date")?.setValue(this.sharedService.epoch(this.saleForm.value.sold_date));
+
     if (this.saleForm.invalid || this.saleForm.get("documents")?.invalid) {
+      if(this.saleForm.get("documents")?.invalid){
+        console.log("invalid doc")
+      }
       return;
     }
     this.saleService.uploadSale(this.saleForm.value).subscribe((res: any) => {
@@ -155,6 +159,9 @@ export class AddSalesComponent implements OnInit,deactivateGuard {
     if(this.saleForm.controls['balance_amount'].value<0){
       this.saleForm.controls['balance_amount'].setErrors(Validators.pattern)
     }
+  }
+  fxncall(){
+    return false
   }
 }
 

@@ -17,6 +17,7 @@ export class ViewDetailsComponent implements OnInit,OnDestroy {
   queryFrom:string="";
   carNo:string=""
   details:any={};
+
   showSpinner:boolean=false;
 
   ngOnInit(): void {
@@ -41,6 +42,10 @@ export class ViewDetailsComponent implements OnInit,OnDestroy {
         this.details.pan_card=res.data.documents.pan_card
         delete this.details['documents'];
         this.showSpinner=false
+      })
+
+      this.sharedservice.viewVehicleDetails(this.carNo).subscribe((res)=>{
+        Object.assign(this.details,res.data)
       })
     }
 

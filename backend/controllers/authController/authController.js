@@ -15,7 +15,7 @@ class authController {
         }
         if (result) {
           const accessToken = jwt.sign(req.body.email, ACCESS_TOKEN_SECRET);
-          return res.status(200).json({ message: "logged in successfully", accessToken });
+          return res.status(200).json({ message: "logged in successfully", accessToken ,user:req.body.email});
         }
         res.status(401).json({ message: "Invalid password" });
       });

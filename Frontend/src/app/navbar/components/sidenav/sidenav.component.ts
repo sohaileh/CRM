@@ -8,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+
+  username:string='';
+  constructor(private sharedservice:SharedService) { }
   ngOnInit(): void {
+    this.username='admin'
   }
 
 }

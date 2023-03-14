@@ -133,7 +133,7 @@
 
         </div>
 
-          <div class="image_container" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
+          <div class="image_container" [class.customerror]="fxncall()" fxLayoutAlign="space-between centre" fxLayout="row wrap" fxFlex.gt-sm="50%"
             fxFlex.sm="50%">
             <span>Adhaaar card*</span>
             <img [src]=" saleForm.value.documents?.adhaar_card" class="image_style" alt="upload adhaar card here"

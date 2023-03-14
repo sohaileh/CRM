@@ -32,10 +32,13 @@ export class ErrorInterceptor implements HttpInterceptor {
                 );
                 this._router.navigateByUrl('/admin/login');
                 break;
-              case 500:
+                case 409:
+                  this.alertService.showError(error.error.message,"Error")
+                  break;
+                case 500:
                 this.alertService.showError('Try again later', 'Server Error');
                 break;
-              case 0:
+                case 0:
                 this.alertService.showError('Server not responding', 'Error');
                 break;
             }

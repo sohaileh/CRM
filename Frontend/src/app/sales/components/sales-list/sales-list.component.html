@@ -16,7 +16,9 @@
       </div>
       -->
       <div>
-      <button class="add-sales theme-background-color" mat-raised-button (click)="router.navigateByUrl('/admin/sales/addsale')">Add sale</button>
+      <button class="add-sales theme-background-color" mat-button (click)="router.navigateByUrl('/admin/sales/addsale')">
+        <mat-icon>add</mat-icon>
+        Add sale</button>
     </div>
     </div>
 
@@ -43,16 +45,24 @@
           <td mat-cell *matCellDef="let buyer"> {{buyer.phone_no}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="preview">
+          <th mat-header-cell *matHeaderCellDef>Preview</th>
+          <th mat-cell *matCellDef="let buyer">
+            <button mat-button class="preview" (click)="viewSale(buyer.vehicle_no)"><mat-icon>visibility</mat-icon>Preview</button>
+          </th>
+        </ng-container>
+
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef>Actions</th>
           <td mat-cell *matCellDef="let buyer">
-            <button mat-icon-button color="primary" (click)="viewSale(buyer.vehicle_no)"><mat-icon>visibility</mat-icon></button>
+            <div class="action">
             <button class="update-button" color="primary" mat-icon-button (click)="updateSale(buyer.vehicle_no)">
               <mat-icon>create</mat-icon>
             </button>
             <button class="delete-button" color="warn"  mat-icon-button (click)="deleteSale(buyer.vehicle_no)">
               <mat-icon>delete_forever</mat-icon>
             </button>
+          </div>
           </td>
         </ng-container>
 
@@ -60,7 +70,7 @@
         <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
       </table>
       <span *ngIf="!salesList.filteredData.length"> No matching sale for "{{sharedService.searchData}}"</span>
-      <mat-paginator #paginator [pageSizeOptions]="[20,50,100]" [pageSize]="10"  (page)="pageEvent($event)"></mat-paginator>
+      <mat-paginator #paginator [pageSizeOptions]="[10,20,30]" [pageSize]="10"  (page)="pageEvent($event)"></mat-paginator>
     </div>
     <div>
       <span *ngIf="!salesList">No sales yet "please add sale first"</span>

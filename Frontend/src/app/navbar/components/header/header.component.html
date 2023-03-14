@@ -2,7 +2,7 @@
 <div class="header" fxlayout="row wrap" >
   <mat-toolbar class="theme-background-color" fxFlex="100%" fxLayoutAlign="space-between center">
      <div class="header-name" fxLayout="row" >
-      <button mat-button (click)="toggleSideBar()"> <mat-icon>menu</mat-icon></button>
+      <button mat-button (click)="toggleSideBar()"> <mat-icon>home</mat-icon></button>
      </div>
 
      <div class="header-action" fxShow fxHide.xs >
@@ -13,7 +13,7 @@
      <button mat-raised-button class="logout" (click)="onLogout()">Logout</button>
         -->
 
-     <button mat-button [matMenuTriggerFor]="userMenu">Username <mat-icon>expand_more</mat-icon></button>
+     <button mat-button [matMenuTriggerFor]="userMenu"> <mat-icon>supervised_user_circle</mat-icon><mat-icon>expand_more</mat-icon></button>
       <mat-menu #userMenu="matMenu">
       <button mat-menu-item (click)="onLogout()">  <mat-icon>power_settings_new</mat-icon> Logout</button>
       <button mat-menu-item> <mat-icon>settings</mat-icon>Setting</button>

@@ -7,9 +7,6 @@ class CustomErrorHandler extends Error{
     static alreadyExists(message){
         return new CustomErrorHandler(403,message);
     }
-    static purchaseAlreadyExists(message){
-        return new CustomErrorHandler(403,message);
-    }
     static noChanges(message){
         return new CustomErrorHandler(304,message);
     }

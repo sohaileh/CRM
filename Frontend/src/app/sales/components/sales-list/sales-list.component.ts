@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class SalesListComponent implements OnInit {
   salesList!: MatTableDataSource<any>;
   pageSize=10;
-  displayedColumns = ["vehicle_no", "fullName", "sold_date", "phone_no","actions"];
+  displayedColumns = ["vehicle_no", "fullName", "sold_date", "phone_no","preview","actions"];
   constructor(public sharedService: SharedService, private alertService: AlertService, public saleService: SalesService, public router: Router) { }
   ngOnInit(): void {
     this.sharedService.getSalesList().subscribe((res: any) => {

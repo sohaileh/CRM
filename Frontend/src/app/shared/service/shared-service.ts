@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -12,7 +13,6 @@ export class SharedService {
   serverUrl = environment.serverUrl;
   isDashboardComponent = true;
   searchData = '';
-
   constructor(
     private snackbar: MatSnackBar,
     private http: HttpClient,
@@ -66,6 +66,10 @@ export class SharedService {
   }
   findSales(carno:any){
   return this.http.get<any>(`${this.serverUrl}findsalebyvehicleno${carno}`)
+  }
+
+  viewVehicleDetails(carno:string){
+    return this.http.get<any>(`${this.serverUrl}viewvehicledetails/${carno}`)
   }
 
 }
